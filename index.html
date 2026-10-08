@@ -214,6 +214,23 @@ html,body,#app{max-width:100%;overflow-x:hidden}
 .list-page .listing-bookmark svg{width:20px;height:23px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linejoin:round}
 .list-page .listing-bookmark.is-saved svg{fill:#717b4c;stroke:#717b4c}
 @media(max-width:375px){.list-page .listing-units .unit-row{font-size:9px!important;grid-template-columns:8% 38% 29% 25%!important}.list-page .listing-units .unit-area{grid-template-columns:minmax(0,1fr) 10px 52px!important}}
+</style><style id="v19-compare">
+/* v19: compare current 4-column vs legible 3-column. Map styling unchanged. */
+.list-variant-switch{display:flex;gap:4px;align-items:center;margin:0 15px 14px;padding:4px;background:#e8eae5;border-radius:8px}
+.list-variant-switch button{flex:1;border:0;border-radius:6px;background:transparent;color:#525650;padding:10px 4px;font-size:12px;font-weight:650;cursor:pointer}
+.list-variant-switch button.active{background:#fff;color:#202520;box-shadow:0 1px 4px #0002}
+.list-page[data-variant="large"] .listing-title{font-size:16px!important;line-height:1.55!important;font-weight:700!important}
+.list-page[data-variant="large"] .listing-units .unit-row{grid-template-columns:35px minmax(0,1fr) max-content!important;gap:7px!important;font-size:12.5px!important;letter-spacing:-.15px!important;padding:8px 0!important;align-items:baseline}
+.list-page[data-variant="large"] .listing-units .unit-area{grid-template-columns:minmax(0,1fr) 13px 72px!important;font-size:12px!important}
+.list-page[data-variant="large"] .listing-units .unit-tsuboprice{display:none!important}
+.list-page[data-variant="large"] .listing-units .unit-rent{font-size:12.5px!important;text-align:right!important}
+.list-page[data-variant="large"] .listing-bookmark{width:32px;flex-basis:32px}
+.list-page[data-variant="large"] .listing-new{font-size:11px}
+@media(max-width:390px){
+ .list-page[data-variant="large"] .listing-units .unit-row{grid-template-columns:29px minmax(0,1fr) max-content!important;gap:4px!important;font-size:11.5px!important}
+ .list-page[data-variant="large"] .listing-units .unit-area{grid-template-columns:minmax(0,1fr) 12px 65px!important;font-size:11.3px!important}
+ .list-page[data-variant="large"] .listing-units .unit-rent{font-size:11.5px!important}
+}
 </style></head><body><div id="app"><div id="map"><div id="mapArt"></div><div id="mapPins"></div><div class="mapcredit">地図は操作検証用の模式図（実際の道路・位置とは異なります）</div></div><div class="top" aria-label="現在の検索条件"><div class="condition-summary" id="summary">渋谷・表参道周辺 ／ 面積指定なし ／ 賃料上限なし</div></div><div id="cards" class="cards"></div><div id="empty" class="empty">該当する物件がありません。条件を変更してください。</div><nav class="bottom"><button class="pill" onclick="openSheet('sort')">☷</button><button class="pill" onclick="openSheet('display')">表示</button><span class="divider"></span><span class="muted">検索条件</span><button class="pill" onclick="openConditions()">変更</button><button class="pill" onclick="saveSearch()">＋ 保存</button></nav><div id="overlay" class="overlay" onclick="closeSheet()"></div><section id="sheet" class="sheet"><button class="close" onclick="closeSheet()">×</button><div id="sheetContent"></div></section></div><script>
 const properties=[{id:1,title:'代官山｜大きな窓から緑を眺める、天井高のある開放的なリノベーションオフィス',lat:35.6488,lng:139.7037,area:'123.45㎡',price:970840,station:'代官山駅 徒歩12分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'},{id:2,title:'中目黒｜緑を感じるリノベーションオフィス',lat:35.6435,lng:139.6987,area:'104.8㎡',price:680000,station:'中目黒駅 徒歩8分',image:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600'},{id:3,title:'恵比寿｜光が差し込むセットアップオフィス',lat:35.6480,lng:139.7102,area:'145.2㎡',price:1220000,station:'恵比寿駅 徒歩6分',image:'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=600'},{id:4,title:'表参道｜天高5mのスケルトン空間',lat:35.6655,lng:139.7127,area:'118.8㎡',price:940000,station:'表参道駅 徒歩7分',image:'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600'},{id:5,title:'渋谷｜明るい窓辺のワークスペース',lat:35.6590,lng:139.7008,area:'92.4㎡',price:620000,station:'渋谷駅 徒歩9分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'}];
 let selected=1,order='default',visible=[...properties],markers={};let zoom=1;const positions={1:[39,59],2:[23,74],3:[72,65],4:[77,27],5:[45,42]};
@@ -284,7 +301,8 @@ function floorplanSVG(p,n){
  ];
  return `<svg viewBox="0 0 300 225" role="img" aria-label="間取り図サンプル${n}"><rect width="300" height="225" fill="#f8f8f5"/><g stroke="#555" stroke-width="3" fill="none" stroke-linejoin="round">${shapes[(n-1)%3]}</g><g fill="#777" font-family="sans-serif" font-size="12"><text x="22" y="18">間取り図サンプル ${n}</text><text x="135" y="214">${p.title.split('｜')[0]} / ${n}F</text></g></svg>`;
 }
-let unitSpacing='four';
+let unitSpacing='four';let listVariant='current';
+function setListVariant(mode){listVariant=mode;list.dataset.variant=mode;document.querySelectorAll('[data-variant-button]').forEach(b=>{const active=b.dataset.variantButton===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});}
 function setUnitSpacing(mode){unitSpacing=mode;list.dataset.unitSpacing=mode;document.querySelectorAll('[data-spacing-option]').forEach(b=>b.classList.toggle('selected',b.dataset.spacingOption===mode));}
 function toggleListingBookmark(id){saved.has(id)?saved.delete(id):saved.add(id);document.querySelectorAll(`.listing-bookmark`).forEach(()=>{});renderList();}
 function renderList(){
@@ -295,8 +313,9 @@ function renderList(){
   'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=850',
   'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=850'
  ];
- list.dataset.unitSpacing=unitSpacing;
+ list.dataset.unitSpacing=unitSpacing;list.dataset.variant=listVariant;
  list.innerHTML=`<div class="list-head"><span>検索結果 <strong>${visible.length}件</strong></span><small>建物単位で表示</small></div>
+ <div class="list-variant-switch" role="group" aria-label="文字サイズと列数の比較"><button type="button" data-variant-button="current" class="${listVariant==='current'?'active':''}" aria-pressed="${listVariant==='current'}" onclick="setListVariant('current')">現状｜4列</button><button type="button" data-variant-button="large" class="${listVariant==='large'?'active':''}" aria-pressed="${listVariant==='large'}" onclick="setListVariant('large')">文字大｜3列</button></div>
  ${visible.map(p=>{
  const photos=galleryImages.map((url,i)=>`<div class="gallery-item"><img loading="lazy" src="${i===0?p.image:url}" alt="物件写真サンプル${i+1}"></div>`).join('');
  const plans=p.units.map((u,i)=>`<div class="gallery-item floorplan">${floorplanSVG(p,i+1)}</div>`).join('');
