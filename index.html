@@ -617,7 +617,12 @@ const secondaryImages={
   4:'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=800',
   5:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800'
 };
-function drawCards(){suppressSwipeUntil=Date.now()+320;document.getElementById('cards').innerHTML=visible.map(p=>{const units=cardUnits(p);const extra=units.length>2?`<span class="more-units">他${units.length-2}区画</span>`:'';return `<article class="card ${p.id===selected?'active':''}" data-id="${p.id}" onclick="select(${p.id},false)"><div class="photos"><div class="photo"><img src="${p.image}" alt="物件写真1（モック用）" loading="lazy"></div><div class="photo"><img src="${secondaryImages[p.id]||p.image}" alt="物件写真2（モック用）" loading="lazy"></div></div><div class="title-line"><div class="title" title="${p.title}">${p.title}</div>${extra}</div><div class="unit-table">${units.slice(0,2).map(u=>`<div class="unit-row ${u.price===21350840?'stress-test-unit':''}"><span class="unit-id">${u.unit}</span><span class="unit-area"><span class="sqm">${u.area.toLocaleString("ja-JP",{minimumFractionDigits:2,maximumFractionDigits:2})}㎡</span><span class="slash">／</span><span class="tsubo">約${(u.area/3.305785).toLocaleString("ja-JP",{minimumFractionDigits:2,maximumFractionDigits:2})}坪</span></span><span class="unit-rent">${yen(u.price)}</span></div>`).join('')}</div></article>`}).join('');document.getElementById('empty').style.display=visible.length?'none':'block'}
+
+function openPropertyDetail(id){
+ try{sessionStorage.setItem('whatOfficeReturnView',view);sessionStorage.setItem('whatOfficeReturnScroll',String(document.getElementById('listPage')?.scrollTop||0));sessionStorage.setItem('whatOfficeReturnSelected',String(selected));}catch(e){}
+ window.location.href='detail.html?id='+encodeURIComponent(id)+'&from='+encodeURIComponent(view);
+}
+function drawCards(){suppressSwipeUntil=Date.now()+320;document.getElementById('cards').innerHTML=visible.map(p=>{const units=cardUnits(p);const extra=units.length>2?`<span class="more-units">他${units.length-2}区画</span>`:'';return `<article class="card ${p.id===selected?'active':''}" data-id="${p.id}" onclick="openPropertyDetail(${p.id})"><div class="photos"><div class="photo"><img src="${p.image}" alt="物件写真1（モック用）" loading="lazy"></div><div class="photo"><img src="${secondaryImages[p.id]||p.image}" alt="物件写真2（モック用）" loading="lazy"></div></div><div class="title-line"><div class="title" title="${p.title}">${p.title}</div>${extra}</div><div class="unit-table">${units.slice(0,2).map(u=>`<div class="unit-row ${u.price===21350840?'stress-test-unit':''}"><span class="unit-id">${u.unit}</span><span class="unit-area"><span class="sqm">${u.area.toLocaleString("ja-JP",{minimumFractionDigits:2,maximumFractionDigits:2})}㎡</span><span class="slash">／</span><span class="tsubo">約${(u.area/3.305785).toLocaleString("ja-JP",{minimumFractionDigits:2,maximumFractionDigits:2})}坪</span></span><span class="unit-rent">${yen(u.price)}</span></div>`).join('')}</div></article>`}).join('');document.getElementById('empty').style.display=visible.length?'none':'block'}
 
 function bookmark(id){saved.has(id)?saved.delete(id):saved.add(id);drawCards();let el=document.querySelector(`[data-id="${selected}"]`);if(el)el.scrollIntoView({inline:'center',block:'nearest'})}
 function select(id,move){if(!visible.some(p=>p.id===id))return;selected=id;drawMarkers();drawCards();centerMapOn(id);let el=document.querySelector(`[data-id="${id}"]`);if(el)el.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})}
@@ -676,8 +681,8 @@ function renderList(){
  return `<article class="listing-card">
  <div class="listing-gallery" aria-label="物件写真と間取り図を横スクロール">${photos}${plans}</div>${p.id===1||p.id===4?'<span class="listing-new">NEW</span>':''}
  <div class="listing-body">
- <div class="listing-title-line"><div class="listing-title">${p.title}</div><button class="listing-bookmark ${saved.has(p.id)?'is-saved':''}" aria-label="${saved.has(p.id)?'ブックマークを解除':'ブックマークに追加'}" aria-pressed="${saved.has(p.id)}" onclick="toggleListingBookmark(${p.id})"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div>
- <div class="listing-units">${cardUnits(p).map(u=>`<div class="unit-row"><span class="unit-id">${u.unit}</span><span class="unit-area"><span class="sqm">${u.area.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}㎡</span><span class="slash">／</span><span class="tsubo">約${(u.area/3.305785).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}坪</span></span><span class="unit-rent">${yen(u.price)}</span><span class="unit-tsuboprice">坪${yen(Math.round(u.price/(u.area/3.305785)))}</span></div>`).join('')}</div>
+ <div class="listing-title-line"><div class="listing-title" onclick="openPropertyDetail(${p.id})">${p.title}</div><button class="listing-bookmark ${saved.has(p.id)?'is-saved':''}" aria-label="${saved.has(p.id)?'ブックマークを解除':'ブックマークに追加'}" aria-pressed="${saved.has(p.id)}" onclick="toggleListingBookmark(${p.id})"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div>
+ <div class="listing-units" onclick="openPropertyDetail(${p.id})">${cardUnits(p).map(u=>`<div class="unit-row"><span class="unit-id">${u.unit}</span><span class="unit-area"><span class="sqm">${u.area.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}㎡</span><span class="slash">／</span><span class="tsubo">約${(u.area/3.305785).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}坪</span></span><span class="unit-rent">${yen(u.price)}</span><span class="unit-tsuboprice">坪${yen(Math.round(u.price/(u.area/3.305785)))}</span></div>`).join('')}</div>
  </div></article>`;
  }).join('')}
  <p class="list-disclaimer">※写真・間取り図・募集条件、地図位置はUI検証用のサンプルです。写真は最大5枚、間取り図は登録枚数分を続けて表示する想定です。詳細ページではさらに多くの写真を表示します。</p>`;
@@ -738,4 +743,12 @@ order='new';ordered();drawMarkers();drawCards();requestAnimationFrame(()=>{cente
 </script><script>
 function setTitleGap(n){document.documentElement.style.setProperty('--extra-gap',n+'ch');}
 setTitleGap(2);setView('list');
+
+(function restoreFromDetail(){
+ try{const p=new URLSearchParams(location.search);if(p.get('return')==='1'){
+ const v=sessionStorage.getItem('whatOfficeReturnView')||'map';const selectedId=Number(sessionStorage.getItem('whatOfficeReturnSelected'));
+ if(visible.some(x=>x.id===selectedId))selected=selectedId;
+ if(v==='list'){setView('list');const scroll=Number(sessionStorage.getItem('whatOfficeReturnScroll')||0);requestAnimationFrame(()=>{document.getElementById('listPage').scrollTop=scroll;});}
+ }}catch(e){}
+})();
 </script></body></html>
