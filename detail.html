@@ -73,8 +73,35 @@ const images=['https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=11
 const units=[{id:'9F',area:'123.45㎡',tsubo:'約37.34坪',price:'￥970,840',rent:'￥900,000',fee:'￥70,840',unitPrice:'約￥26,000／坪',ceiling:'2,700mm',status:'入居中／内覧可',move:'2026年11月上旬予定',features:['天井が高い','大きな窓','前が抜けている','最上階','化けしろあり']},{id:'4F',area:'234.56㎡',tsubo:'約70.95坪',price:'￥1,844,700',rent:'￥1,700,000',fee:'￥144,700',unitPrice:'約￥26,000／坪',ceiling:'2,650mm',status:'空室／内覧可',move:'即日',features:['緑が見える','大きな窓','前が抜けている']},{id:'2F',area:'345.67㎡',tsubo:'約104.56坪',price:'成約済',sold:true,ceiling:'2,550mm',status:'成約済',features:['緑が見える','屋上・ルーフバルコニー']}];
 function rows(r){return r.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')}function toggleUnit(i){const e=document.getElementById('unitDetail'+i);e.hidden=!e.hidden;document.getElementById('sign'+i).textContent=e.hidden?'＋':'−'}document.getElementById('units').innerHTML=units.map((u,i)=>'<div class="unit '+(u.sold?'sold':'match')+'"><div class="unit-summary" onclick="toggleUnit('+i+')"><span class="unit-id">'+u.id+'</span><span class="unit-area">'+u.area+'<small>'+u.tsubo+'</small></span><span class="unit-price">'+u.price+'</span><span class="unit-plus" id="sign'+i+'">＋</span></div><div class="unit-detail" id="unitDetail'+i+'" hidden><dl class="facts">'+rows(u.sold?[['区画',u.id],['面積',u.area+'／'+u.tsubo],['現況',u.status]]:[['区画',u.id],['面積',u.area+'／'+u.tsubo],['賃料',u.rent],['管理費',u.fee],['坪単価',u.unitPrice],['敷金','10ヶ月'],['礼金','2ヶ月'],['現況／内覧',u.status],['入居可能日',u.move],['契約期間','普通建物賃貸借契約 2年'],['最大天井高',u.ceiling],['専有部設備','個別空調／男女別トイレ／給湯'],['区画備考','原状回復条件／償却／解約予告／更新料等の区画固有情報を表示']])+'</dl><p class="tag-title">目的</p><div class="tags"><span>オフィス</span><span>店舗</span><span>アトリエ・ギャラリー</span></div><p class="tag-title">特徴</p><div class="tags">'+u.features.map(x=>'<span>'+x+'</span>').join('')+'</div><dl class="facts" style="margin-top:15px">'+rows([['取引態様','媒介'],['仲介手数料','賃料の1ヶ月分＋消費税'],['情報更新日','2026年9月10日']])+'</dl><button class="cta" onclick="alert(\'比較用プロトタイプ：問い合わせは未接続です\')">この区画について問い合わせる →</button></div></div>').join('');
 const building=[['物件名','What? Office 表参道ビル'],['住所','東京都世田谷区玉川田園調布9-99-99'],['交通','「代官山」徒歩12分／「恵比寿」徒歩12分／「渋谷」徒歩12分'],['用途地域','商業地域'],['築年月','2008年9月'],['構造／規模','鉄骨鉄筋コンクリート造／地上9階・地下1階'],['共用部設備','エレベーター／駐車場（要空確認）／駐輪場（要空確認）／バイク置場（要空確認）／共用ラウンジ／共用会議室'],['建物備考','建物全体に共通する補足情報を表示']];document.getElementById('buildingFacts').innerHTML=rows(building);function toggleBuilding(){const x=document.getElementById('buildingInfo');x.hidden=!x.hidden;document.getElementById('buildingSign').textContent=x.hidden?'＋':'−'}
-const nearArea=[['表参道｜天高5mのスケルトン空間','表参道駅 徒歩7分','118.8㎡／約35.94坪','￥940,000','https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=700'],['恵比寿｜光が差し込むセットアップオフィス','恵比寿駅 徒歩6分','92.4㎡／約27.95坪','￥620,000','https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=700']];const nearPrice=[nearArea[1],['中目黒｜緑を感じるリノベーションオフィス','中目黒駅 徒歩5分','104.8㎡／約31.70坪','￥680,000','https://images.unsplash.com/photo-1497366216548-37526070297c?w=700']];function cards(a){return a.map((x,i)=>{const match=String(x[2]).match(/^([\\d,.]+)㎡／約([\\d,.]+)坪$/);const area=match?'<span class="sqm">'+match[1]+'㎡</span><span class="slash">／</span><span class="tsubo">約'+match[2]+'坪</span>':x[2];return '<article class="listing-card" onclick="openRelated('+JSON.stringify(x[0])+')"><div class="listing-gallery"><div class="gallery-item"><img loading="lazy" src="'+x[4]+'" alt="物件写真"></div></div><div class="listing-body"><div class="listing-title-line"><div class="listing-title">'+x[0]+'</div><button class="listing-bookmark" onclick="event.stopPropagation();this.textContent=this.textContent===\'♧\'?\'◆\':\'♧\'" aria-label="ブックマーク">♧</button></div><div class="listing-units"><div class="unit-row"><span class="unit-id">1F</span><span class="unit-area">'+area+'</span><span class="unit-rent">'+x[3].replace('￥','').replace('¥','')+'円</span></div></div></div></article>'}).join('')}
-function openRelated(title){const map={'表参道｜天高5mのスケルトン空間':4,'恵比寿｜光が差し込むセットアップオフィス':3,'中目黒｜緑を感じるリノベーションオフィス':2};if(map[title])location.href='detail.html?id='+map[title];}
-document.getElementById('nearArea').innerHTML=cards(nearArea);document.getElementById('nearPrice').innerHTML=cards(nearPrice);
+/* Each recommendation is one property, with one or more matching units.
+   Area and rent recommendations can contain different units of the same property. */
+const relatedProperties=[
+ {id:4,title:'表参道｜天高5mのスケルトン空間',image:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=700',
+  units:[{unit:'1F',area:118.8,price:940000},{unit:'2F',area:125.4,price:1080000},{unit:'3F',area:190.2,price:1500000}]},
+ {id:3,title:'恵比寿｜光が差し込むセットアップオフィス',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=700',
+  units:[{unit:'3F',area:92.4,price:620000},{unit:'4F',area:101.2,price:690000},{unit:'5F',area:160.5,price:980000}]},
+ {id:2,title:'中目黒｜緑を感じるリノベーションオフィス',image:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=700',
+  units:[{unit:'2F',area:104.8,price:680000},{unit:'3F',area:145.5,price:710000},{unit:'4F',area:210.3,price:1350000}]}
+];
+/* Demo-only matched-unit selections. Production will calculate matches against the
+   current property's units using area or total monthly rent independently. */
+const areaMatches=[{id:4,units:['1F','2F']},{id:3,units:['3F','4F']}];
+const priceMatches=[{id:3,units:['3F','4F']},{id:2,units:['2F','3F']}];
+function relatedCards(matches){
+ return matches.map(item=>{
+  const p=relatedProperties.find(x=>x.id===item.id);
+  if(!p)return '';
+  const units=p.units.filter(u=>item.units.includes(u.unit));
+  const rows=units.map(u=>{
+   const sqm=u.area.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
+   const tsubo=(u.area/3.305785).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
+   const rent=u.price.toLocaleString('ja-JP')+'円';
+   return '<div class="unit-row"><span class="unit-id">'+u.unit+'</span><span class="unit-area"><span class="sqm">'+sqm+'㎡</span><span class="slash">／</span><span class="tsubo">約'+tsubo+'坪</span></span><span class="unit-rent">'+rent+'</span></div>';
+  }).join('');
+  return '<article class="listing-card" onclick="location.href=\'detail.html?id='+p.id+'\'"><div class="listing-gallery"><div class="gallery-item"><img loading="lazy" src="'+p.image+'" alt="物件写真"></div></div><div class="listing-body"><div class="listing-title-line"><div class="listing-title">'+p.title+'</div><button class="listing-bookmark" onclick="event.stopPropagation();this.textContent=this.textContent===\'♧\'?\'◆\':\'♧\'" aria-label="ブックマーク">♧</button></div><div class="listing-units">'+rows+'</div></div></article>';
+ }).join('');
+}
+document.getElementById('nearArea').innerHTML=relatedCards(areaMatches);
+document.getElementById('nearPrice').innerHTML=relatedCards(priceMatches);
 const id=Number(new URLSearchParams(location.search).get('id')||1);const titles={1:'代官山｜光と緑が見えるオフィス',2:'中目黒｜緑を感じるリノベーションオフィス',3:'恵比寿｜光が差し込むセットアップオフィス',4:'表参道｜天高5mのスケルトン空間',5:'渋谷｜明るい窓辺のワークスペース'};if(titles[id])document.getElementById('propertyTitle').textContent=titles[id];
 </script></body></html>
