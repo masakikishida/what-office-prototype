@@ -250,6 +250,14 @@ html,body,#app{max-width:100%;overflow-x:hidden}
  .list-page .listing-units .unit-area{grid-template-columns:48px 10px minmax(0,1fr)!important}
  .list-page[data-variant="large"] .listing-units .unit-area{grid-template-columns:68px 12px minmax(0,1fr)!important}
 }
+</style><style id="v21-area-tight">
+/* Keep slash alignment while placing the entire area group next to right-aligned rent. */
+.list-page .listing-units .unit-area{grid-template-columns:52px 12px 65px!important;justify-content:end!important;width:100%!important}
+.list-page[data-variant="large"] .listing-units .unit-area{grid-template-columns:66px 12px 74px!important;justify-content:end!important}
+@media(max-width:390px){
+ .list-page .listing-units .unit-area{grid-template-columns:46px 10px 58px!important}
+ .list-page[data-variant="large"] .listing-units .unit-area{grid-template-columns:59px 12px 68px!important}
+}
 </style></head><body><div id="app"><div id="map"><div id="mapArt"></div><div id="mapPins"></div><div class="mapcredit">地図は操作検証用の模式図（実際の道路・位置とは異なります）</div></div><div class="top" aria-label="現在の検索条件"><div class="condition-summary" id="summary">渋谷・表参道周辺 ／ 面積指定なし ／ 賃料上限なし</div></div><div id="cards" class="cards"></div><div id="empty" class="empty">該当する物件がありません。条件を変更してください。</div><nav class="bottom"><button class="pill" onclick="openSheet('sort')">☷</button><button class="pill" onclick="openSheet('display')">表示</button><span class="divider"></span><span class="muted">検索条件</span><button class="pill" onclick="openConditions()">変更</button><button class="pill" onclick="saveSearch()">＋ 保存</button></nav><div id="overlay" class="overlay" onclick="closeSheet()"></div><section id="sheet" class="sheet"><button class="close" onclick="closeSheet()">×</button><div id="sheetContent"></div></section></div><script>
 const properties=[{id:1,title:'代官山｜大きな窓から緑を眺める、天井高のある開放的なリノベーションオフィス',lat:35.6488,lng:139.7037,area:'123.45㎡',price:970840,station:'代官山駅 徒歩12分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'},{id:2,title:'中目黒｜緑を感じるリノベーションオフィス',lat:35.6435,lng:139.6987,area:'104.8㎡',price:680000,station:'中目黒駅 徒歩8分',image:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600'},{id:3,title:'恵比寿｜光が差し込むセットアップオフィス',lat:35.6480,lng:139.7102,area:'145.2㎡',price:1220000,station:'恵比寿駅 徒歩6分',image:'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=600'},{id:4,title:'表参道｜天高5mのスケルトン空間',lat:35.6655,lng:139.7127,area:'118.8㎡',price:940000,station:'表参道駅 徒歩7分',image:'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600'},{id:5,title:'渋谷｜明るい窓辺のワークスペース',lat:35.6590,lng:139.7008,area:'92.4㎡',price:620000,station:'渋谷駅 徒歩9分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'}];
 let selected=1,order='default',visible=[...properties],markers={};let zoom=1;const positions={1:[39,59],2:[23,74],3:[72,65],4:[77,27],5:[45,42]};
