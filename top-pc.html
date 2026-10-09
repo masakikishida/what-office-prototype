@@ -111,5 +111,20 @@ function switchTab(t){
   const rows=[...d.units].sort((a,b)=>a.price-b.price).map(u=>'<div class="unit-row"><span class="unit-id">'+u.unit+'</span><span class="unit-area"><span class="sqm">'+topArea(u.area)+'㎡</span><span class="slash">／</span><span class="tsubo">約'+topArea(u.area/3.305785)+'坪</span></span><span class="unit-rent">'+topYen(u.price)+'</span></div>').join('');
   return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+images+'</div>'+(d.badge==='NEW'?'<span class="listing-new">NEW</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="'+detailUrl+'" class="listing-title">'+d.title+'</a><button class="listing-bookmark" aria-label="ブックマークに追加" aria-pressed="false" onclick="toggleTopBookmark(this)" type="button"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="'+detailUrl+'">'+rows+'</a></div></article>';
  }).join('');
-}switchTab('pick');
+ requestAnimationFrame(alignPcCardTitles);
+}
+function alignPcCardTitles(){
+ const titles=[...document.querySelectorAll('#properties .listing-title-line')];
+ titles.forEach(el=>el.style.minHeight='');
+ if(!window.matchMedia('(min-width:701px)').matches)return;
+ for(let i=0;i<titles.length;i+=2){
+  const pair=titles.slice(i,i+2);
+  if(pair.length<2)continue;
+  const max=Math.max(...pair.map(el=>el.getBoundingClientRect().height));
+  pair.forEach(el=>el.style.minHeight=max+'px');
+ }
+}
+window.addEventListener('resize',()=>requestAnimationFrame(alignPcCardTitles));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(alignPcCardTitles);
+switchTab('pick');
 </script></body></html>
