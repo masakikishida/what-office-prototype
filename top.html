@@ -60,7 +60,7 @@
 .property .listing-units .unit-rent{font-size:12px;font-weight:400;letter-spacing:-.15px;text-align:right;white-space:nowrap}
 @media(max-width:390px){.property .listing-units{--floor-w:55px;--rent-w:90px;--unit-gap:5px}.property .listing-units .sqm,.property .listing-units .tsubo,.property .listing-units .unit-rent,.property .listing-units .unit-id{font-size:11px}}
 @media(min-width:701px) and (max-width:1050px){.property .listing-units{--floor-w:47px;--rent-w:85px;--unit-gap:4px}.property .listing-units .sqm,.property .listing-units .tsubo,.property .listing-units .unit-rent,.property .listing-units .unit-id{font-size:10px;letter-spacing:-.4px}}
-</style></head><body>
+</style><style id="top-v8-listing-data">.property .gallery-item.floorplan{background:#f8f8f5;border:1px solid #e1e1de}.property .gallery-item.floorplan svg{width:100%;height:100%;display:block}.property .listing-title{overflow-wrap:anywhere}.property .listing-units .unit-rent{font-variant-numeric:tabular-nums}</style></head><body>
 <section class="hero" id="hero"><header class="head"><a class="logo" href="top.html">What?Office</a><nav class="nav"><a href="index.html" class="desktop">⌕ 検索</a><a href="index.html" aria-label="ブックマーク"><svg class="header-bookmark" viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg><span class="desktop">ブックマーク</span></a><a href="#member">♙ <span class="desktop">ログイン</span></a><button class="hamb" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="メニュー"><span class="two-lines"><i></i><i></i></span></button></nav><div class="menu" id="menu"><a href="top.html">TOP</a><a href="index.html">物件を探す</a><a href="#office">LIST</a><a href="#topics">TOPICS</a><a href="#member">会員登録</a></div></header>
 <div class="hero-main"><h1>どんな場所で、<br>何をしたい？</h1><p class="tagline">FIND YOUR OWN ANSWER.</p><div class="searchbox"><form class="searchrow" action="index.html"><input id="query" placeholder="問いを入力" aria-label="物件検索"><button>⌕ 検索</button></form><p class="examples">例えば、こんな問い。</p><div class="question-switch"><button type="button" onclick="slide(-1)">←</button><span id="questionText">窓の外に緑が見える？</span><button type="button" onclick="slide(1)">→</button></div><a class="advanced" href="index.html">エリア・広さ・賃料から探す　→</a></div></div></section>
 <section class="section wrap" id="office"><div class="section-head"><h2>LIST</h2><div class="tabs"><button class="active" id="pickTab" onclick="switchTab('pick')">PICK UP</button><button id="newTab" onclick="switchTab('new')">NEW</button></div></div><div class="property-grid" id="properties"></div><div class="center"><a href="index.html" class="outline">物件一覧を見る　→</a></div></section>
@@ -72,14 +72,19 @@
 const photos=["https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=85","https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1200&q=85","https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1200&q=85","https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1200&q=85"];const questions=["窓の外に緑が見える？","みんなの顔が見えるワンフロアは？","自然光の中で仕事ができる？","天井の高いオフィスは？","街並みを眺めながら働ける？"];let slideIndex=0;function showSlide(){document.getElementById('hero').style.backgroundImage='url("'+photos[slideIndex]+'")';document.getElementById('questionText').textContent=questions[slideIndex]}function slide(n){slideIndex=(slideIndex+n+photos.length)%photos.length;showSlide()}showSlide();
 function goSearch(q){document.getElementById('query').value=q;location.href='index.html'}
 /* TOP cards share the listing view's anatomy and show every sample unit. */
-const data=[
- {id:1,title:'代官山 光と段差のない3F',image:0,badge:'PICK UP',units:[{unit:'A-204',area:107.1,price:250000},{unit:'3F',area:124.8,price:310000},{unit:'4F',area:142.6,price:380000}]},
- {id:2,title:'恵比寿 緑が見えるワークプレイス',image:1,badge:'NEW',units:[{unit:'3F',area:142.8,price:480000},{unit:'4F',area:158.4,price:540000}]},
- {id:3,title:'日本橋 天井高3.2mの一室',image:2,badge:'',units:[{unit:'3F',area:198.4,price:620000}]},
- {id:4,title:'神楽坂 路地にひらく小さなオフィス',image:1,badge:'',units:[{unit:'1F',area:82.6,price:330000},{unit:'2F',area:95.2,price:370000}]},
- {id:5,title:'青山 通りから一歩入った静かな4F',image:0,badge:'',units:[{unit:'4F',area:218,price:790000}]},
- {id:6,title:'蔵前 光が回る角部屋',image:2,badge:'',units:[{unit:'3F',area:116.2,price:410000}]}
+/* Same five UI-test listings and all units as index.html. */
+const data=[{"id":1,"title":"代官山｜大きな窓から緑を眺める、天井高のある開放的なリノベーションオフィス","image":"https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600","badge":"NEW","units":[{"unit":"A-104","area":1168.45,"price":21350840},{"unit":"4F","area":168.45,"price":1350840},{"unit":"A-204","area":192.4,"price":1580000},{"unit":"B-105","area":205.7,"price":1690000}]},{"id":2,"title":"中目黒｜緑を感じるリノベーションオフィス","image":"https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600","badge":"","units":[{"unit":"A-104","area":104.8,"price":680000},{"unit":"3F","area":149.8,"price":1060000}]},{"id":3,"title":"恵比寿｜光が差し込むセットアップオフィス","image":"https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=600","badge":"","units":[{"unit":"5F","area":145.2,"price":1220000},{"unit":"B-204","area":190.2,"price":1600000}]},{"id":4,"title":"表参道｜天高5mのスケルトン空間","image":"https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600","badge":"NEW","units":[{"unit":"A-204","area":118.8,"price":940000},{"unit":"B1F","area":163.8,"price":1320000}]},{"id":5,"title":"渋谷｜明るい窓辺のワークスペース","image":"https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600","badge":"","units":[{"unit":"4F","area":92.4,"price":620000},{"unit":"5F","area":137.4,"price":1000000}]}];
+const topGalleryImages=[
+ 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=850',
+ 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=850',
+ 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=850',
+ 'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=850',
+ 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=850'
 ];
+function topFloorplanSVG(p,n){
+ const shapes=['<path d="M40 40H260V184H40Z M40 115H260 M145 40V115 M205 115V184" />','<path d="M44 35H255V187H44Z M44 95H165V187 M165 35V142H255 M100 95V187" />','<path d="M38 42H267V179H38Z M38 106H205 M205 42V179 M105 106V179" />'];
+ return '<svg viewBox="0 0 300 225" role="img" aria-label="間取り図サンプル'+n+'"><rect width="300" height="225" fill="#f8f8f5"/><g stroke="#555" stroke-width="3" fill="none" stroke-linejoin="round">'+shapes[(n-1)%3]+'</g><g fill="#777" font-family="sans-serif" font-size="12"><text x="22" y="18">間取り図サンプル '+n+'</text><text x="135" y="214">'+p.title.split('｜')[0]+' / '+n+'F</text></g></svg>';
+}
 const topYen=n=>n.toLocaleString('ja-JP')+'円';
 const topArea=n=>n.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
 function toggleTopBookmark(button){
@@ -94,7 +99,7 @@ function switchTab(t){
  const list=t==='new'?[...data].sort((a,b)=>(b.badge==='NEW')-(a.badge==='NEW')||b.id-a.id):data;
  document.getElementById('properties').innerHTML=list.map(d=>{
   const detailUrl='detail.html?id='+d.id;
-  const images=[0,1,2].map(n=>'<div class="gallery-item"><img loading="lazy" src="'+photos[(d.image+n)%photos.length]+'" alt="'+d.title+' の写真"></div>').join('');
+  const images=topGalleryImages.map((url,i)=>'<div class="gallery-item"><img loading="lazy" src="'+(i===0?d.image:url)+'" alt="'+d.title+' の写真 '+(i+1)+'"></div>').join('')+d.units.map((u,i)=>'<div class="gallery-item floorplan">'+topFloorplanSVG(d,i+1)+'</div>').join('');
   const rows=d.units.map(u=>'<div class="unit-row"><span class="unit-id">'+u.unit+'</span><span class="unit-area"><span class="sqm">'+topArea(u.area)+'㎡</span><span class="slash">／</span><span class="tsubo">約'+topArea(u.area/3.305785)+'坪</span></span><span class="unit-rent">'+topYen(u.price)+'</span></div>').join('');
   return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+images+'</div>'+(d.badge==='NEW'?'<span class="listing-new">NEW</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="'+detailUrl+'" class="listing-title">'+d.title+'</a><button class="listing-bookmark" aria-label="ブックマークに追加" aria-pressed="false" onclick="toggleTopBookmark(this)" type="button"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="'+detailUrl+'">'+rows+'</a></div></article>';
  }).join('');
