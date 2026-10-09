@@ -1,0 +1,418 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>物件詳細｜別案｜What? Office</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;color:#222;background:white;font-size:12px;line-height:1.6}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}.page{max-width:620px;margin:auto;background:white;padding-bottom:72px}.head{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}.logo{font-weight:800;font-size:19px;letter-spacing:-.8px}.head-icons{display:flex;gap:21px;align-items:center;font-size:22px}.hero{position:relative;width:100%;aspect-ratio:1.32;background:#eee;overflow:hidden}.hero img{width:100%;height:100%;object-fit:cover}.hero button{position:absolute;top:50%;transform:translateY(-50%);border:0;background:#0003;color:white;font-size:27px;width:30px;height:40px}.hero .prev{left:0}.hero .next{right:0}.tabs{display:grid;grid-template-columns:1fr 1fr}.tabs button{background:white;border:1px solid #e9e9e7;padding:10px;font-weight:600;color:#777;font-size:13px}.tabs button.active{border-bottom:2px solid #222;color:#222}.counter{text-align:center;padding:11px 0 14px;color:#444;font-size:11px}.counter .num{color:#777;margin-right:9px}.body{padding:0 16px}h1{font-size:19px;line-height:1.45;margin:13px 0 28px;font-weight:700;letter-spacing:-.3px}.unit-label{display:grid;grid-template-columns:45px 1fr 110px 17px;gap:4px;color:#888;font-size:10px;padding:0 11px 6px}.unit-label span:nth-child(3){text-align:center}.unit{border:1px solid #ddd;margin-bottom:0}.unit.match{border-color:#717a4b;border-width:1.5px}.unit+ .unit{border-top:0}.unit-summary{display:grid;grid-template-columns:45px 1fr 110px 17px;gap:4px;align-items:center;padding:17px 11px;min-height:83px;cursor:pointer}.unit-id{font-size:12px;font-weight:650}.unit-area{font-size:12px;font-weight:650;line-height:1.45}.unit-area small{display:block;color:#888;font-size:11px;font-weight:400}.unit-price{text-align:left;font-size:12px;font-weight:700;white-space:nowrap}.unit-plus{text-align:right;font-size:18px;color:#777}.unit.sold{color:#999}.unit.sold .unit-price{color:#999}.unit-detail{border-top:1px solid #e4e4e1;padding:4px 11px 15px}.facts{margin:0}.facts>div{display:grid;grid-template-columns:38% 1fr;gap:7px;padding:10px 0;border-bottom:1px solid #e6e6e3}.facts dt{color:#777;font-size:11px}.facts dd{margin:0;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.tag-title{font-size:11px;margin:16px 0 7px}.tags{display:flex;gap:5px;flex-wrap:wrap}.tags span{border:1px solid #d9d9d6;border-radius:18px;padding:3px 9px;font-size:10px}.cta{border:0;background:#717a4b;color:white;padding:12px;width:100%;font-weight:650;margin-top:15px}.tax{text-align:right;color:#888;font-size:10px;margin:11px 0 15px}.building{border:1px solid #e4e4e1}.building-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 13px;border:0;background:white;font-size:14px;font-weight:700}.building-inner{padding:0 13px 13px}.alerts{margin:13px 0 24px;color:#b53b3e;font-size:10px;padding-left:16px}.alerts li{margin:3px 0}.description{padding:22px 16px 24px}.description p{font-size:12px;line-height:1.85;margin:0}.fade{max-height:92px;overflow:hidden;position:relative}.fade:not(.expanded):after{content:"";position:absolute;bottom:0;left:0;right:0;height:35px;background:linear-gradient(transparent,#fff)}.fade.expanded{max-height:none}.more{display:block;margin:17px auto 0;background:none;border:0;font-weight:700;font-size:12px}.more span{color:#717a4b}.map{height:245px;background:#ecece9;position:relative;overflow:hidden}.map iframe{width:100%;height:100%;border:0}.map-link{position:absolute;top:10px;left:10px;background:white;padding:9px 12px;font-size:11px;color:#1671c0;box-shadow:0 2px 5px #0002}.access{padding:15px 16px 27px}.address{font-size:12px;font-weight:650;margin-bottom:8px}.map-out{font-size:11px;display:block;margin-bottom:12px}.access p{font-size:11px;line-height:1.8;margin:0 0 3px}.recommend{background:#f5f4f1;padding:28px 0 36px}.recommend h2{font-size:17px;font-weight:500;margin:0 16px 14px}.rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px 31px;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}.reco{flex:0 0 77%;scroll-snap-align:start;background:#fff;border:1px solid #e3e2df}.reco img{width:100%;aspect-ratio:1.55;object-fit:cover;display:block}.reco-content{padding:11px}.reco-title{font-size:13px;font-weight:650;line-height:1.5;min-height:40px}.station{color:#777;font-size:11px;margin:7px 0 11px}.reco-row{display:flex;justify-content:space-between;font-size:11px;margin:5px 0}.reco-row b{font-size:11px}.foot{background:#252525;color:white;padding:35px 16px 72px}.foot strong{font-size:20px}.foot p{color:#aaa;font-size:12px}.sticky{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,620px);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;background:white;border-top:1px solid #e5e5e3;z-index:8;padding-bottom:env(safe-area-inset-bottom)}.sticky button{background:white;border:0;border-right:1px solid #e5e5e3;padding:8px 2px 7px;font-size:10px;display:flex;align-items:center;flex-direction:column;gap:1px}.sticky button span{font-size:20px}.overlay{position:fixed;inset:0;background:#000d;display:none;z-index:20;align-items:center;justify-content:center}.overlay.show{display:flex}.overlay img{width:95%;max-height:85vh;object-fit:contain}.overlay button{position:absolute;top:12px;right:12px;background:white;border:0;padding:8px}.prototype-note{background:#f7f7f5;color:#777;font-size:10px;text-align:center;padding:5px}@media(max-width:360px){.unit-label,.unit-summary{grid-template-columns:32px 1fr 98px 15px;gap:3px}.unit-price{font-size:11px}h1{font-size:18px}.unit-summary{padding:14px 8px}}
+</style><style id="v39-related-list-cards">
+/* Compact horizontal adaptation of the approved v35 listing-card anatomy */
+.recommend{padding:24px 0 28px}.recommend h2{margin:0 16px 13px;font-size:16px;font-weight:600}
+.recommend .rail{gap:11px;padding:0 16px 29px;align-items:flex-start}
+.recommend .listing-card{position:relative;flex:0 0 88%;min-width:0;scroll-snap-align:start;background:transparent;border:0;cursor:pointer}
+.recommend .listing-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:7px;scrollbar-width:none}
+.recommend .listing-gallery::-webkit-scrollbar{display:none}
+.recommend .gallery-item{flex:0 0 90%;width:90%;aspect-ratio:4/3;scroll-snap-align:start}
+.recommend .gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+.recommend .listing-body{padding:13px 0 0}
+.recommend .listing-title-line{display:flex;align-items:flex-start;gap:8px}
+.recommend .listing-title{font-size:14.5px;line-height:1.48;font-weight:650;flex:1;margin-bottom:9px}
+.recommend .listing-bookmark{flex:0 0 25px;border:0;background:transparent;font-size:22px;line-height:1;padding:0}
+.recommend .listing-units{position:relative;--rent-w:94px;--floor-w:28px;--unit-gap:8px}
+.recommend .listing-units .unit-row{display:grid;grid-template-columns:var(--floor-w) minmax(0,1fr) var(--rent-w);column-gap:var(--unit-gap);align-items:baseline;padding:8px 0;font-size:12px;font-weight:400}
+.recommend .unit-id{text-align:right;font-weight:400;font-size:12px}
+.recommend .unit-area{white-space:nowrap;font-size:11px;letter-spacing:-.35px}
+.recommend .unit-rent{text-align:right;white-space:nowrap;font-size:11px;letter-spacing:-.25px}
+.recommend .listing-units:before,.recommend .listing-units:after{content:"";position:absolute;top:0;bottom:0;width:1px;background:#e8e8e5;pointer-events:none}
+.recommend .listing-units:before{left:calc(var(--floor-w) + var(--unit-gap)/2)}
+.recommend .listing-units:after{right:calc(var(--rent-w) + var(--unit-gap)/2 - 4px)}
+@media(max-width:390px){.recommend .listing-units{--rent-w:90px}.recommend .unit-area,.recommend .unit-rent{font-size:10px}.recommend .listing-card{flex-basis:90%}}
+</style><style id="v40-single-image-and-readable-type">
+/* Detail SP typography: scale up the tiny prototype text without introducing oversized vertical spacing. */
+body{font-size:14px;line-height:1.6}
+.head{height:60px}.logo{font-size:20px}
+.tabs button{font-size:15px;padding:12px}.counter{font-size:13px;padding:12px 0 16px}
+h1{font-size:21px;line-height:1.45;margin:15px 0 26px}
+.unit-label{font-size:12px}.unit-id,.unit-area,.unit-price{font-size:14px}.unit-area small{font-size:12px}
+.unit-summary{min-height:86px}.tax{font-size:12px}.building-btn{font-size:16px}
+.facts dt,.facts dd{font-size:14px}.facts>div{padding:11px 0}
+.tag-title{font-size:13px}.tags span{font-size:12px}.cta{font-size:14px}
+.alerts{font-size:12px}.description p{font-size:14px;line-height:1.75}.more{font-size:14px}
+.address{font-size:14px}.map-out,.access p{font-size:13px}.recommend h2{font-size:17px}.foot p{font-size:13px}
+.sticky button{font-size:12px}
+/* Carousel scrolls horizontally; each individual card has one full-width image and no nested image swipe. */
+.recommend .listing-gallery{display:block;overflow:visible;scroll-snap-type:none}
+.recommend .gallery-item{width:100%;aspect-ratio:4/3;display:block}
+.recommend .gallery-item img{width:100%;height:100%;object-fit:cover}
+/* Reuse the approved v35 unit-column relationships, separators and aligned slash. */
+.recommend .listing-units{--rent-w:94px;--floor-w:28px;--unit-gap:8px}
+.recommend .listing-units .unit-row{grid-template-columns:var(--floor-w) minmax(0,1fr) var(--rent-w);column-gap:var(--unit-gap);font-size:12px;padding:8px 0}
+.recommend .unit-id{font-size:12px;text-align:right}
+.recommend .unit-area{display:grid;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr);gap:0;align-items:baseline;font-size:11px;white-space:nowrap;letter-spacing:-.3px}
+.recommend .unit-area .sqm{text-align:right}.recommend .unit-area .slash{text-align:center}.recommend .unit-area .tsubo{text-align:left}
+.recommend .unit-rent{font-size:11px;text-align:right;white-space:nowrap}
+.recommend .listing-units:before{left:calc(var(--floor-w) + var(--unit-gap)/2)}
+.recommend .listing-units:after{right:calc(var(--rent-w) + var(--unit-gap)/2 - 4px)}
+@media(max-width:390px){.recommend .listing-units{--rent-w:90px}.recommend .unit-area,.recommend .unit-rent{font-size:10px}}
+</style><style id="v41-related-accurate-v35-columns">
+/* Heading starts at the same x coordinate as the related card photo and title. */
+.recommend h2{margin-left:16px!important;margin-right:16px!important}
+.recommend .rail{padding-left:16px!important;padding-right:16px!important}
+.recommend .listing-card{flex:0 0 88%;box-sizing:border-box}
+/* v35 grid dimensions: floor 58px, 7px gaps, rent 94px (90px on SE).
+   Preserve the approved fixed area/slash track and divider-only 4px nudge. */
+.recommend .listing-units{--floor-w:58px!important;--unit-gap:7px!important;--rent-w:94px!important;position:relative}
+.recommend .listing-units .unit-row{display:grid!important;grid-template-columns:var(--floor-w) minmax(0,1fr) var(--rent-w)!important;column-gap:var(--unit-gap)!important;align-items:baseline!important}
+.recommend .listing-units .unit-id,.recommend .listing-units .unit-area,.recommend .listing-units .unit-rent,.recommend .listing-units .unit-area *{font-size:12px!important;font-weight:400!important;letter-spacing:-.12px!important;color:#252525!important}
+.recommend .listing-units .unit-id{text-align:right!important;padding-right:5px!important;white-space:nowrap!important}
+.recommend .listing-units .unit-area{display:grid!important;grid-template-columns:70px 11px 67px!important;width:max-content!important;max-width:none!important;gap:0!important;white-space:nowrap!important}
+.recommend .listing-units .unit-area .sqm{text-align:right!important}
+.recommend .listing-units .unit-area .slash{text-align:center!important}
+.recommend .listing-units .unit-area .tsubo{text-align:left!important}
+.recommend .listing-units .unit-rent{text-align:right!important;white-space:nowrap!important}
+.recommend .listing-units::before{left:calc(var(--floor-w) + var(--unit-gap)/2)!important;transform:scaleX(.5)!important;transform-origin:center!important}
+.recommend .listing-units::after{right:calc(var(--rent-w) + var(--unit-gap)/2)!important;transform:translateX(4px) scaleX(.5)!important;transform-origin:center!important}
+@media(max-width:390px){.recommend .listing-units{--rent-w:90px!important}.recommend .listing-units .unit-row,.recommend .listing-units .unit-row *{font-size:11.4px!important}.recommend .listing-units .unit-area{grid-template-columns:57px 11px 57px!important}}
+</style><style id="v43-photo-gallery-and-text">
+/* Main image first; additional images follow its caption as a vertical editorial gallery. */
+.gallery-continuation{padding:0 0 14px}
+.continued-photo{margin:0 0 16px}
+.continued-photo img{width:100%;height:auto;aspect-ratio:1.32;object-fit:cover;display:block}
+.continued-photo figcaption{font-size:13px;text-align:center;padding:10px 12px 2px;color:#555}
+.tabs{gap:10px;padding:12px 16px 0}
+.tabs button{border:1.5px solid #a6a6a2;border-radius:4px;background:#fff;color:#444;padding:12px 10px;font-size:15px;font-weight:700}
+.tabs button.active{background:#262626;border-color:#262626;color:#fff}
+.counter{padding:12px 0 17px;font-size:13px}
+.unit-summary{grid-template-columns:42px minmax(0,1fr) 104px 20px;gap:5px}
+.unit-area{line-height:1.45}.unit-area small{display:block;font-size:13px;color:#666}
+.unit-plus{font-size:21px}
+.alerts{font-size:16px;line-height:1.65;margin-top:17px;margin-bottom:24px;padding-left:20px}
+.alerts li{margin:0 0 8px}
+.description p{font-size:16px;line-height:1.85}
+.description .fade{max-height:112px}
+.description .fade.expanded{max-height:none}
+@media(max-width:390px){.unit-summary{grid-template-columns:31px minmax(0,1fr) 96px 18px;gap:4px}.unit-area{font-size:13px}.unit-area small{font-size:12px}.unit-price{font-size:12px}}
+</style><style id="v44-horizontal-gallery">
+/* TATO-inspired secondary images: one horizontal strip below the hero caption. */
+.gallery-continuation{display:flex!important;flex-direction:row!important;gap:8px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x proximity!important;-webkit-overflow-scrolling:touch;padding:0 16px 17px!important;scrollbar-width:none}
+.gallery-continuation::-webkit-scrollbar{display:none}
+.gallery-continuation .continued-photo{flex:0 0 43%!important;width:43%!important;min-width:0!important;margin:0!important;scroll-snap-align:start}
+.gallery-continuation .continued-photo img{display:block!important;width:100%!important;aspect-ratio:4/3!important;height:auto!important;object-fit:cover!important}
+.gallery-continuation .continued-photo figcaption{font-size:11px!important;line-height:1.4!important;text-align:left!important;padding:5px 0 0!important;color:#777!important}
+@media(min-width:600px){.gallery-continuation .continued-photo{flex-basis:31%!important;width:31%!important}}
+</style><style id="v45-tato-interactive-thumbnails">
+.hero-count{position:absolute;bottom:14px;right:16px;background:#ffffffbf;color:#222;border-radius:20px;padding:4px 11px;font-size:13px;font-weight:600;letter-spacing:.08em;pointer-events:none}
+.gallery-continuation{position:relative;display:flex!important;align-items:center;gap:7px!important;padding:0 16px 17px!important;overflow-x:auto!important;scrollbar-width:none}
+.gallery-continuation .continued-photo{appearance:none;display:block!important;position:relative;flex:0 0 31%!important;width:31%!important;border:0!important;padding:0!important;margin:0!important;background:none!important;opacity:.65;transition:opacity .15s}
+.gallery-continuation .continued-photo.selected{opacity:1}
+.gallery-continuation .continued-photo img{width:100%;aspect-ratio:1.7!important;object-fit:cover}
+.gallery-continuation .thumb-arrow{position:sticky;z-index:3;flex:0 0 29px;width:29px;height:29px;border-radius:50%;border:1px solid #ddd;background:#fffffff0;color:#555;font-size:23px;line-height:1;padding:0}
+.gallery-continuation .thumb-prev{left:0;margin-right:-30px}
+.gallery-continuation .thumb-next{right:0;margin-left:-30px}
+@media(min-width:600px){.gallery-continuation .continued-photo{flex-basis:25%!important;width:25%!important}}
+</style><style id="v46-on-inspired-quiet-accordions">
+/* v46: one consistent visual language for both unit and building accordions.
+   Fine horizontal rules replace individual card borders and olive outlines. */
+.body .unit-label{grid-template-columns:42px minmax(0,1fr) 104px 20px;gap:5px;padding:0 0 10px;color:#888;font-size:12px}
+.body .unit-label span:nth-child(3){text-align:left}
+.body #units{border-top:1px solid #d6d6d2}
+.body #units .unit,.body #units .unit.match,.body #units .unit.sold{border:0!important;border-bottom:1px solid #d6d6d2!important;margin:0!important;background:transparent!important}
+.body #units .unit+.unit{border-top:0!important}
+.body #units .unit-summary{padding:17px 0!important;min-height:75px!important;grid-template-columns:42px minmax(0,1fr) 104px 20px!important;gap:5px!important}
+.body #units .unit-id{font-size:14px;font-weight:600}
+.body #units .unit-area{font-size:14px;font-weight:500}
+.body #units .unit-area small{font-size:12px;font-weight:400;color:#777}
+.body #units .unit-price{font-size:14px;font-weight:600;white-space:nowrap}
+.body #units .unit-plus{font-size:0!important;display:flex;align-items:center;justify-content:center;position:relative;width:20px;height:20px;color:#333}
+.body #units .unit-plus:before,.body #units .unit-plus:after{content:"";position:absolute;left:4px;top:9px;width:12px;height:1px;background:#333}
+.body #units .unit-plus:after{transform:rotate(90deg)}
+.body #units .unit-plus[data-open="true"]:after{display:none}
+.body #units .unit-detail{border-top:1px solid #ececea!important;padding:4px 0 20px!important}
+.body .facts>div{padding:11px 0!important;border-bottom:1px solid #ededeb!important}
+.body .facts dt{color:#777;font-size:13px}
+.body .facts dd{color:#252525;font-size:14px}
+.body .tags span{background:transparent;border-color:#dededb}
+.body .cta{margin-top:18px}
+.body .building{border:0!important;border-top:1px solid #d6d6d2!important;border-bottom:1px solid #d6d6d2!important}
+.body .building-btn{padding:18px 0!important;font-size:15px;font-weight:600;line-height:1.5}
+.body .building-btn span{font-size:0;position:relative;display:block;width:20px;height:20px}
+.body .building-btn span:before,.body .building-btn span:after{content:"";position:absolute;left:4px;top:9px;width:12px;height:1px;background:#333}
+.body .building-btn span:after{transform:rotate(90deg)}
+.body .building-btn span[data-open="true"]:after{display:none}
+.body .building-inner{padding:0 0 18px!important}
+.body .tax{margin:10px 0 22px}
+.body .alerts{margin-top:22px}
+@media(max-width:390px){
+ .body .unit-label,.body #units .unit-summary{grid-template-columns:31px minmax(0,1fr) 96px 18px!important;gap:4px!important}
+ .body #units .unit-price{font-size:12px}
+ .body #units .unit-area{font-size:13px}
+}
+</style><style id="v47-continuous-gallery">
+/* Photos + plans are a single sequence. A 3/4-width thumbnail rail leaves a
+   quiet fixed jump control on the right. */
+.tabs{display:none!important}
+.gallery-bar{display:flex;align-items:center;gap:10px;padding:0 16px 17px;max-width:100%}
+.gallery-bar .gallery-continuation{flex:3 1 0;min-width:0;width:auto!important;margin:0!important;padding:0!important;display:flex!important;gap:7px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x proximity;scrollbar-width:none}
+.gallery-bar .gallery-continuation::-webkit-scrollbar{display:none}
+.gallery-bar .continued-photo{flex:0 0 42%!important;width:42%!important;min-width:0!important;opacity:.65;border:0!important;padding:0!important;margin:0!important;background:transparent!important;scroll-snap-align:start}
+.gallery-bar .continued-photo.selected{opacity:1}
+.gallery-bar .continued-photo img{width:100%;aspect-ratio:1.55!important;height:auto!important;object-fit:cover;display:block}
+.gallery-bar .plan-jump{flex:1 0 0;min-width:0;align-self:stretch;border:0;border-left:1px solid #dededb;background:white;color:#333;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;padding:0 0 0 9px}
+.gallery-bar .plan-jump span{font-size:16px;font-weight:400}
+.gallery-bar .thumb-arrow{display:none!important}
+.counter{padding:12px 16px 13px!important}
+@media(max-width:390px){.gallery-bar{gap:7px;padding-left:12px;padding-right:12px}.gallery-bar .plan-jump{font-size:11px;padding-left:6px}.gallery-bar .continued-photo{flex-basis:46%!important;width:46%!important}}
+</style><style id="v48-caption-below-gallery">.gallery-bar{padding-bottom:4px!important}.counter{padding-top:7px!important;padding-bottom:16px!important}.gallery-bar .plan-jump{letter-spacing:.02em}</style><style id="v49">.hero .prev,.hero .next{display:none!important}.gallery-bar{padding-top:15px!important}.gallery-bar .plan-jump{background:#f3f3f3!important;border:0!important}.counter .num{display:none!important}.gallery-bar .gallery-continuation{position:relative}.gallery-bar .plan-jump{min-height:68px}</style><style id="v49-arrows">.gallery-bar .thumb-shell{position:relative;flex:3 1 0;min-width:0}.gallery-bar .thumb-shell .gallery-continuation{width:100%!important;flex:none!important}.thumb-control{position:absolute;top:50%;transform:translateY(-50%);z-index:5;border:0;border-radius:50%;width:27px;height:27px;padding:0;background:rgba(255,255,255,.88);color:#333;font-size:23px;line-height:1;box-shadow:0 1px 4px #0002}.thumb-left{left:4px}.thumb-right{right:4px}</style><style id="v50-gallery-center">
+.hero-count{display:none!important}
+.counter{display:flex!important;gap:12px;align-items:center;padding:14px 16px 0!important}
+.counter .num{display:inline!important;flex:0 0 auto;color:#777;font-size:13px}
+.counter #caption{font-size:13px}
+.gallery-bar{padding-top:12px!important}
+.gallery-bar .gallery-continuation{scroll-snap-type:x mandatory!important;scroll-padding-inline:29%!important}
+.gallery-bar .continued-photo{scroll-snap-align:center!important}
+</style><style id="v51-gallery-compact">.hero-count{display:block!important}.counter{display:flex!important;justify-content:center!important;text-align:center!important;padding:10px 16px 17px!important}.counter .num{display:none!important}.counter #caption{font-size:13px}.gallery-bar{padding-top:14px!important;padding-bottom:0!important}</style><style id="v52-caption-position">.counter{justify-content:center!important;text-align:center!important;padding:14px 16px 0!important}.gallery-bar{padding-top:12px!important}</style><style id="v53-extreme-digit-stress">
+/* Long floor labels, 4-digit square metres and 8-digit rent: stress-test layout. */
+.body .unit-label,.body #units .unit-summary{grid-template-columns:minmax(58px,1.05fr) minmax(98px,1.65fr) minmax(116px,2fr) 20px!important;column-gap:6px!important}
+.body #units .unit-summary>*{min-width:0}
+.body #units .unit-id{overflow-wrap:anywhere;font-size:13px!important}
+.body #units .unit-area{font-size:13px!important;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.35px}
+.body #units .unit-area small{font-size:11px!important}
+.body #units .unit-price{font-size:clamp(11px,3vw,14px)!important;letter-spacing:-.45px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.body .unit-label span:nth-child(3){text-align:left}
+@media(max-width:359px){
+ .body .unit-label{grid-template-columns:60px minmax(0,1fr) 20px!important}
+ .body .unit-label span:nth-child(3){display:none}
+ .body #units .unit-summary{grid-template-columns:60px minmax(0,1fr) 20px!important;row-gap:5px!important}
+ .body #units .unit-id{grid-column:1;grid-row:1}
+ .body #units .unit-area{grid-column:2;grid-row:1}
+ .body #units .unit-price{grid-column:2;grid-row:2;font-size:14px!important}
+ .body #units .unit-plus{grid-column:3;grid-row:1 / span 2}
+}
+</style><style id="v55-unit-alignment">
+/* Mirror v35 listing: numeric rent ends align on the right edge. */
+.body #units .unit-price{text-align:right!important;justify-self:stretch!important;font-variant-numeric:tabular-nums}
+.body .unit-label span:nth-child(3){text-align:right!important}
+.body #units .unit-area{text-align:left}
+@media(max-width:359px){
+ .body #units .unit-price{text-align:right!important;grid-column:2!important}
+}
+</style><style id="v56-column-alignment">
+/* Keep a dedicated gap before the plus control, while right-aligning values within their own columns. */
+.body .unit-label,.body #units .unit-summary{
+ grid-template-columns:64px minmax(0,1fr) minmax(118px,1.2fr) 32px!important;
+ column-gap:7px!important;
+}
+.body .unit-label span:first-child,.body #units .unit-id{text-align:right!important;justify-self:stretch!important}
+.body .unit-label span:nth-child(3),.body #units .unit-price{text-align:right!important}
+.body #units .unit-plus{justify-self:end!important}
+@media(max-width:390px){
+ .body .unit-label,.body #units .unit-summary{
+ grid-template-columns:58px minmax(0,1fr) minmax(112px,1.15fr) 29px!important;
+ column-gap:5px!important;
+ }
+ .body #units .unit-price{font-size:clamp(10px,2.8vw,13px)!important}
+}
+@media(max-width:359px){
+ .body .unit-label,.body #units .unit-summary{
+ grid-template-columns:58px minmax(0,1fr) 29px!important;
+ }
+ .body #units .unit-price{grid-column:2!important;text-align:right!important}
+}
+</style><style id="v57-v35-column-balance">
+/* Carry over the locked v35 listing alignment: floor right, sqm right, fixed slash, tsubo left, rent right. */
+.body .unit-label,.body #units .unit-summary{grid-template-columns:58px minmax(0,1fr) 115px 29px!important;column-gap:5px!important}
+.body .unit-label span:first-child,.body #units .unit-id{text-align:right!important;white-space:nowrap!important;overflow-wrap:normal!important}
+.body #units .unit-area{display:grid!important;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr)!important;gap:0!important;align-items:baseline!important;white-space:nowrap!important;min-width:0!important}
+.body #units .unit-area .sqm{grid-column:1;text-align:right;justify-self:end;font-size:11px}
+.body #units .unit-area .slash{grid-column:2;text-align:center;justify-self:center;font-size:10px;color:#999}
+.body #units .unit-area .tsubo{grid-column:3;text-align:left;justify-self:start;font-size:10px;color:#888}
+.body #units .unit-price{text-align:right!important;justify-self:stretch!important;font-size:11px!important;letter-spacing:-.45px!important}
+.body #units .unit-plus{justify-self:end!important}
+@media(min-width:500px){.body .unit-label,.body #units .unit-summary{grid-template-columns:72px minmax(0,1fr) 145px 35px!important;column-gap:10px!important}.body #units .unit-area .sqm{font-size:13px}.body #units .unit-area .tsubo{font-size:12px}.body #units .unit-price{font-size:13px!important}}
+@media(max-width:359px){.body .unit-label,.body #units .unit-summary{grid-template-columns:54px minmax(0,1fr) 25px!important}.body #units .unit-price{grid-column:2!important;grid-row:2!important;font-size:12px!important}.body #units .unit-area{grid-column:2!important;grid-row:1!important}.body #units .unit-plus{grid-column:3!important;grid-row:1 / span 2!important}}
+</style><style id="v58-zoom-actions">
+.overlay{background:rgba(0,0,0,.92)!important;padding:0!important}
+.overlay img{width:100%!important;max-width:100%!important;height:auto!important;max-height:94dvh!important;object-fit:contain!important}
+.overlay .zoom-close{position:absolute;top:max(12px,env(safe-area-inset-top));right:14px;z-index:3;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.85);color:#222;font-size:25px;line-height:1;padding:0}
+.overlay .zoom-plan{position:absolute;right:15px;bottom:max(22px,env(safe-area-inset-bottom));top:auto;z-index:3;background:rgba(255,255,255,.92);color:#222;border:0;border-radius:2px;padding:12px 16px;font-size:13px;font-weight:600}
+.overlay .zoom-plan[hidden]{display:none!important}
+</style><style id="v59-gallery-arrows">
+.hero{position:relative}
+.hero-nav,.overlay .zoom-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:rgba(255,255,255,.78);color:#333;font-size:26px;font-weight:300;line-height:1;padding:0;cursor:pointer;box-shadow:0 1px 4px #0002}
+.hero-nav-left,.overlay .zoom-nav-left{left:10px}
+.hero-nav-right,.overlay .zoom-nav-right{right:10px}
+.overlay .zoom-nav{background:rgba(255,255,255,.75);width:34px;height:34px}
+@media(min-width:768px){.hero-nav-left{left:16px}.hero-nav-right{right:16px}.overlay .zoom-nav-left{left:24px}.overlay .zoom-nav-right{right:24px}}
+</style><style id="v60-zoom-metadata">
+.overlay .zoom-meta{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:16px;right:16px;display:flex;align-items:end;justify-content:center;pointer-events:none;color:#fff;font-size:12px;line-height:1.5;text-shadow:0 1px 5px #0008;z-index:2}
+.overlay .zoom-meta #zoomCaption{text-align:center;max-width:75%;padding:0 8px}
+.overlay .zoom-meta #zoomCount{position:absolute;right:0;bottom:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+.overlay .zoom-plan{bottom:max(52px,calc(env(safe-area-inset-bottom) + 34px))}
+</style><style id="v61-caption-wrap">
+/* Keep captions centered and reserve an independent right-hand counter lane. */
+.overlay .zoom-meta{left:14px;right:14px;display:grid;grid-template-columns:1fr minmax(0,420px) 1fr;align-items:end;justify-items:center;column-gap:0}
+.overlay .zoom-meta #zoomCaption{grid-column:2;max-width:100%;width:100%;padding:0 8px;box-sizing:border-box;text-align:center;overflow-wrap:anywhere;line-height:1.5}
+.overlay .zoom-meta #zoomCount{grid-column:3;position:static;justify-self:end;align-self:end;padding-left:8px}
+@media(max-width:600px){.overlay .zoom-meta{grid-template-columns:55px minmax(0,1fr) 55px}.overlay .zoom-meta #zoomCaption{font-size:12px}}
+.counter #caption{display:block;max-width:560px;margin-inline:auto;text-align:center;line-height:1.55;overflow-wrap:anywhere}
+</style><style id="v62-caption-spacing">
+/* Reserve a distinct caption zone; prevent collisions with the plan shortcut. */
+.overlay .zoom-meta{bottom:max(17px,env(safe-area-inset-bottom));grid-template-columns:50px minmax(0,1fr) 50px;align-items:end}
+.overlay .zoom-meta #zoomCaption{font-size:12px;line-height:1.65;max-width:100%;padding:0 5px;text-wrap:balance;overflow-wrap:normal;word-break:normal;line-break:strict}
+.overlay .zoom-meta #zoomCount{font-size:12px}
+.overlay .zoom-plan{bottom:max(108px,calc(env(safe-area-inset-bottom) + 92px));padding:10px 14px}
+@media(min-width:700px){.overlay .zoom-meta{grid-template-columns:75px minmax(0,1fr) 75px}.overlay .zoom-meta #zoomCaption{max-width:540px}}
+</style><style id="v63-stable-caption-height">
+/* Reserve a stable two-line caption slot so thumbnail and content positions never jump. */
+.counter{height:76px!important;box-sizing:border-box!important;padding:10px 16px 8px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden}
+.counter #caption{margin:0 auto!important;max-width:560px!important;line-height:1.55!important;text-align:center!important;display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.gallery-bar{padding-top:0!important}
+</style><style id="v65-unit-fact-groups">.unit-facts>.unit-fact-group{display:block;grid-template-columns:none;gap:0;padding:8px 0;border-bottom:0}.unit-facts>.unit-fact-group+.unit-fact-group{border-top:1px solid #e6e6e3;padding-top:14px;margin-top:4px}.unit-facts>.unit-fact-group>div{display:grid;grid-template-columns:38% minmax(0,1fr);gap:7px;padding:7px 0;border-bottom:0}.unit-facts>.unit-fact-group dt,.unit-facts>.unit-fact-group dd{min-width:0;margin:0;overflow-wrap:anywhere}</style><style id="v68-unit-finishing">.unit-facts>.unit-fact-group+.unit-fact-group{position:relative;border-top:0;margin-top:4px;padding-top:14px}.unit-facts>.unit-fact-group+.unit-fact-group:before{content:"";position:absolute;left:0;right:0;top:0;border-top:1px solid #e6e6e3}.unit-facts>.unit-fact-group>div{border-bottom:0}.unit-detail>.unit-facts:not(.unit-meta-facts){border-bottom:0}.unit-detail>.unit-facts:not(.unit-meta-facts) .unit-fact-group:last-child{border-bottom:0}.unit-meta-facts{border-top:1px solid #e6e6e3;margin-top:18px;padding-top:12px}.unit-meta-facts>.unit-fact-group{border:0;padding:0}.unit-meta-facts>.unit-fact-group>div{border:0;padding:7px 0}</style><style id="v69-single-group-dividers">.unit-detail .unit-facts>.unit-fact-group+.unit-fact-group{border-top:0!important}.unit-detail .unit-facts>.unit-fact-group+.unit-fact-group:before{border-top:0!important}.unit-detail .unit-facts>.unit-fact-group+.unit-fact-group{box-shadow:inset 0 1px 0 #e6e6e3}.unit-detail .unit-facts>.unit-fact-group{border-bottom:0!important}.unit-detail .unit-facts{border-bottom:0!important}</style><style id="v70-reordered-unit-tags">.unit-tags-block{padding:4px 0 16px}.unit-followup-facts{border-top:1px solid #e6e6e3;padding-top:10px}.unit-followup-facts:empty{display:none}.unit-tags-block .tag-title:first-child{margin-top:12px}</style><style id="opinion-layout-v1">
+/* Independent editorial alternative. The original detail.html is unchanged. */
+.alt-main{padding:0 18px 34px}
+.alt-intro{padding:24px 0 29px}
+.alt-intro h1{font-size:23px;line-height:1.5;letter-spacing:-.4px;margin:0 0 20px;font-weight:700}
+.alt-intro .description{padding:0}
+.alt-intro .description p{font-size:15px;line-height:1.95;color:#3b3b38}
+.alt-intro .description .fade{max-height:none!important;overflow:visible}
+.alt-intro .description .fade:after{display:none!important}
+.alt-intro .description .more{display:none}
+.alt-notices{margin:0 0 34px;padding:19px 17px 15px;background:#f5f5f1;border-left:3px solid #737b59}
+.alt-notices h2{font-size:14px;letter-spacing:.02em;margin:0 0 10px;font-weight:700}
+.alt-notices .alerts{color:#393c36;font-size:13px;line-height:1.75;margin:0;padding-left:18px}
+.alt-notices .alerts li{margin:0 0 8px}
+.alt-section-title{font-size:17px;font-weight:700;line-height:1.5;margin:0 0 15px;letter-spacing:.01em}
+.alt-units{margin-bottom:43px}
+.alt-units .unit-label{padding-bottom:9px}
+.alt-units .unit{border-left:0;border-right:0;border-color:#deded9}
+.alt-units .unit.match{border-color:#a0a58e;border-width:1px}
+.alt-units .unit-summary{min-height:78px}
+.alt-units .tax{margin:12px 0 0}
+.alt-location{margin:0 -18px 40px}
+.alt-location>.alt-section-title{padding:0 18px;margin-bottom:12px}
+.alt-location .access{padding:0 18px 18px}
+.alt-location .address{font-size:14px;margin-bottom:8px}
+.alt-location .map-out{margin-bottom:10px}
+.alt-location .map{height:275px}
+.alt-building{margin:0 0 6px}
+.alt-building .building{border-left:0;border-right:0;border-color:#d8d8d4}
+.alt-building .building-btn{padding:16px 3px;font-size:15px}
+.alt-building .building-inner{padding:0 4px 14px}
+.alt-building .facts>div{grid-template-columns:38% minmax(0,1fr)}
+.alt-main .unit-detail .unit-facts>.unit-fact-group{display:block!important}
+.alt-main .unit-detail .unit-facts>.unit-fact-group>div{display:grid!important}
+.alt-main .unit-meta-facts{margin-top:19px}
+.recommend{border-top:1px solid #e5e5e0}
+.sticky{grid-template-columns:1fr 1.3fr 1.3fr}
+@media(min-width:620px){.alt-main{padding-left:26px;padding-right:26px}.alt-location{margin-left:-26px;margin-right:-26px}.alt-location>.alt-section-title,.alt-location .access{padding-left:26px;padding-right:26px}}
+</style></head><body><div class="page"><header class="head"><div class="logo">What? Office</div><div class="head-icons"><span>⌕</span><span>♧</span><span>☰</span></div></header><div class="hero"><img id="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" onclick="zoom()"><span class="hero-count" id="heroCount">01｜12</span><button class="hero-nav hero-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><button class="hero-nav hero-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button></div><div class="counter"><span class="num" id="counter" hidden>1 / 12</span><span id="caption">窓際のワークスペース</span></div><div class="gallery-bar"><div class="thumb-shell"><div id="galleryContinuation" class="gallery-continuation" aria-label="写真・間取り図サムネイル"></div><button class="thumb-control thumb-left" type="button" onclick="shift(-1)" aria-label="前の写真">‹</button><button class="thumb-control thumb-right" type="button" onclick="shift(1)" aria-label="次の写真">›</button></div><button class="plan-jump" type="button" onclick="jumpToPlan()">間取り図</button></div><div class="body alt-main"><div class="alt-intro"><h1 id="propertyTitle">代官山｜光と緑が見えるオフィス</h1><div class="description"><div class="fade" id="intro"><p>窓の向こうに見える緑と、仕事に集中できる静けさ。代官山駅から徒歩12分、通りから一歩入った場所には穏やかな時間が流れています。9階は遠くまで視界が抜け、4階と2階では近くの緑を感じられます。フロアごとに異なる景色が、働き方を考えるきっかけになる物件です。</p></div><button class="more" onclick="const x=document.getElementById('intro');x.classList.toggle('expanded');this.innerHTML=x.classList.contains('expanded')?'閉じる <span>−</span>':'もっと見る <span>＋</span>'">もっと見る <span>＋</span></button></div></div><section class="alt-notices" aria-label="特記事項"><h2>特記事項</h2><ul class="alerts"><li>期間限定で居抜き相談可。原状回復前のため、現在の内装を活かして入居できる可能性があります。</li><li>契約条件の詳細はお問い合わせください。</li></ul></section><section class="alt-units"><h2 class="alt-section-title">募集区画</h2><div class="unit-label"><span>区画</span><span>面積</span><span>賃料＋管理費</span><span></span></div><div id="units"></div><div class="tax">※記載金額はすべて税抜</div></section><section class="alt-location"><h2 class="alt-section-title">所在地・アクセス</h2><div class="access"><div class="address">♧ 世田谷区玉川田園調布9-99-99</div><a class="map-out" href="https://maps.google.com/?q=東京都世田谷区玉川田園調布" target="_blank">Googleマップへ ↗</a><p>都営大江戸線「若松河田」徒歩6分</p><p>東京メトロ副都心線「東新宿」徒歩8分</p><p>都営大江戸線「東新宿」徒歩8分</p></div><div class="map"><iframe title="周辺地図" loading="lazy" src="https://www.google.com/maps?q=東京都世田谷区玉川田園調布&output=embed"></iframe><a class="map-link" target="_blank" href="https://maps.google.com/?q=東京都世田谷区玉川田園調布">マップで開く ↗</a></div></section><section class="alt-building"><h2 class="alt-section-title">建物について</h2><div class="building"><button class="building-btn" onclick="toggleBuilding()">建物情報 <span id="buildingSign">＋</span></button><div class="building-inner" id="buildingInfo" hidden><dl class="facts" id="buildingFacts"></dl></div></div></section></div><div class="recommend"><h2>広さが近い物件</h2><div class="rail" id="nearArea"></div><h2>賃料が近い物件</h2><div class="rail" id="nearPrice"></div></div><footer class="foot"><strong>What? Office</strong><p>働く場所から、会社の未来を考える。</p></footer></div><div class="sticky"><button onclick="location.href='tel:0312345678'"><span>♧</span>電話</button><button onclick="alert('比較用プロトタイプ：問い合わせ送信は未接続です')"><span>⌕</span>お問い合わせ</button><button onclick="this.querySelector('span').textContent=this.querySelector('span').textContent==='♧'?'◆':'♧'"><span>♧</span>ブックマーク</button></div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="写真の拡大表示" onclick="if(event.target===this)closeZoom()"><button class="zoom-close" type="button" onclick="closeZoom()" aria-label="閉じる">×</button><button class="zoom-nav zoom-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><img id="zoomImage" alt="拡大画像"><div class="zoom-meta"><span id="zoomCaption"></span><span id="zoomCount"></span></div><button class="zoom-nav zoom-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button><button class="zoom-plan" type="button" onclick="zoomToPlan()">間取り図</button></div><script>
+const images=['https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1100','https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1100','https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1100','https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1100','https://images.unsplash.com/photo-1497366216548-37526070297c?w=1100','https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1100','https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1100','https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1100','https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1100','https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1100'];const plans=['https://placehold.co/900x680/f4f4f1/555?text=9F+Plan','https://placehold.co/900x680/f4f4f1/555?text=4F+Plan'];/* One continuous public gallery, while source photos and plans remain separate arrays. */
+const photoCaptions=[
+'窓際のワークスペース',
+'大きな窓から自然光が差し込み、奥まで明るさが届く開放的なワークスペース',
+'木の質感を生かした落ち着きのある室内',
+'窓の向こうに街並みが広がり、時間帯によって光の表情が変わる執務空間',
+'ゆとりのあるミーティングスペース',
+'素材の表情が残る天井と床を生かした、シンプルで自由度の高いオフィス',
+'通路から奥のスペースまで視線が抜けるレイアウト',
+'縦位置で撮影した窓際の一角。床から天井までの高さと、窓から入る自然光が伝わる',
+'家具の配置をイメージしやすい、整った形の室内',
+'外の緑を眺めながら過ごせる、窓際の小さなスペース'
+];
+const gallery=[...images.map((src,i)=>({src:i===7?src.split('?')[0]+'?auto=format&fit=crop&crop=center&w=700&h=1100&q=85':src,kind:'photo',caption:photoCaptions[i]})),...plans.map((src,i)=>({src,kind:'plan',caption:'間取り図 '+(i+1)}))];
+const firstPlanIndex=images.length;let idx=0;
+function updateHero(options={}){
+ const item=gallery[idx],hero=document.getElementById('heroImage');
+ hero.src=item.src;hero.alt=item.kind==='plan'?'間取り図 '+(idx-firstPlanIndex+1):'物件写真 '+(idx+1);
+ document.getElementById('counter').textContent=(idx+1)+' / '+gallery.length;
+ document.getElementById('heroCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0');
+
+ document.getElementById('caption').textContent=item.caption;
+ document.querySelectorAll('.continued-photo').forEach((el,i)=>{el.classList.toggle('selected',i===idx);el.setAttribute('aria-pressed',String(i===idx))});
+ if(options.scroll!==false)scrollThumb(idx,options.smooth!==false);if(document.getElementById('overlay').classList.contains('show'))refreshZoom();
+}
+let railSyncUntil=0;
+function scrollThumb(i,smooth=true){
+ const rail=document.getElementById('galleryContinuation'),el=rail.children[i];
+ if(!el)return;
+ railSyncUntil=Date.now()+(smooth?700:100);
+ const target=el.offsetLeft-rail.offsetLeft-(rail.clientWidth-el.clientWidth)/2;
+ rail.scrollTo({left:Math.max(0,target),behavior:smooth?'smooth':'auto'});
+}
+function shift(d){idx=(idx+d+gallery.length)%gallery.length;updateHero()}
+function selectPhoto(i){idx=i;updateHero()}
+function jumpToPlan(){idx=firstPlanIndex;updateHero()}
+function syncFromRail(){
+ if(Date.now()<railSyncUntil)return;
+ const rail=document.getElementById('galleryContinuation');
+ const center=rail.scrollLeft+rail.clientWidth/2;
+ let best=0,distance=Infinity;
+ Array.from(rail.children).forEach((el,i)=>{
+  const midpoint=el.offsetLeft-rail.offsetLeft+el.clientWidth/2;
+  const delta=Math.abs(midpoint-center);
+  if(delta<distance){distance=delta;best=i}
+ });
+ if(best!==idx){idx=best;updateHero({scroll:false})}
+}
+let zoomOverflow='';
+function setZoomCaption(caption){
+ const el=document.getElementById('zoomCaption');el.replaceChildren();
+ const punctuation=caption.search(/[。、]/);
+ if(caption.length>27&&punctuation>=8&&punctuation<caption.length-9){
+  el.append(document.createTextNode(caption.slice(0,punctuation+1)));
+  el.append(document.createElement('br'));
+  el.append(document.createTextNode(caption.slice(punctuation+1)));
+ }else{el.textContent=caption}
+}
+function refreshZoom(){document.getElementById('zoomImage').src=gallery[idx].src;document.getElementById('zoomImage').alt=gallery[idx].kind==='plan'?'間取り図':'物件写真';document.querySelector('.zoom-plan').hidden=idx>=firstPlanIndex;setZoomCaption(gallery[idx].caption);document.getElementById('zoomCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0')}
+function zoom(){zoomOverflow=document.body.style.overflow;document.body.style.overflow='hidden';refreshZoom();document.getElementById('overlay').classList.add('show')}
+function closeZoom(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=zoomOverflow}
+function zoomToPlan(){idx=firstPlanIndex;updateHero();refreshZoom()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('overlay').classList.contains('show'))closeZoom()});
+function renderContinuation(){
+ const target=document.getElementById('galleryContinuation');
+ target.innerHTML=gallery.map((item,i)=>'<button type="button" class="continued-photo'+(i===idx?' selected':'')+'" onclick="selectPhoto('+i+')" aria-pressed="'+(i===idx)+'" aria-label="'+(item.kind==='plan'?'間取り図':'写真')+' '+(item.kind==='plan'?(i-firstPlanIndex+1):(i+1))+'"><img loading="lazy" src="'+item.src+'" alt=""></button>').join('');
+}
+renderContinuation();updateHero({scroll:false});
+const galleryRail=document.getElementById("galleryContinuation");
+let railTimer;
+galleryRail.addEventListener("scroll",()=>{if(Date.now()<railSyncUntil)return;syncFromRail();clearTimeout(railTimer);railTimer=setTimeout(()=>{syncFromRail()},90)},{passive:true});
+let tx=0,swipedHero=false;
+document.querySelector('.hero').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;swipedHero=false},{passive:true});
+document.querySelector('.hero').addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>45){swipedHero=true;shift(d<0?1:-1)}},{passive:true});
+document.getElementById('heroImage').addEventListener('click',e=>{if(swipedHero){e.stopImmediatePropagation();swipedHero=false}},true);
+let zoomTouchX=0,zoomSwiped=false;
+const zoomOverlay=document.getElementById('overlay');
+zoomOverlay.addEventListener('touchstart',e=>{zoomTouchX=e.touches[0].clientX;zoomSwiped=false},{passive:true});
+zoomOverlay.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-zoomTouchX;if(Math.abs(d)>45){zoomSwiped=true;shift(d<0?1:-1)}},{passive:true});
+zoomOverlay.addEventListener('click',e=>{if(zoomSwiped){e.stopImmediatePropagation();zoomSwiped=false}},true);
+const units=[{id:'A-204',area:'1,234.56㎡',tsubo:'約373.45坪',price:'12,345,678円',rent:'12,000,000円',fee:'345,678円',unitPrice:'約26,000円／坪',ceiling:'2,700mm',status:'入居中／内覧可',move:'2026年11月上旬予定',features:['天井が高い','大きな窓','前が抜けている','最上階','化けしろあり']},{id:'4F',area:'234.56㎡',tsubo:'約70.95坪',price:'1,844,700円',rent:'1,700,000円',fee:'144,700円',unitPrice:'約26,000円／坪',ceiling:'2,650mm',status:'空室／内覧可',move:'即日',features:['緑が見える','大きな窓','前が抜けている']},{id:'2F',area:'345.67㎡',tsubo:'約104.56坪',price:'成約済',sold:true,ceiling:'2,550mm',status:'成約済',features:['緑が見える','屋上・ルーフバルコニー']}];
+function rows(r){return r.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')}function unitRows(groups){return groups.map(group=>'<div class="unit-fact-group">'+rows(group)+'</div>').join('')}function toggleUnit(i){const e=document.getElementById('unitDetail'+i);e.hidden=!e.hidden;document.getElementById('sign'+i).textContent=e.hidden?'＋':'−';document.getElementById('sign'+i).dataset.open=String(!e.hidden)}document.getElementById('units').innerHTML=units.map((u,i)=>'<div class="unit '+(u.sold?'sold':'match')+'"><div class="unit-summary" onclick="toggleUnit('+i+')"><span class="unit-id">'+u.id+'</span><span class="unit-area"><span class="sqm">'+u.area+'</span><span class="slash">／</span><span class="tsubo">'+u.tsubo+'</span></span><span class="unit-price">'+u.price+'</span><span class="unit-plus" id="sign'+i+'">＋</span></div><div class="unit-detail" id="unitDetail'+i+'" hidden><dl class="facts unit-facts">'+unitRows(u.sold?[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['現況',u.status]]]:[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['賃料',u.rent],['管理費',u.fee],['坪単価',u.unitPrice]]])+'</dl><div class="unit-tags-block"><p class="tag-title">目的</p><div class="tags"><span>オフィス</span><span>店舗</span><span>アトリエ・ギャラリー</span></div><p class="tag-title">特徴</p><div class="tags">'+u.features.map(x=>'<span>'+x+'</span>').join('')+'</div></div><dl class="facts unit-facts unit-followup-facts">'+unitRows(u.sold?[]:[[['敷金','10ヶ月'],['礼金','2ヶ月'],['契約期間','普通建物賃貸借契約 2年'],['現況／内覧',u.status],['入居可能日',u.move]],[['最大天井高',u.ceiling],['専有部設備','個別空調／男女別トイレ／給湯'],['区画備考','原状回復条件／償却／解約予告／更新料等の区画固有情報を表示']]])+'</dl><dl class="facts unit-facts unit-meta-facts">'+unitRows([[['取引態様','媒介'],['仲介手数料','賃料の1ヶ月分＋消費税'],['情報更新日','2026年9月10日']]])+'</dl><button class="cta" onclick="alert(\'比較用プロトタイプ：問い合わせは未接続です\')">この区画について問い合わせる →</button></div></div>').join('');
+const building=[['物件名','What? Office 表参道ビル'],['住所','東京都世田谷区玉川田園調布9-99-99'],['交通','「代官山」徒歩12分／「恵比寿」徒歩12分／「渋谷」徒歩12分'],['用途地域','商業地域'],['築年月','2008年9月'],['構造／規模','鉄骨鉄筋コンクリート造／地上9階・地下1階'],['共用部設備','エレベーター／駐車場（要空確認）／駐輪場（要空確認）／バイク置場（要空確認）／共用ラウンジ／共用会議室'],['建物備考','建物全体に共通する補足情報を表示']];document.getElementById('buildingFacts').innerHTML=rows(building);function toggleBuilding(){const x=document.getElementById('buildingInfo');x.hidden=!x.hidden;document.getElementById('buildingSign').textContent=x.hidden?'＋':'−';document.getElementById('buildingSign').dataset.open=String(!x.hidden)}
+/* Each recommendation is one property, with one or more matching units.
+   Area and rent recommendations can contain different units of the same property. */
+const relatedProperties=[
+ {id:4,title:'表参道｜天高5mのスケルトン空間',image:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=700',
+  units:[{unit:'1F',area:118.8,price:940000},{unit:'2F',area:125.4,price:1080000},{unit:'3F',area:190.2,price:1500000}]},
+ {id:3,title:'恵比寿｜光が差し込むセットアップオフィス',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=700',
+  units:[{unit:'3F',area:92.4,price:620000},{unit:'4F',area:101.2,price:690000},{unit:'5F',area:160.5,price:980000}]},
+ {id:2,title:'中目黒｜緑を感じるリノベーションオフィス',image:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=700',
+  units:[{unit:'2F',area:104.8,price:680000},{unit:'3F',area:145.5,price:710000},{unit:'4F',area:210.3,price:1350000}]}
+];
+/* Demo-only matched-unit selections. Production will calculate matches against the
+   current property's units using area or total monthly rent independently. */
+const areaMatches=[{id:4,units:['1F','2F']},{id:3,units:['3F','4F']}];
+const priceMatches=[{id:3,units:['3F','4F']},{id:2,units:['2F','3F']}];
+function relatedCards(matches){
+ return matches.map(item=>{
+  const p=relatedProperties.find(x=>x.id===item.id);
+  if(!p)return '';
+  const units=p.units.filter(u=>item.units.includes(u.unit));
+  const rows=units.map(u=>{
+   const sqm=u.area.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
+   const tsubo=(u.area/3.305785).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
+   const rent=u.price.toLocaleString('ja-JP')+'円';
+   return '<div class="unit-row"><span class="unit-id">'+u.unit+'</span><span class="unit-area"><span class="sqm">'+sqm+'㎡</span><span class="slash">／</span><span class="tsubo">約'+tsubo+'坪</span></span><span class="unit-rent">'+rent+'</span></div>';
+  }).join('');
+  return '<article class="listing-card" onclick="location.href=\'detail.html?id='+p.id+'\'"><div class="listing-gallery"><div class="gallery-item"><img loading="lazy" src="'+p.image+'" alt="物件写真"></div></div><div class="listing-body"><div class="listing-title-line"><div class="listing-title">'+p.title+'</div><button class="listing-bookmark" onclick="event.stopPropagation();this.textContent=this.textContent===\'♧\'?\'◆\':\'♧\'" aria-label="ブックマーク">♧</button></div><div class="listing-units">'+rows+'</div></div></article>';
+ }).join('');
+}
+document.getElementById('nearArea').innerHTML=relatedCards(areaMatches);
+document.getElementById('nearPrice').innerHTML=relatedCards(priceMatches);
+const id=Number(new URLSearchParams(location.search).get('id')||1);const titles={1:'代官山｜光と緑が見えるオフィス',2:'中目黒｜緑を感じるリノベーションオフィス',3:'恵比寿｜光が差し込むセットアップオフィス',4:'表参道｜天高5mのスケルトン空間',5:'渋谷｜明るい窓辺のワークスペース'};if(titles[id])document.getElementById('propertyTitle').textContent=titles[id];
+</script></body></html>
