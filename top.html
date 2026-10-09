@@ -12,6 +12,28 @@
 /* Align the catchcopy and search area closer to the bottom edge of the hero. */
 .hero-main{bottom:28px}
 @media(max-width:700px){.hero-main{bottom:max(20px,env(safe-area-inset-bottom,0px) + 12px)}}
+</style><style id="top-v4-listing-match">
+/* v35-style card structure on TOP: swipeable 4:3 photos, bookmark, unit grid. */
+.property-grid{gap:20px 25px}.property.listing-card{background:#fff;border:0;box-shadow:none;margin:0;padding:0 0 24px;position:relative;min-width:0}
+.property .listing-gallery{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-padding-left:0;padding:0 0 2px;align-items:flex-start;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;aspect-ratio:auto}
+.property .listing-gallery::-webkit-scrollbar{display:none}
+.property .gallery-item{flex:0 0 90%;width:90%;aspect-ratio:4/3;overflow:hidden;scroll-snap-align:start}
+.property .gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+.property .listing-new{position:absolute;left:14px;top:14px;background:#fff;color:#222;padding:5px 10px;border-radius:2px;font-size:10px;z-index:3}
+.property .listing-body{padding:12px 0 0}
+.property .listing-title-line{display:flex;align-items:flex-start;gap:8px;margin:0}
+.property .listing-title{font-size:13px;line-height:1.6;font-weight:700;flex:1;min-width:0;margin:0 0 9px}
+.property .listing-bookmark{flex:0 0 29px;min-height:32px;border:0;background:transparent;color:#252525;padding:0;cursor:pointer}
+.property .listing-bookmark svg{width:21px;height:27px;fill:none;stroke:currentColor;stroke-width:1.5}
+.property .listing-bookmark.is-saved svg{fill:#717b4c;stroke:#717b4c}
+.property .listing-units{position:relative;display:block;--floor-w:58px;--rent-w:94px;--unit-gap:7px}
+.property .listing-units:before,.property .listing-units:after{content:"";position:absolute;top:4px;bottom:4px;width:1px;background:#e5e5e2;pointer-events:none}
+.property .listing-units:before{left:var(--floor-w)}.property .listing-units:after{right:calc(var(--rent-w) + 3px);transform:translateX(4px) scaleX(.5)}
+.property .listing-units .unit-row{display:grid;grid-template-columns:var(--floor-w) minmax(0,1fr) var(--rent-w);gap:var(--unit-gap);align-items:baseline;white-space:nowrap;font-size:11px;padding:5px 0}
+.property .unit-id{text-align:right;padding-right:5px;font-size:11px}.property .unit-area{display:grid;grid-template-columns:minmax(0,1fr) 11px minmax(0,1fr);align-items:baseline;white-space:nowrap;gap:0;min-width:0}
+.property .unit-area .sqm{text-align:right;justify-self:end;font-size:11px}.property .unit-area .slash{text-align:center;color:#888;font-size:10px}.property .unit-area .tsubo{text-align:left;justify-self:start;color:#777;font-size:10px}
+.property .unit-rent{text-align:right;font-size:11px;letter-spacing:-.3px;font-weight:600}.property .unit-tsuboprice{display:none}
+@media(max-width:390px){.property .listing-units{--floor-w:55px;--rent-w:90px;--unit-gap:5px}.property .listing-units .unit-row{font-size:10px}.property .unit-area .sqm,.property .unit-rent{font-size:10px}}
 </style></head><body>
 <section class="hero" id="hero"><header class="head"><a class="logo" href="top.html">What?Office</a><nav class="nav"><a href="index.html" class="desktop">⌕ 検索</a><a href="index.html">♡ <span class="desktop">お気に入り</span></a><a href="#member">♙ <span class="desktop">ログイン</span></a><button class="hamb" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="メニュー"><span class="two-lines"><i></i><i></i></span></button></nav><div class="menu" id="menu"><a href="top.html">TOP</a><a href="index.html">物件を探す</a><a href="#office">OFFICE LIST</a><a href="#topics">TOPICS</a><a href="#member">会員登録</a></div></header>
 <div class="hero-main"><h1>これからの自分たちに、<br>どんなオフィスが<br class="mobile">似合うだろう？</h1><p class="tagline">FIND YOUR OWN ANSWER.</p><div class="searchbox"><form class="searchrow" action="index.html"><input id="query" placeholder="問いを入力" aria-label="物件検索"><button>⌕ 検索</button></form><p class="examples">例えば、こんな問い。</p><div class="question-switch"><button type="button" onclick="slide(-1)">←</button><span id="questionText">窓の外に緑が見える？</span><button type="button" onclick="slide(1)">→</button></div><a class="advanced" href="index.html">エリア・広さ・賃料から探す　→</a></div></div></section>
@@ -24,5 +46,15 @@
 const photos=["https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=85","https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1200&q=85","https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1200&q=85","https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1200&q=85"];const questions=["窓の外に緑が見える？","みんなの顔が見えるワンフロアは？","自然光の中で仕事ができる？","天井の高いオフィスは？","街並みを眺めながら働ける？"];let slideIndex=0;function showSlide(){document.getElementById('hero').style.backgroundImage='url("'+photos[slideIndex]+'")';document.getElementById('questionText').textContent=questions[slideIndex]}function slide(n){slideIndex=(slideIndex+n+photos.length)%photos.length;showSlide()}showSlide();
 function goSearch(q){document.getElementById('query').value=q;location.href='index.html'}
 const data=[['代官山 光と段差のない3F','107.1㎡ / 32.4坪','¥250,000',0,'PICK UP'],['恵比寿 緑が見えるワークプレイス','142.8㎡ / 43.2坪','¥480,000',1,'NEW'],['日本橋 天井高3.2mの一室','198.4㎡ / 60.0坪','¥620,000',2,''],['神楽坂 路地にひらく小さなオフィス','82.6㎡ / 25.0坪','¥330,000',1,''],['青山 通りから一歩入った静かな4F','218.0㎡ / 65.9坪','¥790,000',0,''],['蔵前 光が回る角部屋','116.2㎡ / 35.2坪','¥410,000',2,'']];
-function switchTab(t){document.getElementById('pickTab').classList.toggle('active',t==='pick');document.getElementById('newTab').classList.toggle('active',t==='new');const a=t==='new'?[...data].reverse():data;document.getElementById('properties').innerHTML=a.map((d,i)=>'<a class="property" href="detail.html"><div class="property-img"><img loading="lazy" src="'+photos[d[3]]+'" alt="'+d[0]+'">'+(d[4]==='NEW'?'<span class="flag">NEW</span>':i===2?'<span class="flag">UPDATE</span>':'')+'<button class="heart" aria-label="お気に入り" onclick="event.preventDefault();event.stopPropagation();this.textContent=this.textContent===\'♡\'?\'♥\':\'♡\'">♡</button></div><h3>'+d[0]+'</h3><div class="metrics"><div><small>面積</small><strong>'+d[1]+'</strong></div><div><small>賃料＋管理費</small><strong>'+d[2]+'</strong></div><span class="arrow">→</span></div></a>').join('')}switchTab('pick');
+function switchTab(t){
+document.getElementById('pickTab').classList.toggle('active',t==='pick');
+document.getElementById('newTab').classList.toggle('active',t==='new');
+const a=t==='new'?[...data].reverse():data;
+document.getElementById('properties').innerHTML=a.map((d,i)=>{
+const floor=i===0?'A-204':'3F';
+const area=d[1].split(' / ');
+const badge=d[4]==='NEW'?'NEW':i===2?'UPDATE':'';
+return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+[0,1,2].map((n)=>'<div class="gallery-item"><img loading="lazy" src="'+photos[(d[3]+n)%photos.length]+'" alt="'+d[0]+'"></div>').join('')+'</div>'+(badge?'<span class="listing-new">'+badge+'</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="detail.html" class="listing-title">'+d[0]+'</a><button class="listing-bookmark" aria-label="ブックマーク" onclick="this.classList.toggle(\'is-saved\')" type="button"><svg viewBox="0 0 24 28"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="detail.html"><div class="unit-row"><span class="unit-id">'+floor+'</span><span class="unit-area"><span class="sqm">'+area[0]+'</span><span class="slash">／</span><span class="tsubo">約'+area[1]+'</span></span><span class="unit-rent">'+d[2].replace('¥','')+'円</span><span class="unit-tsuboprice">坪単価</span></div></a></div></article>';
+}).join('');
+}switchTab('pick');
 </script></body></html>
