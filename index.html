@@ -755,7 +755,7 @@ window.addEventListener('resize',()=>{if(selected)centerMapOn(selected)});
 order='new';ordered();drawMarkers();drawCards();requestAnimationFrame(()=>{centerMapOn(selected);document.querySelector(`#cards [data-id="${selected}"]`)?.scrollIntoView({inline:'center',block:'nearest'})});
 </script><script>
 function setTitleGap(n){document.documentElement.style.setProperty('--extra-gap',n+'ch');}
-setTitleGap(2);setView('list');
+setTitleGap(2);setView(new URLSearchParams(location.search).get('view')==='map'?'map':'list');
 
 (function restoreFromDetail(){
  try{const p=new URLSearchParams(location.search);if(p.get('return')==='1'){
