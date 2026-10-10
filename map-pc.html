@@ -878,7 +878,7 @@ function select(id,move){
   centerMapOn(id);
   if(move){
    const el=cards.querySelector('[data-id="'+id+'"]');
-   if(el){const target=cards.scrollTop+el.getBoundingClientRect().top-cards.getBoundingClientRect().top-18;cards.scrollTo({top:Math.max(0,target),behavior:'smooth'});}
+   if(el){const target=cards.scrollTop+el.getBoundingClientRect().top-cards.getBoundingClientRect().top-(cards.clientHeight-el.getBoundingClientRect().height)/2;cards.scrollTo({top:Math.max(0,target),behavior:'smooth'});}
   }
   return;
  }
