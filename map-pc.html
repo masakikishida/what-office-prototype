@@ -1077,4 +1077,75 @@ document.addEventListener('keydown',function(e){
  map.addEventListener('pointerup',endDrag);
  map.addEventListener('pointercancel',endDrag);
 })();
+</script><style id="pc-map-v19-empty-state">
+@media(min-width:900px){
+ #app:not(.is-list-view) #empty{display:none!important}
+ #app:not(.is-list-view) #cards .pc-map-no-results{
+  min-height:calc(100% - 16px);width:100%;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;gap:20px;
+  box-sizing:border-box;padding:36px 16px;color:#373737;
+ }
+ #app:not(.is-list-view) #cards .pc-map-no-results p{
+  font-size:18px;font-weight:700;line-height:1.6;margin:0;
+ }
+ #app:not(.is-list-view) #cards .pc-map-no-results button{
+  background:#fff;border:1px solid #d3d3d0;border-radius:3px;
+  padding:12px 24px;font-size:14px;color:#333;cursor:pointer;
+ }
+ #app:not(.is-list-view) #cards .pc-map-no-results button:hover{background:#f4f4f2}
+}
+</style>
+<script id="pc-map-v19-viewport-sync">
+(function(){
+ const map=document.getElementById('map'),cards=document.getElementById('cards');
+ if(!map||!cards)return;
+ const isDesktopMap=()=>innerWidth>=900&&view==='map';
+ const baseResults=()=>properties.filter(p=>matchedUnits(p).length&&(
+  filters.area==='all'||filters.area==='shibuya'&&[4,5].includes(p.id)||
+  filters.area==='ebisu'&&[1,2,3].includes(p.id)));
+ let refreshTimer=null,gesture=false;
+ function inViewport(p){
+  const pos=positions[p.id];if(!pos)return false;
+  const x=50+(pos[0]-50)*zoom+mapOffsetX;
+  const y=50+(pos[1]-50)*zoom+mapOffsetY;
+  // Allow the edge of a marker to be visible, not just its center.
+  return x>=-3&&x<=103&&y>=-3&&y<=103;
+ }
+ function refresh(){
+  if(!isDesktopMap())return;
+  const next=baseResults().filter(inViewport);
+  const same=next.length===visible.length&&next.every((p,i)=>visible[i]?.id===p.id);
+  if(same)return;
+  const oldScroll=cards.scrollTop;
+  visible=next;
+  ordered();
+  if(!visible.some(p=>p.id===selected))selected=null;
+  drawMarkers();drawCards();
+  cards.scrollTop=oldScroll;
+  if(!visible.length){
+   cards.innerHTML='<div class="pc-map-no-results"><p>この範囲に該当する物件はありません</p><button type="button" onclick="openConditions()">検索条件を変更する</button></div>';
+  }
+ }
+ function schedule(){
+  if(!isDesktopMap())return;
+  gesture=true;
+  clearTimeout(refreshTimer);
+  refreshTimer=setTimeout(()=>{gesture=false;refresh()},230);
+ }
+ // Only direct user map interactions trigger viewport-based result updates.
+ map.addEventListener('wheel',e=>{if(!e.target.closest('button,a,input,select,textarea'))schedule()},{passive:true});
+ let dragging=false;
+ map.addEventListener('pointerdown',e=>{
+  if(e.button===0&&!e.target.closest('button,a,input,select,textarea,.pc-map-zoom'))dragging=true;
+ });
+ map.addEventListener('pointerup',()=>{if(dragging){dragging=false;schedule()}});
+ map.addEventListener('pointercancel',()=>{dragging=false});
+ map.querySelectorAll('.pc-map-zoom button').forEach(button=>button.addEventListener('click',schedule));
+ // Keep empty state and result count consistent after changing search conditions.
+ const oldApply=window.applyConditions;
+ window.applyConditions=function(){
+  oldApply();
+  if(isDesktopMap())schedule();
+ };
+})();
 </script></body></html>
