@@ -838,7 +838,7 @@ function ordered(){
  if(!visible.some(p=>p.id===selected))selected=visible[0]?.id??null;
 }
 function cardUnits(p){const units=[...matchedUnits(p)];const comparator=order==='high'?(a,b)=>b.price-a.price:order==='wide'?(a,b)=>b.area-a.area:order==='narrow'?(a,b)=>a.area-b.area:(a,b)=>a.price-b.price;return units.sort(comparator)}
-function unitRows(p){const units=cardUnits(p);return `<div class="unit-head"><span>区画</span><span>面積</span><span>賃料+管理費</span></div>`+displayedUnits.map(u=>`<div class="unit-row"><span>${u.unit}</span><span>${u.area.toLocaleString('ja-JP')}㎡</span><span>${yen(u.price)}</span></div>`).join('')+(units.length>2?`<div class="more-units">他${units.length-2}区画</div>`:'')}
+function unitRows(p){const units=cardUnits(p);return `<div class="unit-head"><span>区画</span><span>面積</span><span>賃料+管理費</span></div>`+units.slice(0,2).map(u=>`<div class="unit-row"><span>${u.unit}</span><span>${u.area.toLocaleString('ja-JP')}㎡</span><span>${yen(u.price)}</span></div>`).join('')+(units.length>2?`<div class="more-units">他${units.length-2}区画</div>`:'')}
 function areaText(n){return n.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})+'㎡／約'+(n/3.305785).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})+'坪'}
 const secondaryImages={
   1:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800',
