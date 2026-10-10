@@ -783,6 +783,32 @@ html,body,#app{max-width:100%;overflow-x:hidden}
   transform:translateX(-12px)!important;
  }
 }
+</style><style id="pc-map-v16-selection-and-area-search">
+@media(min-width:900px){
+ #app:not(.is-list-view) #cards{scroll-padding-top:18px!important}
+ #app:not(.is-list-view) #cards .card.active{
+  border:2px solid #75835d!important;
+  background:#f8faf4!important;
+  box-shadow:0 2px 12px #5a6d4b24!important;
+ }
+ #app:not(.is-list-view) #map .map-pin:has(.pins.active){z-index:20!important}
+ #app:not(.is-list-view) #map .pins.active{
+  background:#252b22!important;color:#fff!important;
+  border-color:#252b22!important;box-shadow:0 2px 0 3px #8c9c70,0 5px 14px #0003!important;
+ }
+ #app:not(.is-list-view) #map .pc-map-area-search{
+  position:absolute;z-index:650;top:77px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:8px;pointer-events:none;
+ }
+ #app:not(.is-list-view) #map .pc-map-area-search button{
+  pointer-events:auto;background:#fff;border:1px solid #d6d6d1;border-radius:24px;
+  padding:10px 18px;font-size:13px;font-weight:650;color:#252525;white-space:nowrap;
+  box-shadow:0 3px 14px #0002;cursor:pointer;
+ }
+ #app:not(.is-list-view) #map .pc-map-area-search button:hover{background:#f6f7f4}
+ #app:not(.is-list-view) #map .pc-map-area-search button[hidden]{display:none!important}
+}
+@media(max-width:899px){.pc-map-area-search{display:none!important}}
 </style></head><body><div id="app"><header class="pc-map-header" aria-label="サイトヘッダー"><a class="wo-list-logo" href="top-pc.html">What?Office</a><nav class="wo-list-nav"><a href="top-pc.html" aria-label="TOPへ戻る">⌕</a><button type="button" aria-label="ブックマーク" onclick="alert('ブックマーク一覧は本制作で接続予定です')"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button><button type="button" aria-label="ログイン" onclick="alert('ログインは本制作で接続予定です')">♙</button><button type="button" aria-label="メニュー" onclick="document.getElementById('pcMapMenu').classList.toggle('open')"><span class="wo-menu-bars"><i></i><i></i></span></button></nav><div class="wo-list-menu" id="pcMapMenu"><a href="top-pc.html">TOP</a><a href="listing-pc-d.html">物件を探す</a><a href="top-pc.html#topics">TOPICS</a><a href="top-pc.html#member">会員登録</a></div></header><div id="map"><div id="mapArt"></div><div id="mapPins"></div><div class="pc-map-zoom" aria-label="地図の拡大縮小"><button type="button" aria-label="地図を拡大" onclick="zoomMap(1)">＋</button><button type="button" aria-label="地図を縮小" onclick="zoomMap(-1)">−</button></div><div class="mapcredit">地図は操作検証用の模式図（実際の道路・位置とは異なります）</div></div><div class="top" aria-label="現在の検索条件" role="button" tabindex="0" onclick="if(window.innerWidth>=900)openConditions()" onkeydown="if(window.innerWidth>=900&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openConditions()}"><div class="condition-summary" id="summary">渋谷・表参道周辺 ／ 面積指定なし ／ 賃料上限なし</div></div><div id="cards" class="cards"></div><div id="empty" class="empty">該当する物件がありません。条件を変更してください。</div><nav class="bottom"><span class="muted">検索条件</span><button class="pill" onclick="saveSearch()">＋ 保存</button><button class="pill" onclick="openConditions()">変更</button><span class="divider"></span><button class="pill" onclick="openSheet('display')">表示</button><button class="pill" onclick="openSheet('sort')">並替</button></nav><div id="overlay" class="overlay" onclick="closeSheet()"></div><section id="sheet" class="sheet"><button class="close" onclick="closeSheet()">×</button><div id="sheetContent"></div></section></div><script>
 const properties=[{id:1,title:'代官山｜大きな窓から緑を眺める、天井高のある開放的なリノベーションオフィス',lat:35.6488,lng:139.7037,area:'123.45㎡',price:970840,station:'代官山駅 徒歩12分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'},{id:2,title:'中目黒｜緑を感じるリノベーションオフィス',lat:35.6435,lng:139.6987,area:'104.8㎡',price:680000,station:'中目黒駅 徒歩8分',image:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600'},{id:3,title:'恵比寿｜光が差し込むセットアップオフィス',lat:35.6480,lng:139.7102,area:'145.2㎡',price:1220000,station:'恵比寿駅 徒歩6分',image:'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=600'},{id:4,title:'表参道｜天高5mのスケルトン空間',lat:35.6655,lng:139.7127,area:'118.8㎡',price:940000,station:'表参道駅 徒歩7分',image:'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600'},{id:5,title:'渋谷｜明るい窓辺のワークスペース',lat:35.6590,lng:139.7008,area:'92.4㎡',price:620000,station:'渋谷駅 徒歩9分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'}];
 let selected=1,order='default',visible=[...properties],markers={};let zoom=1;const positions={1:[39,59],2:[23,74],3:[72,65],4:[77,27],5:[45,42]};
@@ -975,7 +1001,7 @@ function pcMapCardClick(id){if(window.innerWidth>=900){select(id,true)}else{open
 /* The SP selection function scrolls horizontally; in PC mode align the selected card vertically. */
 if(window.innerWidth>=900){
  const originalSelect=window.select;
- window.select=function(id,move){originalSelect(id,move);const card=document.querySelector('#cards [data-id="'+id+'"]');if(card)card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});};
+ window.select=function(id,move){originalSelect(id,move);const card=document.querySelector('#cards [data-id="'+id+'"]');if(card)card.scrollIntoView({behavior:'smooth',block:'start',inline:'nearest'});};
 }
 </script><script id="pc-map-v4-keyboard-navigation">
 /* Arrow Up/Down select previous/next visible property in PC map view. */
@@ -994,7 +1020,7 @@ document.addEventListener('keydown',function(e){
  if(nextIndex===index)return;
  select(visible[nextIndex].id,true);
  const card=document.querySelector('#cards [data-id="'+visible[nextIndex].id+'"]');
- if(card)card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
+ 
 });
 </script><script id="pc-map-v7-trackpad-pan">
 (function(){
@@ -1032,5 +1058,47 @@ document.addEventListener('keydown',function(e){
  function endDrag(e){if(drag&&e.pointerId===drag.id){drag=null;map.style.cursor='';}}
  map.addEventListener('pointerup',endDrag);
  map.addEventListener('pointercancel',endDrag);
+})();
+</script><script id="pc-map-v16-area-search">
+(function(){
+ const map=document.getElementById('map');
+ if(!map)return;
+ const toolbar=document.createElement('div');
+ toolbar.className='pc-map-area-search';
+ toolbar.innerHTML='<button type="button" id="pcMapAreaSearch" hidden>このエリアで再検索</button><button type="button" id="pcMapAreaReset" hidden>全件に戻す</button>';
+ map.appendChild(toolbar);
+ const search=toolbar.querySelector('#pcMapAreaSearch');
+ const reset=toolbar.querySelector('#pcMapAreaReset');
+ let isAreaFiltered=false;
+ function baseResults(){return properties.filter(p=>matchedUnits(p).length&&(filters.area==='all'||filters.area==='shibuya'&&[4,5].includes(p.id)||filters.area==='ebisu'&&[1,2,3].includes(p.id)))}
+ function desktop(){return innerWidth>=900&&!document.getElementById('app').classList.contains('is-list-view')}
+ function moved(){if(desktop())search.hidden=false}
+ map.addEventListener('wheel',moved,{passive:true});
+ map.addEventListener('pointerup',e=>{if(e.target.closest('.pc-map-zoom'))return;moved()});
+ map.querySelectorAll('.pc-map-zoom button').forEach(b=>b.addEventListener('click',moved));
+ search.addEventListener('click',()=>{
+  const bounds={x0:0,x1:100,y0:0,y1:100};
+  const within=p=>{
+   const pos=positions[p.id];if(!pos)return false;
+   const x=50+(pos[0]-50)*zoom+mapOffsetX;
+   const y=50+(pos[1]-50)*zoom+mapOffsetY;
+   return x>=bounds.x0&&x<=bounds.x1&&y>=bounds.y0&&y<=bounds.y1;
+  };
+  visible=baseResults().filter(within);
+  ordered();
+  selected=visible[0]?.id||0;
+  drawMarkers();drawCards();
+  if(visible.length){
+   const first=document.querySelector('#cards .card');
+   if(first)first.scrollIntoView({behavior:'smooth',block:'start',inline:'nearest'});
+  }
+  isAreaFiltered=true;search.hidden=true;reset.hidden=false;
+ });
+ reset.addEventListener('click',()=>{
+  visible=baseResults();ordered();selected=visible[0]?.id||0;
+  drawMarkers();drawCards();isAreaFiltered=false;reset.hidden=true;search.hidden=true;
+  document.getElementById('cards').scrollTop=0;
+ });
+ window.addEventListener('resize',()=>{if(!desktop())search.hidden=true});
 })();
 </script></body></html>
