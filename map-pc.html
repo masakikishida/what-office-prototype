@@ -807,4 +807,22 @@ if(window.innerWidth>=900){
  const originalSelect=window.select;
  window.select=function(id,move){originalSelect(id,move);const card=document.querySelector('#cards [data-id="'+id+'"]');if(card)card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});};
 }
+</script><script id="pc-map-v4-keyboard-navigation">
+/* Arrow Up/Down select previous/next visible property in PC map view. */
+document.addEventListener('keydown',function(e){
+ if(window.innerWidth<900||e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ const app=document.getElementById('app');
+ if(!app||app.classList.contains('is-list-view'))return;
+ if(document.getElementById('conditionsPage')?.style.display==='block')return;
+ const active=document.activeElement;
+ if(active&&(active.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName)))return;
+ if(!Array.isArray(visible)||visible.length===0)return;
+ e.preventDefault();
+ const index=visible.findIndex(p=>p.id===selected);
+ const delta=e.key==='ArrowDown'?1:-1;
+ const nextIndex=index<0?0:(index+delta+visible.length)%visible.length;
+ select(visible[nextIndex].id,true);
+ const card=document.querySelector('#cards [data-id="'+visible[nextIndex].id+'"]');
+ if(card)card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
+});
 </script></body></html>
