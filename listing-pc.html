@@ -634,9 +634,6 @@ html,body,#app{max-width:100%;overflow-x:hidden}
  #listPage .listing-units .unit-row{padding-top:5px;padding-bottom:5px}
  #listPage .listing-card{padding-bottom:12px}
  #listPage .pc-list-grid[data-layout="single"]{max-width:920px;grid-template-columns:minmax(0,1fr);row-gap:40px}
- #listPage .pc-list-grid[data-layout="single"] .listing-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;overflow:hidden}
- #listPage .pc-list-grid[data-layout="single"] .listing-gallery .gallery-item{display:block!important;width:100%;height:auto;aspect-ratio:4/3;min-width:0;flex:none}
- #listPage .pc-list-grid[data-layout="single"] .listing-gallery .gallery-item:nth-child(n+4){display:none!important}
  #listPage .pc-list-grid[data-layout="single"] .listing-title{font-size:16px}
  #listPage .pc-list-grid[data-layout="single"] .listing-body{padding-top:13px}
  #listPage .pc-list-grid[data-layout="single"] .listing-units{max-width:680px}
@@ -649,7 +646,6 @@ html,body,#app{max-width:100%;overflow-x:hidden}
  #listPage .list-head{max-width:920px}
  #listPage .pc-list-grid .listing-gallery{display:flex!important;gap:9px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scrollbar-width:thin!important;overscroll-behavior-x:contain}
  #listPage .pc-list-grid .listing-gallery .gallery-item{display:block!important;flex:0 0 calc((100% - 9px)/2)!important;width:calc((100% - 9px)/2)!important;height:auto!important;aspect-ratio:4/3!important;scroll-snap-align:start;min-width:0}
- #listPage .pc-list-grid .listing-gallery .gallery-item:nth-child(n+4){display:block!important}
  #listPage .pc-list-grid .listing-title{font-size:16px}
  #listPage .pc-list-grid .listing-body{padding-top:13px}
  #listPage .pc-list-grid .listing-units{max-width:680px}
@@ -757,7 +753,7 @@ function renderList(){
  const photos=galleryImages.map((url,i)=>`<div class="gallery-item"><img loading="lazy" src="${i===0?p.image:url}" alt="物件写真サンプル${i+1}"></div>`).join('');
  const plans=p.units.map((u,i)=>`<div class="gallery-item floorplan">${floorplanSVG(p,i+1)}</div>`).join('');
  return `<article class="listing-card">
- <div class="listing-gallery" aria-label="物件写真と間取り図を横スクロール">${photos}${plans}</div>${p.id===1||p.id===4?'<span class="listing-new">NEW</span>':''}
+ <div class="listing-gallery" aria-label="写真5枚と区画ごとの間取り図を横スクロール">${photos}${plans}</div>${p.id===1||p.id===4?'<span class="listing-new">NEW</span>':''}
  <div class="listing-body">
  <div class="listing-title-line"><div class="listing-title" onclick="openPropertyDetail(${p.id})">${p.title}</div><button class="listing-bookmark ${saved.has(p.id)?'is-saved':''}" aria-label="${saved.has(p.id)?'ブックマークを解除':'ブックマークに追加'}" aria-pressed="${saved.has(p.id)}" onclick="toggleListingBookmark(${p.id})"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div>
  <div class="listing-units" onclick="openPropertyDetail(${p.id})">${cardUnits(p).map(u=>`<div class="unit-row"><span class="unit-id">${u.unit}</span><span class="unit-area"><span class="sqm">${u.area.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}㎡</span><span class="slash">／</span><span class="tsubo">約${(u.area/3.305785).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}坪</span></span><span class="unit-rent">${yen(u.price)}</span><span class="unit-tsuboprice">坪${yen(Math.round(u.price/(u.area/3.305785)))}</span></div>`).join('')}</div>
