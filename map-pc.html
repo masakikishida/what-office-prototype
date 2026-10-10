@@ -1138,9 +1138,15 @@ document.addEventListener('keydown',function(e){
  map.addEventListener('pointerdown',e=>{
   if(e.button===0&&!e.target.closest('button,a,input,select,textarea,.pc-map-zoom'))dragging=true;
  });
+ map.addEventListener('pointermove',()=>{if(dragging)schedule()});
  map.addEventListener('pointerup',()=>{if(dragging){dragging=false;schedule()}});
+ window.addEventListener('pointerup',()=>{if(dragging){dragging=false;schedule()}});
  map.addEventListener('pointercancel',()=>{dragging=false});
  map.querySelectorAll('.pc-map-zoom button').forEach(button=>button.addEventListener('click',schedule));
+ // Recheck whenever the map transform changes during a direct user gesture.
+ // The pointermove handler above is needed because captured pointerup may be lost
+ // and the map can be dragged a long way before release.
+
  // Keep empty state and result count consistent after changing search conditions.
  const oldApply=window.applyConditions;
  window.applyConditions=function(){
