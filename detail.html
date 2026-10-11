@@ -494,13 +494,12 @@ function toggleUnit(i){
   x.sign.dataset.open=String(shouldOpen);
   return {...x,start,startTop,startBottom,end:shouldOpen?natural:0,endTop:shouldOpen?top:0,endBottom:shouldOpen?bottom:0,shouldOpen};
  });
- // Only correct scrolling when the tapped heading is actually leaving the viewport.
- const keepHeadingVisible=()=>{
-  const rect=heading.getBoundingClientRect();
-  const topLimit=12;
-  const bottomLimit=window.innerHeight-90;
-  if(rect.top<topLimit)window.scrollBy(0,rect.top-topLimit);
-  else if(rect.bottom>bottomLimit)window.scrollBy(0,rect.bottom-bottomLimit);
+ // Keep the exact tapped heading position while an earlier unit collapses.
+ // The scroll adjustment follows the layout change frame by frame, without smooth scrolling.
+ const anchorTop=heading.getBoundingClientRect().top;
+ const keepHeadingPosition=()=>{
+  const delta=heading.getBoundingClientRect().top-anchorTop;
+  if(Math.abs(delta)>0.25)window.scrollBy(0,delta);
  };
  const finish=()=>{
   cancelAnimationFrame(unitTransitionFrame);
@@ -512,7 +511,7 @@ function toggleUnit(i){
    x.row.style.removeProperty('padding-top');
    x.row.style.removeProperty('padding-bottom');
   });
-  keepHeadingVisible();
+  keepHeadingPosition();
  };
  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return;}
  const duration=240;
@@ -527,7 +526,7 @@ function toggleUnit(i){
    x.row.style.setProperty('padding-top',(x.startTop+(x.endTop-x.startTop)*eased)+'px','important');
    x.row.style.setProperty('padding-bottom',(x.startBottom+(x.endBottom-x.startBottom)*eased)+'px','important');
   });
-  keepHeadingVisible();
+  keepHeadingPosition();
   if(t<1)unitTransitionFrame=requestAnimationFrame(frame);
   else{finish();unitTransitionCleanup=null;}
  }
