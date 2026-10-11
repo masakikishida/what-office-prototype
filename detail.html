@@ -464,34 +464,43 @@ let unitTransitionCleanup=null;
 function toggleUnit(i){
  const detail=document.getElementById('unitDetail'+i);
  const heading=detail?.previousElementSibling;
- if(!detail||!heading)return;
+ const sign=document.getElementById('sign'+i);
+ if(!detail||!heading||!sign)return;
+ // Interrupt at the current visual state rather than jumping to the old target.
  if(unitTransitionCleanup){unitTransitionCleanup();unitTransitionCleanup=null;}
- const pane=window.innerWidth>=900?heading.closest('.pc-detail-sidebar .alt-units'):null;
- const anchorTop=heading.getBoundingClientRect().top;
- const willOpen=detail.hidden;
+ const willOpen=sign.dataset.open!=='true';
  const rows=units.map((u,j)=>({j,row:document.getElementById('unitDetail'+j),sign:document.getElementById('sign'+j)})).filter(x=>x.row&&x.sign);
- const motionOff=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  const items=rows.map(x=>{
-  const start=x.row.hidden?0:x.row.getBoundingClientRect().height;
-  const shouldOpen=willOpen&&x.j===i;
+  const wasHidden=x.row.hidden;
+  const start=wasHidden?0:x.row.getBoundingClientRect().height;
+  const computed=wasHidden?null:getComputedStyle(x.row);
+  const startTop=wasHidden?0:parseFloat(computed.paddingTop)||0;
+  const startBottom=wasHidden?0:parseFloat(computed.paddingBottom)||0;
   x.row.hidden=false;
   x.row.style.height='auto';
   x.row.style.overflow='hidden';
   x.row.style.boxSizing='border-box';
+  x.row.style.removeProperty('padding-top');
+  x.row.style.removeProperty('padding-bottom');
   const natural=x.row.getBoundingClientRect().height;
-  const end=shouldOpen?natural:0;
+  const naturalStyle=getComputedStyle(x.row);
+  const top=parseFloat(naturalStyle.paddingTop)||0;
+  const bottom=parseFloat(naturalStyle.paddingBottom)||0;
+  const shouldOpen=willOpen&&x.j===i;
   x.row.style.height=start+'px';
-  x.row.style.opacity=start>0?'1':'0';
+  x.row.style.setProperty('padding-top',startTop+'px','important');
+  x.row.style.setProperty('padding-bottom',startBottom+'px','important');
   x.sign.textContent=shouldOpen?'−':'＋';
   x.sign.dataset.open=String(shouldOpen);
-  return {...x,start,end,shouldOpen};
+  return {...x,start,startTop,startBottom,end:shouldOpen?natural:0,endTop:shouldOpen?top:0,endBottom:shouldOpen?bottom:0,shouldOpen};
  });
- const adjustAnchor=()=>{
-  const delta=heading.getBoundingClientRect().top-anchorTop;
-  if(Math.abs(delta)>0.5){
-   if(pane)pane.scrollTop+=delta;
-   else window.scrollBy({top:delta,behavior:'instant'});
-  }
+ // Only correct scrolling when the tapped heading is actually leaving the viewport.
+ const keepHeadingVisible=()=>{
+  const rect=heading.getBoundingClientRect();
+  const topLimit=12;
+  const bottomLimit=window.innerHeight-90;
+  if(rect.top<topLimit)window.scrollBy(0,rect.top-topLimit);
+  else if(rect.bottom>bottomLimit)window.scrollBy(0,rect.bottom-bottomLimit);
  };
  const finish=()=>{
   cancelAnimationFrame(unitTransitionFrame);
@@ -500,25 +509,25 @@ function toggleUnit(i){
    x.row.style.removeProperty('height');
    x.row.style.removeProperty('overflow');
    x.row.style.removeProperty('box-sizing');
-   x.row.style.removeProperty('opacity');
+   x.row.style.removeProperty('padding-top');
+   x.row.style.removeProperty('padding-bottom');
   });
-  adjustAnchor();
+  keepHeadingVisible();
  };
- if(motionOff){
-  finish();
-  return;
- }
- const duration=300;
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return;}
+ const duration=240;
  const started=performance.now();
- unitTransitionCleanup=finish;
+ // Cancellation leaves the interpolated heights intact for the next tap.
+ unitTransitionCleanup=()=>cancelAnimationFrame(unitTransitionFrame);
  function frame(now){
   const t=Math.min(1,(now-started)/duration);
-  const eased=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  const eased=1-Math.pow(1-t,3);
   items.forEach(x=>{
    x.row.style.height=(x.start+(x.end-x.start)*eased)+'px';
-   x.row.style.opacity=String(x.start===x.end?(x.shouldOpen?1:0):(x.start>0?1-eased:eased));
+   x.row.style.setProperty('padding-top',(x.startTop+(x.endTop-x.startTop)*eased)+'px','important');
+   x.row.style.setProperty('padding-bottom',(x.startBottom+(x.endBottom-x.startBottom)*eased)+'px','important');
   });
-  adjustAnchor();
+  keepHeadingVisible();
   if(t<1)unitTransitionFrame=requestAnimationFrame(frame);
   else{finish();unitTransitionCleanup=null;}
  }
