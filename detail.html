@@ -495,18 +495,13 @@ function toggleUnit(i){
   return {...x,start,startTop,startBottom,end:shouldOpen?natural:0,endTop:shouldOpen?top:0,endBottom:shouldOpen?bottom:0,shouldOpen};
  });
  // Only correct scrolling when the tapped heading is actually leaving the viewport.
- // Keep the tapped row visually anchored without per-frame window scrolling.
- // A temporary bottom spacer preserves scroll range when an earlier row collapses.
- const anchorTop=heading.getBoundingClientRect().top;
- const spacer=document.createElement('div');
- spacer.style.height=window.innerHeight+'px';
- spacer.style.pointerEvents='none';
- document.getElementById('units').appendChild(spacer);
+ // Keep the tapped heading within the visible viewport.
  const keepHeadingVisible=()=>{
-  const delta=heading.getBoundingClientRect().top-anchorTop;
-  if(Math.abs(delta)>0.75){
-   window.scrollTo({top:window.scrollY+delta,behavior:'instant'});
-  }
+  const rect=heading.getBoundingClientRect();
+  const topLimit=12;
+  const bottomLimit=window.innerHeight-90;
+  if(rect.top<topLimit)window.scrollBy(0,rect.top-topLimit);
+  else if(rect.bottom>bottomLimit)window.scrollBy(0,rect.bottom-bottomLimit);
  };
  const finish=()=>{
   cancelAnimationFrame(unitTransitionFrame);
@@ -519,7 +514,6 @@ function toggleUnit(i){
    x.row.style.removeProperty('padding-bottom');
   });
   keepHeadingVisible();
-  spacer.remove();
  };
  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return;}
  const duration=240;
