@@ -850,7 +850,7 @@ const secondaryImages={
 
 function openPropertyDetail(id){
  try{sessionStorage.setItem('whatOfficeReturnView',view);sessionStorage.setItem('whatOfficeReturnScroll',String(document.getElementById('listPage')?.scrollTop||0));sessionStorage.setItem('whatOfficeReturnSelected',String(selected));}catch(e){}
- window.location.href='detail.html?id='+encodeURIComponent(id)+'&from='+encodeURIComponent(view);
+ window.location.href=(window.innerWidth>=900?'detail-pc.html':'detail.html')+'?id='+encodeURIComponent(id)+'&from='+encodeURIComponent(view);
 }
 const mapCardGalleryImages=[
  'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=850',
