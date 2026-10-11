@@ -460,20 +460,17 @@ zoomOverlay.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-
 zoomOverlay.addEventListener('click',e=>{if(zoomSwiped){e.stopImmediatePropagation();zoomSwiped=false}},true);
 const units=[{id:'A-204',area:'1,234.56㎡',tsubo:'約373.45坪',price:'12,345,678円',rent:'12,000,000円',fee:'345,678円',unitPrice:'約26,000円／坪',ceiling:'2,700mm',status:'入居中／内覧可',move:'2026年11月上旬予定',features:['天井が高い','大きな窓','前が抜けている','最上階','化けしろあり']},{id:'4F',area:'234.56㎡',tsubo:'約70.95坪',price:'1,844,700円',rent:'1,700,000円',fee:'144,700円',unitPrice:'約26,000円／坪',ceiling:'2,650mm',status:'空室／内覧可',move:'即日',features:['緑が見える','大きな窓','前が抜けている']},{id:'2F',area:'345.67㎡',tsubo:'約104.56坪',price:'成約済',sold:true,ceiling:'2,550mm',status:'成約済',features:['緑が見える','屋上・ルーフバルコニー']}];
 function rows(r){return r.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')}function unitRows(groups){return groups.map(group=>'<div class="unit-fact-group">'+rows(group)+'</div>').join('')}let unitTransitionFrame=0;
-let unitTransitionCleanup=null;
+let unitTransitionActive=false;
 function toggleUnit(i){
- const detail=document.getElementById('unitDetail'+i);
- const heading=detail?.previousElementSibling;
- if(!detail||!heading)return;
- if(unitTransitionCleanup){unitTransitionCleanup();unitTransitionCleanup=null;}
- const pane=window.innerWidth>=900?heading.closest('.pc-detail-sidebar .alt-units'):null;
- const anchorTop=heading.getBoundingClientRect().top;
- const willOpen=detail.hidden;
- const rows=units.map((u,j)=>({j,row:document.getElementById('unitDetail'+j),sign:document.getElementById('sign'+j)})).filter(x=>x.row&&x.sign);
- const motionOff=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const selected=document.getElementById('unitDetail'+i);
+ if(!selected)return;
+ // Preserve current rendered heights when another row is tapped mid-transition.
+ if(unitTransitionActive)cancelAnimationFrame(unitTransitionFrame);
+ const opening=document.getElementById('sign'+i).dataset.open!=='true';
+ const rows=units.map((u,j)=>({j,row:document.getElementById('unitDetail'+j),sign:document.getElementById('sign'+j)}));
  const items=rows.map(x=>{
   const start=x.row.hidden?0:x.row.getBoundingClientRect().height;
-  const shouldOpen=willOpen&&x.j===i;
+  const shouldOpen=opening&&x.j===i;
   x.row.hidden=false;
   x.row.style.height='auto';
   x.row.style.overflow='hidden';
@@ -481,46 +478,31 @@ function toggleUnit(i){
   const natural=x.row.getBoundingClientRect().height;
   const end=shouldOpen?natural:0;
   x.row.style.height=start+'px';
-  x.row.style.opacity=start>0?'1':'0';
   x.sign.textContent=shouldOpen?'−':'＋';
   x.sign.dataset.open=String(shouldOpen);
   return {...x,start,end,shouldOpen};
- });
- const adjustAnchor=()=>{
-  const delta=heading.getBoundingClientRect().top-anchorTop;
-  if(Math.abs(delta)>0.5){
-   if(pane)pane.scrollTop+=delta;
-   else window.scrollBy({top:delta,behavior:'instant'});
-  }
- };
+ }).filter(x=>x.start!==x.end||x.shouldOpen);
  const finish=()=>{
-  cancelAnimationFrame(unitTransitionFrame);
-  items.forEach(x=>{
-   x.row.hidden=!x.shouldOpen;
+  rows.forEach(x=>{
+   const shouldOpen=opening&&x.j===i;
+   x.row.hidden=!shouldOpen;
    x.row.style.removeProperty('height');
    x.row.style.removeProperty('overflow');
    x.row.style.removeProperty('box-sizing');
    x.row.style.removeProperty('opacity');
   });
-  adjustAnchor();
+  unitTransitionActive=false;
  };
- if(motionOff){
-  finish();
-  return;
- }
- const duration=300;
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return;}
+ const duration=220;
  const started=performance.now();
- unitTransitionCleanup=finish;
+ unitTransitionActive=true;
  function frame(now){
   const t=Math.min(1,(now-started)/duration);
-  const eased=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-  items.forEach(x=>{
-   x.row.style.height=(x.start+(x.end-x.start)*eased)+'px';
-   x.row.style.opacity=String(x.start===x.end?(x.shouldOpen?1:0):(x.start>0?1-eased:eased));
-  });
-  adjustAnchor();
+  const eased=1-Math.pow(1-t,3);
+  items.forEach(x=>{x.row.style.height=(x.start+(x.end-x.start)*eased)+'px';});
   if(t<1)unitTransitionFrame=requestAnimationFrame(frame);
-  else{finish();unitTransitionCleanup=null;}
+  else finish();
  }
  unitTransitionFrame=requestAnimationFrame(frame);
 }
