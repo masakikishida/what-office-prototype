@@ -376,9 +376,26 @@ const photoCaptions=[
 ];
 const gallery=[...images.map((src,i)=>({src:i===7?src.split('?')[0]+'?auto=format&fit=crop&crop=center&w=700&h=1100&q=85':src,kind:'photo',caption:photoCaptions[i]})),...plans.map((src,i)=>({src,kind:'plan',caption:'間取り図 '+(i+1)}))];
 const firstPlanIndex=images.length;let idx=0;
+function fadeGalleryImage(image,src,alt){
+ if(image.getAttribute('src')===src){image.alt=alt;return}
+ const parent=image.parentElement;
+ parent.querySelectorAll('.gallery-fade-layer').forEach(el=>el.remove());
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const old=image.cloneNode(false);
+ if(!reduced&&image.complete&&image.naturalWidth){
+  const style=getComputedStyle(parent);
+  if(style.position==='static')parent.style.position='relative';
+  old.removeAttribute('id');old.className='gallery-fade-layer';
+  Object.assign(old.style,{position:'absolute',left:image.offsetLeft+'px',top:image.offsetTop+'px',width:image.offsetWidth+'px',height:image.offsetHeight+'px',margin:'0',pointerEvents:'none',zIndex:'2',opacity:'1',transition:'opacity 200ms ease-out'});
+  parent.appendChild(old);
+ }
+ image.src=src;image.alt=alt;
+ const finish=()=>{if(!old.isConnected)return;requestAnimationFrame(()=>{old.style.opacity='0'});setTimeout(()=>old.remove(),240)};
+ if(old.isConnected){if(image.complete)finish();else{image.addEventListener('load',finish,{once:true});image.addEventListener('error',finish,{once:true});setTimeout(finish,1000)}}
+}
 function updateHero(options={}){
  const item=gallery[idx],hero=document.getElementById('heroImage');
- hero.src=item.src;hero.alt=item.kind==='plan'?'間取り図 '+(idx-firstPlanIndex+1):'物件写真 '+(idx+1);
+ fadeGalleryImage(hero,item.src,item.kind==='plan'?'間取り図 '+(idx-firstPlanIndex+1):'物件写真 '+(idx+1));
  document.getElementById('counter').textContent=(idx+1)+' / '+gallery.length;
  document.getElementById('heroCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0');
 
@@ -419,7 +436,7 @@ function setZoomCaption(caption){
   el.append(document.createTextNode(caption.slice(punctuation+1)));
  }else{el.textContent=caption}
 }
-function refreshZoom(){document.getElementById('zoomImage').src=gallery[idx].src;document.getElementById('zoomImage').alt=gallery[idx].kind==='plan'?'間取り図':'物件写真';document.querySelector('.zoom-plan').hidden=idx>=firstPlanIndex;setZoomCaption(gallery[idx].caption);document.getElementById('zoomCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0')}
+function refreshZoom(){fadeGalleryImage(document.getElementById('zoomImage'),gallery[idx].src,gallery[idx].kind==='plan'?'間取り図':'物件写真');document.querySelector('.zoom-plan').hidden=idx>=firstPlanIndex;setZoomCaption(gallery[idx].caption);document.getElementById('zoomCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0')}
 function zoom(){zoomOverflow=document.body.style.overflow;document.body.style.overflow='hidden';refreshZoom();document.getElementById('overlay').classList.add('show')}
 function closeZoom(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=zoomOverflow}
 function zoomToPlan(){idx=firstPlanIndex;updateHero();refreshZoom()}
