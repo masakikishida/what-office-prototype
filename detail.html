@@ -495,12 +495,18 @@ function toggleUnit(i){
   return {...x,start,startTop,startBottom,end:shouldOpen?natural:0,endTop:shouldOpen?top:0,endBottom:shouldOpen?bottom:0,shouldOpen};
  });
  // Only correct scrolling when the tapped heading is actually leaving the viewport.
+ // Keep the tapped row visually anchored without per-frame window scrolling.
+ // A temporary bottom spacer preserves scroll range when an earlier row collapses.
+ const anchorTop=heading.getBoundingClientRect().top;
+ const spacer=document.createElement('div');
+ spacer.style.height=window.innerHeight+'px';
+ spacer.style.pointerEvents='none';
+ document.getElementById('units').appendChild(spacer);
  const keepHeadingVisible=()=>{
-  const rect=heading.getBoundingClientRect();
-  const topLimit=12;
-  const bottomLimit=window.innerHeight-90;
-  if(rect.top<topLimit)window.scrollBy(0,rect.top-topLimit);
-  else if(rect.bottom>bottomLimit)window.scrollBy(0,rect.bottom-bottomLimit);
+  const delta=heading.getBoundingClientRect().top-anchorTop;
+  if(Math.abs(delta)>0.75){
+   window.scrollTo({top:window.scrollY+delta,behavior:'instant'});
+  }
  };
  const finish=()=>{
   cancelAnimationFrame(unitTransitionFrame);
@@ -513,6 +519,7 @@ function toggleUnit(i){
    x.row.style.removeProperty('padding-bottom');
   });
   keepHeadingVisible();
+  spacer.remove();
  };
  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return;}
  const duration=240;
@@ -533,7 +540,7 @@ function toggleUnit(i){
  }
  unitTransitionFrame=requestAnimationFrame(frame);
 }
-document.getElementById('units').innerHTML=units.map((u,i)=>'<div class="unit '+(u.sold?'sold':'match')+'"><div class="unit-summary" onclick="toggleUnit('+i+')"><span class="unit-id">'+u.id+'</span><span class="unit-area"><span class="sqm">'+u.area+'</span><span class="slash">／</span><span class="tsubo">'+u.tsubo+'</span></span><span class="unit-price">'+u.price+'</span><span class="unit-plus" id="sign'+i+'">＋</span></div><div class="unit-detail" id="unitDetail'+i+'" hidden><dl class="facts unit-facts">'+unitRows(u.sold?[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['現況',u.status]]]:[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['賃料',u.rent],['管理費',u.fee],['坪単価',u.unitPrice]]])+'</dl><div class="unit-tags-block"><p class="tag-title">目的</p><div class="tags"><span>オフィス</span><span>店舗</span><span>アトリエ・ギャラリー</span></div><p class="tag-title">特徴</p><div class="tags">'+u.features.map(x=>'<span>'+x+'</span>').join('')+'</div></div><dl class="facts unit-facts unit-followup-facts">'+unitRows(u.sold?[]:[[['敷金','10ヶ月'],['礼金','2ヶ月'],['契約期間','普通建物賃貸借契約 2年'],['現況／内覧',u.status],['入居可能日',u.move]],[['最大天井高',u.ceiling],['専有部設備','個別空調／男女別トイレ／給湯'],['区画備考','原状回復条件／償却／解約予告／更新料等の区画固有情報を表示']]])+'</dl><dl class="facts unit-facts unit-meta-facts">'+unitRows([[['取引態様','媒介'],['仲介手数料','賃料の1ヶ月分＋消費税'],['情報更新日','2026年9月10日']]])+'</dl><button class="cta" onclick="alert(\'比較用プロトタイプ：問い合わせは未接続です\')">この区画について問い合わせる →</button></div></div>').join('');
+document.getElementById('units').innerHTML=units.map((u,i)=>'<div class="unit '+(u.sold?'sold':'match')+'"><div class="unit-summary" onclick="toggleUnit('+i+')"><span class="unit-id">'+u.id+'</span><span class="unit-area"><span class="sqm">'+u.area+'</span><span class="slash">／</span><span class="tsubo">'+u.tsubo+'</span></span><span class="unit-price">'+u.price+'</span><span class="unit-plus" id="sign'+i+'">＋</span></div><div class="unit-detail" id="unitDetail'+i+'" hidden><dl class="facts unit-facts">'+unitRows(u.sold?[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['現況',u.status]]]:[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['賃料',u.rent],['管理費',u.fee],['坪単価',u.unitPrice]]])+'</dl><div class="unit-tags-block"><p class="tag-title">目的</p><div class="tags"><span>オフィス</span><span>店舗</span><span>アトリエ・ギャラリー</span></div><p class="tag-title">特徴</p><div class="tags">'+u.features.map(x=>'<span>'+x+'</span>').join('')+'</div></div><dl class="facts unit-facts unit-followup-facts">'+unitRows(u.sold?[]:[[['敷金','10ヶ月'],['礼金','2ヶ月'],['契約期間','普通建物賃貸借契約 2年'],['現況／内覧',u.status],['入居可能日',u.move]],[['最大天井高',u.ceiling],['専有部設備','個別空調／男女別トイレ／給湯'],['区画備考','原状回復条件／償却／解約予告／更新料等の区画固有情報を表示']]])+'</dl><dl class="facts unit-facts unit-meta-facts">'+unitRows([[['取引態様','媒介'],['仲介手数料','賃料の1ヶ月分＋消費税'],['情報更新日','2026年9月10日']]])+'</dl></div></div>').join('');
 
 /* Footer action sheet based on the "ワイヤー用情報（ビジュアル）4" I74:Q79 specification. */
 let unitActionMode='inquiry';
