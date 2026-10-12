@@ -560,7 +560,562 @@ h1{font-size:21px;line-height:1.45;margin:15px 0 26px}
   max-height:calc(100dvh - var(--pc-sidebar-top, 113px) - 16px)!important;
  }
 }
-</style><style id="unit-accordion-stable-anchor">#units{overflow-anchor:none}</style></head><body><div class="page"><header class="head"><div class="logo">What? Office</div><div class="head-icons"><span>⌕</span><span>♧</span><span>☰</span></div></header><div class="hero"><img id="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" onclick="zoom()"><span class="hero-count" id="heroCount">01｜12</span><button class="hero-nav hero-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><button class="hero-nav hero-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button></div><div class="counter"><span class="num" id="counter" hidden>1 / 12</span><span id="caption">窓際のワークスペース</span></div><div class="gallery-bar"><div class="thumb-shell"><div id="galleryContinuation" class="gallery-continuation" aria-label="写真・間取り図サムネイル"></div><button class="thumb-control thumb-left" type="button" onclick="shift(-1)" aria-label="前の写真">‹</button><button class="thumb-control thumb-right" type="button" onclick="shift(1)" aria-label="次の写真">›</button></div><button class="plan-jump" type="button" onclick="jumpToPlan()">間取り図</button></div><div class="body alt-main"><div class="alt-intro"><h1 id="propertyTitle">代官山｜光と緑が見えるオフィス</h1><div class="description"><div class="fade" id="intro"><p>白金台駅から徒歩10分。駅から少し距離はありますが、周辺には高級料理店なども点在する、落ち着いたエリアです。今回募集されているのは、1FとB1Fを合わせた約56坪のスケルトン空間。</p><p>1Fは、道路側に大きく取られた窓が印象的です。窓の先には街路樹や植栽があり、室内からも緑がよく見えます。窓は一方向だけではなく、建物の形に沿って複数面に配置。柱や梁が現れたスケルトンの状態ながら、外からの光がしっかり入ります。</p><p>天井高は3.5m超。梁が交差し、壁もまっすぐな長方形ではないため、室内には少し変わった形が残っています。整った箱というより、この形そのものをどう使うかを考えたくなる空間です。</p><p>そして1Fから階段を下りるとB1Fへ。こちらにもドライエリアに面した大きな窓があり、地下ながら外からの光が入ります。一方で、道路に面した1Fとは視線の抜け方が異なり、囲われたような落ち着きがあります。</p><p>緑が見える1Fと、少しおこもり感のあるB1F。同じスケルトンでも、上下階でかなり雰囲気の違う2フロアです。</p></div><button class="more" onclick="const x=document.getElementById('intro');x.classList.toggle('expanded');this.innerHTML=x.classList.contains('expanded')?'閉じる <span>−</span>':'もっと見る <span>＋</span>'">もっと見る <span>＋</span></button></div></div><section class="alt-notices" aria-label="特記事項"><h2>特記事項</h2><ul class="alerts"><li>期間限定で居抜き相談可。原状回復前のため、現在の内装を活かして入居できる可能性があります。</li><li>契約条件の詳細はお問い合わせください。</li></ul></section><section class="alt-overview" aria-label="物件概要"><div class="alt-overview-header"><h2 class="alt-section-title">物件概要</h2><span class="alt-tax-note">※金額はすべて税抜</span></div><div class="alt-units" aria-label="募集区画"><div id="units"></div></div><section class="alt-building"><div class="building"><button class="building-btn" onclick="toggleBuilding()">建物情報 <span id="buildingSign">＋</span></button><div class="building-inner" id="buildingInfo" hidden><dl class="facts" id="buildingFacts"></dl></div></div></section><section class="alt-location"><div class="access"><div class="alt-address-row"><div class="address">♧ 世田谷区玉川田園調布9-99-99</div><a class="map-out" href="https://maps.google.com/?q=東京都世田谷区玉川田園調布" target="_blank" rel="noopener noreferrer">Googleマップへ ↗</a></div><p>都営大江戸線「若松河田」徒歩6分</p><p>東京メトロ副都心線「東新宿」徒歩8分</p><p>都営大江戸線「東新宿」徒歩8分</p></div><div class="map"><iframe title="周辺地図" loading="lazy" src="https://www.google.com/maps?q=東京都世田谷区玉川田園調布&output=embed"></iframe></div></section></section></div><div class="recommend"><h2>広さが近い物件</h2><div class="rail" id="nearArea"></div><h2>賃料が近い物件</h2><div class="rail" id="nearPrice"></div></div><footer class="foot"><strong>What? Office</strong><p>働く場所から、会社の未来を考える。</p></footer></div><div class="sticky"><button type="button" onclick="location.href='tel:0312345678'"><span>♧</span>電話</button><button type="button" onclick="openUnitAction('inquiry')"><span>⌕</span>お問い合わせ</button><button type="button" onclick="openUnitAction('bookmark')"><span>♧</span>ブックマーク</button></div>
+</style><style id="unit-accordion-stable-anchor">#units{overflow-anchor:none}</style><style id="pc-sp-approved-detail-v1">
+/* Comparison only: PC structure retained, SP monochrome accordion language applied. */
+.body #units .unit.is-open{background:#fafafa!important;box-shadow:inset 3px 0 0 #a6a6a6;border-bottom:2px solid #bcbcbc!important}
+.body #units .unit.is-open .unit-summary{background:#f0f0f0!important}
+.body #units .unit.is-open .unit-detail{background:#fafafa!important;border-top:1px solid #d5d5d5!important}
+.body .alt-building .building{border:0!important;border-bottom:1px solid #d6d6d2!important}
+.body .alt-building .building.is-open{background:#fafafa!important;box-shadow:inset 3px 0 0 #a6a6a6;border-bottom:2px solid #bcbcbc!important}
+.body .alt-building .building.is-open .building-btn{background:#f0f0f0!important}
+.body .alt-building .building.is-open .building-inner{background:#fafafa!important;border-top:1px solid #d5d5d5!important}
+.body #units .unit-detail{padding-left:13px!important;padding-right:13px!important}
+.body #units .unit-detail .unit-facts>.unit-fact-group+.unit-fact-group{position:relative;box-shadow:none!important}
+.body #units .unit-detail .unit-facts>.unit-fact-group+.unit-fact-group:before,
+.body #units .unit-detail .unit-tags-block:before,
+.body #units .unit-detail .unit-followup-facts:before{content:"";position:absolute;top:0;left:0;right:0;border-top:1px solid #dedede}
+.body #units .unit-detail .unit-tags-block{position:relative;border-top:0!important;padding-top:14px!important}
+.body #units .unit-detail .unit-followup-facts{position:relative;border-top:0!important}
+.body .alt-building .building-btn{padding-left:13px!important;padding-right:13px!important}
+.body .alt-building .building-inner{padding:4px 13px 20px!important}
+.body .alt-building .building-inner .building-fact-group{display:block!important;border:0!important}
+.body .alt-building .building-inner .building-fact-group>div{display:grid!important;grid-template-columns:38% minmax(0,1fr)!important;gap:7px!important;padding:11px 0!important;border:0!important}
+.body .alt-building .building-inner .building-fact-group+.building-fact-group{padding:0!important;margin:0!important;border:0!important}
+.body .alt-building .building-inner .building-fact-group+.building-fact-group:before{display:none!important}
+.body #units .unit-plus,.body .alt-building .building-btn #buildingSign{display:block!important;position:relative!important;flex:none!important;width:28px!important;height:28px!important;border:0!important;border-radius:0!important;background:transparent!important;box-sizing:border-box!important;font-size:0!important}
+.body #units .unit-plus:before,.body #units .unit-plus:after,.body .alt-building .building-btn #buildingSign:before,.body .alt-building .building-btn #buildingSign:after{content:""!important;display:block!important;position:absolute!important;left:6px!important;top:13px!important;width:16px!important;height:1.5px!important;background:#292929!important;border:0!important}
+.body #units .unit-plus:before,.body .alt-building .building-btn #buildingSign:before{transform:none!important}
+.body #units .unit-plus:after,.body .alt-building .building-btn #buildingSign:after{transform:rotate(90deg)!important}
+.body #units .unit-plus[data-open="true"]:after,.body .alt-building .building-btn #buildingSign[data-open="true"]:after{display:none!important}
+@media(min-width:900px){
+ .pc-detail-sidebar .alt-units .unit-summary{
+  display:grid!important;grid-template-columns:48px minmax(0,1fr) minmax(98px,112px) 28px!important;
+  column-gap:6px!important;align-items:center!important;
+  padding:14px 10px!important;
+ }
+ .pc-detail-sidebar .alt-units .unit-id{text-align:right!important;padding-right:4px!important;white-space:nowrap!important}
+ .pc-detail-sidebar .alt-units .unit-area{
+  display:grid!important;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr)!important;
+  width:100%!important;min-width:0!important;align-items:baseline!important;
+  position:relative!important;left:5px!important;white-space:nowrap!important;
+ }
+ .pc-detail-sidebar .alt-units .unit-area .sqm{justify-self:end!important;text-align:right!important}
+ .pc-detail-sidebar .alt-units .unit-area .slash{justify-self:center!important}
+ .pc-detail-sidebar .alt-units .unit-area .tsubo{justify-self:start!important;text-align:left!important}
+ .pc-detail-sidebar .alt-units .unit-price{text-align:right!important;justify-self:stretch!important;position:relative!important;left:-6px!important;white-space:nowrap!important}
+ .pc-detail-sidebar .alt-units .unit-plus{justify-self:end!important}
+}
+</style><style id="pc-sp-comparison-v2-space-color">
+/* Restore an unmistakable yet restrained monochrome open state. */
+@media(min-width:900px){
+ .pc-detail-sidebar #units .unit.is-open{
+  background:#f5f5f5!important;
+  box-shadow:inset 3px 0 0 #a1a1a1!important;
+  border-bottom:2px solid #b9b9b9!important;
+ }
+ .pc-detail-sidebar #units .unit.is-open>.unit-summary{background:#eaeaea!important}
+ .pc-detail-sidebar #units .unit.is-open>.unit-detail{
+  background:#f5f5f5!important;
+  border-top:1px solid #d0d0d0!important;
+ }
+ /* Give the four columns and rows breathing room without losing A-204 alignment. */
+ .pc-detail-sidebar #units .unit-summary{
+  grid-template-columns:50px minmax(0,1fr) 116px 28px!important;
+  column-gap:10px!important;
+  min-height:83px!important;
+  padding:17px 13px!important;
+ }
+ .pc-detail-sidebar #units .unit-id{padding-right:3px!important}
+ .pc-detail-sidebar #units .unit-area{left:2px!important}
+ .pc-detail-sidebar #units .unit-price{left:-4px!important}
+ .pc-detail-sidebar #units .unit-detail{padding:14px 18px 26px!important}
+ .pc-detail-sidebar #units .unit-detail .facts>div,
+ .pc-detail-sidebar #units .unit-detail .unit-fact-group>div{
+  grid-template-columns:35% minmax(0,1fr)!important;
+  column-gap:16px!important;
+  padding:14px 0!important;
+  line-height:1.8!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .facts dt{font-size:11px!important;line-height:1.8!important}
+ .pc-detail-sidebar #units .unit-detail .facts dd{font-size:12px!important;line-height:1.8!important}
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block{padding:20px 0 22px!important}
+ .pc-detail-sidebar #units .unit-detail .tag-title{margin:15px 0 10px!important}
+ .pc-detail-sidebar #units .unit-detail .tags{gap:8px!important}
+ .pc-detail-sidebar #units .unit-detail .tags span{font-size:11px!important;padding:6px 9px!important}
+ .pc-detail-sidebar .alt-building .building.is-open .building-btn{background:#eaeaea!important}
+ .pc-detail-sidebar .alt-building .building.is-open .building-inner{background:#f5f5f5!important}
+}
+</style><style id="pc-sp-comparison-v3-column-and-building">
+@media(min-width:900px){
+ /* Give the right column room before considering smaller typography. */
+ .pc-detail-lead{grid-template-columns:minmax(0,60fr) minmax(0,40fr)!important}
+ .pc-detail-media{padding-right:clamp(12px,1.6vw,24px)!important}
+ .pc-detail-sidebar{border-left:0!important;padding-left:clamp(12px,1.6vw,24px)!important}
+ .pc-detail-sidebar #units .unit-summary{
+  grid-template-columns:50px minmax(0,1fr) 116px 28px!important;
+  column-gap:12px!important;
+ }
+ /* Remove the legacy duplicated heading and restore a single, clean accordion. */
+ .pc-detail-media .alt-building:before{content:none!important;display:none!important}
+ .pc-detail-media .alt-building{margin-top:14px!important}
+ .pc-detail-media .alt-building .building-btn{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  width:100%!important;min-height:64px!important;
+  padding:14px 13px!important;text-align:left!important;
+  font-size:15px!important;font-weight:600!important;
+  border:0!important;border-bottom:1px solid #d6d6d2!important;
+  outline:none;
+ }
+ .pc-detail-media .alt-building .building-btn:focus-visible{outline:2px solid #666!important;outline-offset:2px}
+ .pc-detail-media .alt-building .building.is-open .building-btn{background:#eaeaea!important}
+ .pc-detail-media .alt-building .building-inner{
+  padding:12px 16px 22px!important;
+  background:#f5f5f5!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts,
+ .pc-detail-media .alt-building .building-facts,
+ .pc-detail-media .alt-building .building-fact-group{
+  display:block!important;grid-template-columns:none!important;
+  width:100%!important;max-width:100%!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group>div{
+  display:grid!important;grid-template-columns:140px minmax(0,1fr)!important;
+  column-gap:20px!important;align-items:start!important;
+  width:100%!important;padding:11px 0!important;
+  border:0!important;break-inside:avoid!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts dt,
+ .pc-detail-media .alt-building #buildingFacts dd{
+  display:block!important;width:auto!important;min-width:0!important;
+  margin:0!important;padding:0!important;line-height:1.8!important;
+  font-size:13px!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts dt{color:#777!important}
+ .pc-detail-media .alt-building #buildingFacts dd{color:#292929!important;overflow-wrap:anywhere!important}
+ .pc-detail-media .alt-building .building-fact-group+.building-fact-group{
+  margin:0!important;padding:0!important;border:0!important;
+ }
+ .pc-detail-media .alt-building .building-fact-group+.building-fact-group:before{display:none!important}
+}
+</style><style id="pc-sp-comparison-v5-image-fixed-sidebar-expanded">
+/* Restore the pre-56:44 image footprint and position.
+   Reclaim the former center divider/sidebar inset for the right-hand facts only. */
+@media(min-width:900px){
+ .pc-detail-lead{grid-template-columns:minmax(0,60fr) minmax(0,40fr)!important;gap:0!important}
+ .pc-detail-media{padding-right:clamp(24px,3vw,46px)!important}
+ .pc-detail-sidebar{
+  border-left:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+ }
+}
+</style><style id="pc-sp-screenshot-65-35-fixed-photo">
+@media(min-width:900px){
+ /* Screenshot reference: the photo occupies the original 65% media track.
+    Remove ONLY the dividing line and left padding of the right column. */
+ .pc-detail-lead{
+  grid-template-columns:minmax(0,65fr) minmax(0,35fr)!important;
+  gap:0!important;
+ }
+ .pc-detail-media{padding-right:clamp(24px,3vw,46px)!important}
+ .pc-detail-sidebar{
+  border-left:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+ }
+}
+</style><style id="pc-detail-v7-readable-facts-and-related-balance">
+@media(min-width:900px){
+ /* Detail facts: same visual reading size as the building information. */
+ .pc-detail-sidebar #units .unit-detail .facts dt{
+  font-size:12.5px!important;line-height:1.75!important;
+  color:#777!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .facts dd{
+  font-size:14px!important;line-height:1.75!important;
+  color:#292929!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .facts>div,
+ .pc-detail-sidebar #units .unit-detail .unit-fact-group>div{
+  grid-template-columns:35% minmax(0,1fr)!important;
+  column-gap:14px!important;
+  padding:13px 0!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .tag-title{
+  font-size:12.5px!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .tags span{
+  font-size:12px!important;
+ }
+ /* Related cards: same 3-track column proportions and alignment as PC listing cards. */
+ .recommend .listing-units{
+  --floor-w:43px!important;--rent-w:124px!important;--unit-gap:6px!important;
+  width:100%!important;
+ }
+ .recommend .listing-units .unit-row{
+  display:grid!important;
+  grid-template-columns:43px minmax(0,1fr) 124px!important;
+  column-gap:6px!important;
+  align-items:baseline!important;
+  padding:8px 0!important;
+ }
+ .recommend .listing-units .unit-id{
+  grid-column:1!important;justify-self:stretch!important;
+  text-align:right!important;padding-right:3px!important;
+  font-variant-numeric:tabular-nums!important;
+ }
+ .recommend .listing-units .unit-area{
+  grid-column:2!important;display:grid!important;
+  grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr)!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  justify-self:stretch!important;margin:0!important;
+  white-space:nowrap!important;
+ }
+ .recommend .listing-units .unit-area .sqm{justify-self:end!important;text-align:right!important}
+ .recommend .listing-units .unit-area .slash{justify-self:center!important;text-align:center!important}
+ .recommend .listing-units .unit-area .tsubo{justify-self:start!important;text-align:left!important}
+ .recommend .listing-units .unit-rent{
+  grid-column:3!important;justify-self:stretch!important;
+  text-align:right!important;font-variant-numeric:tabular-nums!important;
+ }
+ .recommend .listing-units .unit-row,
+ .recommend .listing-units .unit-row *{
+  font-size:12px!important;letter-spacing:-.2px!important;
+ }
+ .recommend .listing-units::before{left:calc(43px + 3px)!important}
+ .recommend .listing-units::after{right:calc(124px + 3px)!important}
+}
+</style><style id="pc-detail-type-hierarchy-v8">
+/* Shared PC reading scale: 14px for content, 13px for labels. */
+@media(min-width:900px){
+ .pc-detail-media .alt-intro .description p{
+  font-size:14px!important;
+  line-height:2!important;
+ }
+ .pc-detail-media .alt-notices .alerts,
+ .pc-detail-media .alt-notices .alerts li{
+  font-size:14px!important;
+  line-height:1.85!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .facts dt{
+  font-size:13px!important;
+  line-height:1.75!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .facts dd{
+  font-size:14px!important;
+  line-height:1.75!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts dt{
+  font-size:13px!important;
+  line-height:1.8!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts dd{
+  font-size:14px!important;
+  line-height:1.8!important;
+ }
+}
+</style><style id="pc-detail-type-hierarchy-v9">
+/* +1px to the discussed reading hierarchy, keeping the property title unchanged. */
+@media(min-width:900px){
+ .pc-detail-media .counter #caption{font-size:14px!important}
+ .pc-detail-media .alt-intro .description p{font-size:15px!important}
+ .pc-detail-media .alt-notices .alerts,
+ .pc-detail-media .alt-notices .alerts li{font-size:15px!important}
+ .pc-detail-sidebar #units .unit-detail .facts dt{font-size:14px!important}
+ .pc-detail-sidebar #units .unit-detail .facts dd{font-size:15px!important}
+ .pc-detail-media .alt-building #buildingFacts dt{font-size:14px!important}
+ .pc-detail-media .alt-building #buildingFacts dd{font-size:15px!important}
+}
+</style><style id="pc-detail-v10-compact-facts-no-extra-building-rule">
+@media(min-width:900px){
+ /* Remove the duplicate divider between the open building heading and its contents. */
+ .pc-detail-media .alt-building .building.is-open .building-inner,
+ .body .alt-building .building.is-open .building-inner{
+  border-top:0!important;
+ }
+ .pc-detail-media .alt-building .building.is-open .building-btn{
+  border-bottom:0!important;
+ }
+ /* Tighten the rhythm of detail facts without reducing type sizes. */
+ .pc-detail-sidebar #units .unit-detail .facts>div,
+ .pc-detail-sidebar #units .unit-detail .unit-fact-group>div{
+  padding:7px 0!important;
+  line-height:1.55!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .facts dt,
+ .pc-detail-sidebar #units .unit-detail .facts dd{
+  line-height:1.55!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group>div{
+  padding:7px 0!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts dt,
+ .pc-detail-media .alt-building #buildingFacts dd{
+  line-height:1.55!important;
+ }
+ .pc-detail-media .alt-building .building-inner{
+  padding-top:8px!important;
+  padding-bottom:14px!important;
+ }
+}
+</style><style id="pc-detail-v11-tags-divider">
+@media(min-width:900px){
+ /* Restore the single separator between 坪単価 and 目的. */
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block{
+  border-top:1px solid #dedede!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block:before{
+  content:none!important;
+  display:none!important;
+ }
+}
+</style><style id="pc-detail-v12-building-internal-lines">
+@media(min-width:900px){
+ /* Building information must be one continuous list, with no line between 交通 and 用途地域. */
+ .pc-detail-media .alt-building #buildingFacts,
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group,
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group>div{
+  border:0!important;
+  box-shadow:none!important;
+  background-image:none!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group+.building-fact-group{
+  border:0!important;
+  border-top:0!important;
+  box-shadow:none!important;
+  margin-top:0!important;
+  padding-top:0!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group::before,
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group::after,
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group>div::before,
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group>div::after{
+  content:none!important;display:none!important;
+ }
+}
+</style><style id="pc-detail-v13-tag-labels">
+@media(min-width:900px){
+ .pc-detail-sidebar #units .unit-detail .tag-title{
+  font-size:14px!important;
+ }
+}
+</style><style id="pc-detail-v14-single-unit-top-rule">
+@media(min-width:900px){
+ /* One separator above the first unit; remove the duplicate container rule. */
+ .pc-detail-sidebar .body #units,
+ .pc-detail-sidebar #units{
+  border-top:0!important;
+ }
+}
+</style><style id="pc-detail-v15-location-text">
+@media(min-width:900px){
+ .pc-detail-media .alt-location .address,
+ .pc-detail-media .alt-location .access p,
+ .pc-detail-media .alt-location .map-out{
+  font-size:15px!important;
+ }
+}
+</style><style id="pc-detail-v16-unified-section-headings">
+@media(min-width:900px){
+ /* Uniform 17px section headings; leave the property title untouched. */
+ .pc-detail-media .alt-notices h2,
+ .pc-detail-sidebar .alt-overview-header .alt-section-title,
+ .pc-detail-media .alt-building .building-btn,
+ .pc-detail-media .alt-location:before,
+ .recommend h2{
+  font-size:17px!important;
+ }
+}
+</style><style id="pc-detail-v17-single-heading-separator">
+@media(min-width:900px){
+ /* The double rule comes from the heading's border and the units' own top edge.
+    Keep only the heading separator. */
+ .pc-detail-sidebar .pc-detail-unit-heading{
+  border-bottom:1px solid #d9dad5!important;
+ }
+ .pc-detail-sidebar #units,
+ .pc-detail-sidebar .alt-units,
+ .pc-detail-sidebar .alt-units .unit:first-child,
+ .pc-detail-sidebar #units .unit:first-child{
+  border-top:0!important;
+  box-shadow:none;
+ }
+ .pc-detail-sidebar .alt-units::before,
+ .pc-detail-sidebar #units::before{
+  content:none!important;display:none!important;
+ }
+}
+</style><style id="pc-detail-v18-related-card-type">
+@media(min-width:900px){
+ /* Related cards: readable hierarchy without altering the established columns. */
+ .recommend .listing-title{
+  font-size:16px!important;
+ }
+ .recommend .listing-units .unit-row,
+ .recommend .listing-units .unit-row *,
+ .recommend .listing-units .unit-id,
+ .recommend .listing-units .unit-area,
+ .recommend .listing-units .unit-rent{
+  font-size:13px!important;
+ }
+}
+</style><style id="pc-detail-v19-unit-label-column-30">
+@media(min-width:900px){
+ /* Comparison: move unit fact values left while retaining the 14px column gap. */
+ .pc-detail-sidebar #units .unit-detail .facts>div,
+ .pc-detail-sidebar #units .unit-detail .unit-fact-group>div{
+  grid-template-columns:30% minmax(0,1fr)!important;
+  column-gap:14px!important;
+ }
+}
+</style><style id="pc-detail-v20-zoom-caption">
+.overlay .zoom-meta #zoomCaption{font-size:14px!important}
+</style><style id="pc-detail-v21-zoom-caption-clearance">
+/* Reserve roughly two caption lines below the enlarged photo. */
+.overlay #zoomImage{
+ max-height:calc(94dvh - 80px)!important;
+ transform:translateY(-24px);
+}
+</style><style id="pc-detail-v22-zoom-stage">
+/* Size the actual image, not a full-viewport img box; keep caption outside. */
+.overlay{box-sizing:border-box!important;padding:12px 16px 100px!important}
+.overlay .zoom-image-stage{position:relative;display:flex;align-items:center;justify-content:center;width:fit-content;max-width:100%;max-height:calc(100dvh - 132px);flex:0 1 auto}
+.overlay #zoomImage{display:block;width:auto!important;height:auto!important;max-width:min(100%,calc(100vw - 32px))!important;max-height:calc(100dvh - 132px)!important;transform:none!important;object-fit:contain!important}
+.overlay .zoom-image-stage #zoomCount{position:absolute;right:12px;bottom:12px;z-index:3;color:white;background:rgba(0,0,0,.52);font-size:13px;line-height:1.3;padding:5px 8px;border-radius:2px;font-variant-numeric:tabular-nums;pointer-events:none;text-shadow:none}
+.overlay .zoom-meta{bottom:max(22px,env(safe-area-inset-bottom))!important;grid-template-columns:minmax(0,1fr)!important;left:24px!important;right:24px!important}
+.overlay .zoom-meta #zoomCaption{grid-column:1!important;max-width:680px!important;font-size:14px!important}
+.overlay .zoom-plan{font-size:15px!important;padding:14px 20px!important;bottom:max(110px,calc(env(safe-area-inset-bottom) + 96px))!important}
+</style><style id="pc-detail-v24-zoom-balanced-layout">
+/* Treat image and caption as one vertically centered composition. */
+.overlay{padding:20px 24px!important;box-sizing:border-box!important}
+.overlay .zoom-content{
+ width:100%;max-width:1100px;max-height:calc(100dvh - 40px);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:16px;min-height:0;
+}
+.overlay .zoom-image-stage{
+ position:relative;width:100%;max-width:100%;max-height:calc(100dvh - 144px);
+ display:flex;align-items:center;justify-content:center;flex:0 1 auto;
+}
+.overlay .zoom-image-stage #zoomImage{
+ display:block;width:auto!important;height:auto!important;max-width:100%!important;
+ max-height:calc(100dvh - 144px)!important;object-fit:contain!important;transform:none!important;
+}
+.overlay .zoom-image-stage #zoomCount{
+ right:12px;bottom:12px;background:rgba(255,255,255,.75)!important;
+ color:#222!important;border-radius:20px!important;padding:4px 11px!important;
+ font-size:13px!important;font-weight:600!important;letter-spacing:.08em!important;
+ line-height:1.4!important;
+}
+.overlay .zoom-content .zoom-meta{
+ position:static!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;width:100%;min-height:44px;max-height:68px;
+ margin:0!important;padding:0 24px!important;box-sizing:border-box!important;
+ flex:0 0 auto;pointer-events:none;
+}
+.overlay .zoom-content .zoom-meta #zoomCaption{
+ width:auto!important;max-width:680px!important;line-height:1.55!important;
+ padding:0!important;font-size:14px!important;
+}
+</style><style id="pc-detail-v25-fixed-zoom-count">
+/* Keep the counter in the same viewport position for landscape and portrait images. */
+.overlay .zoom-image-stage #zoomCount{
+ position:fixed!important;
+ right:clamp(28px,3vw,52px)!important;
+ bottom:clamp(112px,12vh,148px)!important;
+ top:auto!important;left:auto!important;
+ background:rgba(255,255,255,.80)!important;
+ color:#222!important;
+ border-radius:999px!important;
+ padding:8px 18px!important;
+ font-size:18px!important;
+ font-weight:600!important;
+ letter-spacing:.08em!important;
+ line-height:1.3!important;
+ z-index:5!important;
+ pointer-events:none!important;
+}
+</style><style id="pc-detail-v26-landscape-anchored-count">
+/* Anchor to the actual landscape image bottom-right, then retain that position for portraits. */
+.overlay .zoom-image-stage #zoomCount{
+ right:var(--zoom-count-right,32px)!important;
+ bottom:var(--zoom-count-bottom,120px)!important;
+}
+</style><style id="pc-detail-v27-compact-zoom-count">
+.overlay .zoom-image-stage #zoomCount{
+ font-size:13px!important;
+ padding:4px 11px!important;
+ line-height:1.4!important;
+}
+</style><style id="pc-detail-v28-unified-section-spacing">
+@media(min-width:900px){
+ /* Building: no extra space at the group boundary (交通→用途地域 etc.). */
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group{
+  margin:0!important;padding:0!important;
+ }
+ .pc-detail-media .alt-building #buildingFacts .building-fact-group+.building-fact-group{
+  margin:0!important;padding:0!important;border:0!important;
+ }
+ /* Unit: remove accumulated padding/margins on nested fact groups. */
+ .pc-detail-sidebar #units .unit-detail .unit-facts{
+  margin-top:0!important;margin-bottom:0!important;
+  padding-top:0!important;padding-bottom:0!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-facts>.unit-fact-group{
+  margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-facts>.unit-fact-group+.unit-fact-group{
+  margin-top:7px!important;padding-top:7px!important;
+  border-top:1px solid #dedede!important;box-shadow:none!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-facts>.unit-fact-group+.unit-fact-group:before{
+  content:none!important;display:none!important;
+ }
+ /* 坪単価→目的: one divider, with the same 7px rhythm as other rows. */
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block{
+  margin:7px 0 0!important;padding:7px 0!important;
+  border-top:1px solid #dedede!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block:before{
+  content:none!important;display:none!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block .tag-title:first-child{
+  margin:0 0 8px!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block .tag-title:not(:first-child){
+  margin:12px 0 8px!important;
+ }
+ /* 特徴→敷金 and 区画備考→取引態様: equal space on both sides of dividers. */
+ .pc-detail-sidebar #units .unit-detail .unit-followup-facts{
+  margin:7px 0 0!important;padding:7px 0 0!important;
+  border-top:1px solid #dedede!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-followup-facts:before{
+  content:none!important;display:none!important;
+ }
+ .pc-detail-sidebar #units .unit-detail .unit-meta-facts{
+  margin:7px 0 0!important;padding:7px 0 0!important;
+  border-top:1px solid #dedede!important;
+ }
+}
+</style><style id="pc-detail-v29-purpose-divider-balance">
+@media(min-width:900px){
+ /* Give the first purpose label enough breathing room below the divider. */
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block{
+  padding-top:14px!important;
+ }
+}
+</style><style id="pc-detail-v30-consistent-tag-labels">
+@media(min-width:900px){
+ /* 目的・特徴 are field labels, not subsection headings. Match other dt labels. */
+ .pc-detail-sidebar #units .unit-detail .unit-tags-block .tag-title{
+  color:#777!important;
+  font-weight:400!important;
+  font-size:14px!important;
+  line-height:1.55!important;
+ }
+}
+</style></head><body><div class="page"><header class="head"><div class="logo">What? Office</div><div class="head-icons"><span>⌕</span><span>♧</span><span>☰</span></div></header><div class="hero"><img id="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" onclick="zoom()"><span class="hero-count" id="heroCount">01｜12</span><button class="hero-nav hero-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><button class="hero-nav hero-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button></div><div class="counter"><span class="num" id="counter" hidden>1 / 12</span><span id="caption">窓際のワークスペース</span></div><div class="gallery-bar"><div class="thumb-shell"><div id="galleryContinuation" class="gallery-continuation" aria-label="写真・間取り図サムネイル"></div><button class="thumb-control thumb-left" type="button" onclick="shift(-1)" aria-label="前の写真">‹</button><button class="thumb-control thumb-right" type="button" onclick="shift(1)" aria-label="次の写真">›</button></div><button class="plan-jump" type="button" onclick="jumpToPlan()">間取り図</button></div><div class="body alt-main"><div class="alt-intro"><h1 id="propertyTitle">代官山｜光と緑が見えるオフィス</h1><div class="description"><div class="fade" id="intro"><p>白金台駅から徒歩10分。駅から少し距離はありますが、周辺には高級料理店なども点在する、落ち着いたエリアです。今回募集されているのは、1FとB1Fを合わせた約56坪のスケルトン空間。</p><p>1Fは、道路側に大きく取られた窓が印象的です。窓の先には街路樹や植栽があり、室内からも緑がよく見えます。窓は一方向だけではなく、建物の形に沿って複数面に配置。柱や梁が現れたスケルトンの状態ながら、外からの光がしっかり入ります。</p><p>天井高は3.5m超。梁が交差し、壁もまっすぐな長方形ではないため、室内には少し変わった形が残っています。整った箱というより、この形そのものをどう使うかを考えたくなる空間です。</p><p>そして1Fから階段を下りるとB1Fへ。こちらにもドライエリアに面した大きな窓があり、地下ながら外からの光が入ります。一方で、道路に面した1Fとは視線の抜け方が異なり、囲われたような落ち着きがあります。</p><p>緑が見える1Fと、少しおこもり感のあるB1F。同じスケルトンでも、上下階でかなり雰囲気の違う2フロアです。</p></div><button class="more" onclick="const x=document.getElementById('intro');x.classList.toggle('expanded');this.innerHTML=x.classList.contains('expanded')?'閉じる <span>−</span>':'もっと見る <span>＋</span>'">もっと見る <span>＋</span></button></div></div><section class="alt-notices" aria-label="特記事項"><h2>特記事項</h2><ul class="alerts"><li>期間限定で居抜き相談可。原状回復前のため、現在の内装を活かして入居できる可能性があります。</li><li>契約条件の詳細はお問い合わせください。</li></ul></section><section class="alt-overview" aria-label="物件概要"><div class="alt-overview-header"><h2 class="alt-section-title">物件概要</h2><span class="alt-tax-note">※金額はすべて税抜</span></div><div class="alt-units" aria-label="募集区画"><div id="units"></div></div><section class="alt-building"><div class="building"><button class="building-btn" onclick="toggleBuilding()">建物情報 <span id="buildingSign">＋</span></button><div class="building-inner" id="buildingInfo" hidden><div class="facts building-facts" id="buildingFacts"></div></div></div></section><section class="alt-location"><div class="access"><div class="alt-address-row"><div class="address">♧ 世田谷区玉川田園調布9-99-99</div><a class="map-out" href="https://maps.google.com/?q=東京都世田谷区玉川田園調布" target="_blank" rel="noopener noreferrer">Googleマップへ ↗</a></div><p>都営大江戸線「若松河田」徒歩6分</p><p>東京メトロ副都心線「東新宿」徒歩8分</p><p>都営大江戸線「東新宿」徒歩8分</p></div><div class="map"><iframe title="周辺地図" loading="lazy" src="https://www.google.com/maps?q=東京都世田谷区玉川田園調布&output=embed"></iframe></div></section></section></div><div class="recommend"><h2>広さが近い物件</h2><div class="rail" id="nearArea"></div><h2>賃料が近い物件</h2><div class="rail" id="nearPrice"></div></div><footer class="foot"><strong>What? Office</strong><p>働く場所から、会社の未来を考える。</p></footer></div><div class="sticky"><button type="button" onclick="location.href='tel:0312345678'"><span>♧</span>電話</button><button type="button" onclick="openUnitAction('inquiry')"><span>⌕</span>お問い合わせ</button><button type="button" onclick="openUnitAction('bookmark')"><span>♧</span>ブックマーク</button></div>
 <div class="unit-action-backdrop" id="unitActionBackdrop" hidden onclick="if(event.target===this)closeUnitAction()">
  <section class="unit-action-panel" role="dialog" aria-modal="true" aria-labelledby="unitActionTitle">
   <div class="unit-action-heading"><h2 id="unitActionTitle"></h2><button type="button" class="unit-action-close" onclick="closeUnitAction()" aria-label="閉じる">×</button></div>
@@ -569,7 +1124,7 @@ h1{font-size:21px;line-height:1.45;margin:15px 0 26px}
   <button type="button" class="unit-action-submit" id="unitActionSubmit" onclick="submitUnitAction()" disabled></button>
   <p class="unit-action-feedback" id="unitActionFeedback" aria-live="polite"></p>
  </section>
-</div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="写真の拡大表示" onclick="if(event.target===this)closeZoom()"><button class="zoom-close" type="button" onclick="closeZoom()" aria-label="閉じる">×</button><button class="zoom-nav zoom-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><img id="zoomImage" alt="拡大画像"><div class="zoom-meta"><span id="zoomCaption"></span><span id="zoomCount"></span></div><button class="zoom-nav zoom-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button><button class="zoom-plan" type="button" onclick="zoomToPlan()">間取り図</button></div><script>
+</div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="写真の拡大表示" onclick="if(!event.target.closest('button') && !event.target.closest('#zoomImage'))closeZoom()"><button class="zoom-close" type="button" onclick="closeZoom()" aria-label="閉じる">×</button><button class="zoom-nav zoom-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><div class="zoom-content"><div class="zoom-image-stage"><img id="zoomImage" alt="拡大画像"><span id="zoomCount"></span></div><div class="zoom-meta"><span id="zoomCaption"></span></div></div><button class="zoom-nav zoom-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button><button class="zoom-plan" type="button" onclick="zoomToPlan()">間取り図</button></div><script>
 const images=['https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1100','https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1100','https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1100','https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1100','https://images.unsplash.com/photo-1497366216548-37526070297c?w=1100','https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1100','https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1100','https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1100','https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1100','https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1100'];const plans=['https://placehold.co/900x680/f4f4f1/555?text=9F+Plan','https://placehold.co/900x680/f4f4f1/555?text=4F+Plan'];/* One continuous public gallery, while source photos and plans remain separate arrays. */
 const photoCaptions=[
 '窓際のワークスペース',
@@ -645,11 +1200,44 @@ function setZoomCaption(caption){
   el.append(document.createTextNode(caption.slice(punctuation+1)));
  }else{el.textContent=caption}
 }
-function refreshZoom(){fadeGalleryImage(document.getElementById('zoomImage'),gallery[idx].src,gallery[idx].kind==='plan'?'間取り図':'物件写真');document.querySelector('.zoom-plan').hidden=idx>=firstPlanIndex;setZoomCaption(gallery[idx].caption);document.getElementById('zoomCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0')}
-function zoom(){zoomOverflow=document.body.style.overflow;document.body.style.overflow='hidden';refreshZoom();document.getElementById('overlay').classList.add('show')}
+let zoomCountPositionLocked=false;
+function positionZoomCount(){
+ if(zoomCountPositionLocked)return;
+ const img=document.getElementById('zoomImage'),overlay=document.getElementById('overlay');
+ if(!overlay.classList.contains('show')||!img.complete||!img.naturalWidth)return;
+ const count=document.getElementById('zoomCount'),stage=document.querySelector('.zoom-image-stage');
+ let right,bottom;
+ if(img.naturalWidth>=img.naturalHeight){
+  const rect=img.getBoundingClientRect();
+  right=window.innerWidth-rect.right+16;
+  bottom=window.innerHeight-rect.bottom+16;
+ }else{
+  /* If a portrait is opened first, use the landscape-sized reference frame. */
+  const frame=stage.getBoundingClientRect(),width=Math.min(frame.width,(window.innerHeight-144)*1.5);
+  const height=width/1.5;
+  right=(window.innerWidth-width)/2+16;
+  bottom=window.innerHeight-(frame.top+frame.height/2+height/2)+16;
+ }
+ count.style.setProperty('--zoom-count-right',Math.max(12,right)+'px');
+ count.style.setProperty('--zoom-count-bottom',Math.max(12,bottom)+'px');
+ zoomCountPositionLocked=true;
+}
+function refreshZoom(){
+ const zoomImage=document.getElementById('zoomImage');
+ if(zoomImage.getAttribute('src')!==gallery[idx].src)zoomImage.src=gallery[idx].src;
+ zoomImage.alt=gallery[idx].kind==='plan'?'間取り図':'物件写真';
+ document.querySelector('.zoom-plan').hidden=idx>=firstPlanIndex;
+ setZoomCaption(gallery[idx].caption);
+ document.getElementById('zoomCount').textContent=String(idx+1).padStart(2,'0')+'｜'+String(gallery.length).padStart(2,'0');
+ requestAnimationFrame(positionZoomCount);
+}
+document.getElementById('zoomImage').addEventListener('load',()=>requestAnimationFrame(positionZoomCount));
+window.addEventListener('resize',()=>{zoomCountPositionLocked=false;requestAnimationFrame(positionZoomCount)});
+
+function zoom(){zoomOverflow=document.body.style.overflow;document.body.style.overflow='hidden';zoomCountPositionLocked=false;refreshZoom();document.getElementById('overlay').classList.add('show');requestAnimationFrame(positionZoomCount)}
 function closeZoom(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=zoomOverflow}
 function zoomToPlan(){idx=firstPlanIndex;updateHero();refreshZoom()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('overlay').classList.contains('show'))closeZoom()});
+document.addEventListener('keydown',e=>{const opened=document.getElementById('overlay').classList.contains('show');if(e.key==='Escape'&&opened){e.preventDefault();closeZoom();return}if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;if(!opened&&(e.target.closest('input,textarea,select,[contenteditable="true"]')||document.getElementById('unitActionBackdrop')?.hidden===false))return;e.preventDefault();shift(e.key==='ArrowLeft'?-1:1)});
 function renderContinuation(){
  const target=document.getElementById('galleryContinuation');
  target.innerHTML=gallery.map((item,i)=>'<button type="button" class="continued-photo'+(i===idx?' selected':'')+'" onclick="selectPhoto('+i+')" aria-pressed="'+(i===idx)+'" aria-label="'+(item.kind==='plan'?'間取り図':'写真')+' '+(item.kind==='plan'?(i-firstPlanIndex+1):(i+1))+'"><img loading="lazy" src="'+item.src+'" alt=""></button>').join('');
@@ -672,68 +1260,17 @@ function rows(r){return r.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>'
 let unitTransitionCleanup=null;
 function toggleUnit(i){
  const detail=document.getElementById('unitDetail'+i);
- const heading=detail?.previousElementSibling;
- if(!detail||!heading)return;
- if(unitTransitionCleanup){unitTransitionCleanup();unitTransitionCleanup=null;}
- const pane=window.innerWidth>=900?heading.closest('.pc-detail-sidebar .alt-units'):null;
- const anchorTop=heading.getBoundingClientRect().top;
- const willOpen=detail.hidden;
- const rows=units.map((u,j)=>({j,row:document.getElementById('unitDetail'+j),sign:document.getElementById('sign'+j)})).filter(x=>x.row&&x.sign);
- const motionOff=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const items=rows.map(x=>{
-  const start=x.row.hidden?0:x.row.getBoundingClientRect().height;
-  const shouldOpen=willOpen&&x.j===i;
-  x.row.hidden=false;
-  x.row.style.height='auto';
-  x.row.style.overflow='hidden';
-  x.row.style.boxSizing='border-box';
-  const natural=x.row.getBoundingClientRect().height;
-  const end=shouldOpen?natural:0;
-  x.row.style.height=start+'px';
-  x.row.style.opacity=start>0?'1':'0';
-  x.sign.textContent=shouldOpen?'−':'＋';
-  x.sign.dataset.open=String(shouldOpen);
-  return {...x,start,end,shouldOpen};
- });
- const adjustAnchor=()=>{
-  const delta=heading.getBoundingClientRect().top-anchorTop;
-  if(Math.abs(delta)>0.5){
-   if(pane)pane.scrollTop+=delta;
-   else window.scrollBy({top:delta,behavior:'instant'});
-  }
- };
- const finish=()=>{
-  cancelAnimationFrame(unitTransitionFrame);
-  items.forEach(x=>{
-   x.row.hidden=!x.shouldOpen;
-   x.row.style.removeProperty('height');
-   x.row.style.removeProperty('overflow');
-   x.row.style.removeProperty('box-sizing');
-   x.row.style.removeProperty('opacity');
-  });
-  adjustAnchor();
- };
- if(motionOff){
-  finish();
-  return;
- }
- const duration=300;
- const started=performance.now();
- unitTransitionCleanup=finish;
- function frame(now){
-  const t=Math.min(1,(now-started)/duration);
-  const eased=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-  items.forEach(x=>{
-   x.row.style.height=(x.start+(x.end-x.start)*eased)+'px';
-   x.row.style.opacity=String(x.start===x.end?(x.shouldOpen?1:0):(x.start>0?1-eased:eased));
-  });
-  adjustAnchor();
-  if(t<1)unitTransitionFrame=requestAnimationFrame(frame);
-  else{finish();unitTransitionCleanup=null;}
- }
- unitTransitionFrame=requestAnimationFrame(frame);
+ const sign=document.getElementById('sign'+i);
+ if(!detail||!sign)return;
+ const isOpening=detail.hidden;
+ detail.hidden=!isOpening;
+ sign.textContent=isOpening?'−':'＋';
+ sign.dataset.open=String(isOpening);
+ const summary=detail.previousElementSibling;
+ summary?.setAttribute('aria-expanded',String(isOpening));
+ detail.parentElement.classList.toggle('is-open',isOpening);
 }
-document.getElementById('units').innerHTML=units.map((u,i)=>'<div class="unit '+(u.sold?'sold':'match')+'"><div class="unit-summary" onclick="toggleUnit('+i+')"><span class="unit-id">'+u.id+'</span><span class="unit-area"><span class="sqm">'+u.area+'</span><span class="slash">／</span><span class="tsubo">'+u.tsubo+'</span></span><span class="unit-price">'+u.price+'</span><span class="unit-plus" id="sign'+i+'">＋</span></div><div class="unit-detail" id="unitDetail'+i+'" hidden><dl class="facts unit-facts">'+unitRows(u.sold?[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['現況',u.status]]]:[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['賃料',u.rent],['管理費',u.fee],['坪単価',u.unitPrice]]])+'</dl><div class="unit-tags-block"><p class="tag-title">目的</p><div class="tags"><span>オフィス</span><span>店舗</span><span>アトリエ・ギャラリー</span></div><p class="tag-title">特徴</p><div class="tags">'+u.features.map(x=>'<span>'+x+'</span>').join('')+'</div></div><dl class="facts unit-facts unit-followup-facts">'+unitRows(u.sold?[]:[[['敷金','10ヶ月'],['礼金','2ヶ月'],['契約期間','普通建物賃貸借契約 2年'],['現況／内覧',u.status],['入居可能日',u.move]],[['最大天井高',u.ceiling],['専有部設備','個別空調／男女別トイレ／給湯'],['区画備考','原状回復条件／償却／解約予告／更新料等の区画固有情報を表示']]])+'</dl><dl class="facts unit-facts unit-meta-facts">'+unitRows([[['取引態様','媒介'],['仲介手数料','賃料の1ヶ月分＋消費税'],['情報更新日','2026年9月10日']]])+'</dl></div></div>').join('');
+document.getElementById('units').innerHTML=units.map((u,i)=>'<div class="unit '+(u.sold?'sold':'match')+'"><div class="unit-summary" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit('+i+')" onkeydown="if(event.key===&quot;Enter&quot;||event.key===&quot; &quot;){event.preventDefault();toggleUnit('+i+')}"><span class="unit-id">'+u.id+'</span><span class="unit-area"><span class="sqm">'+u.area+'</span><span class="slash">／</span><span class="tsubo">'+u.tsubo+'</span></span><span class="unit-price">'+u.price+'</span><span class="unit-plus" id="sign'+i+'">＋</span></div><div class="unit-detail" id="unitDetail'+i+'" hidden><dl class="facts unit-facts">'+unitRows(u.sold?[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['現況',u.status]]]:[[['区画',u.id],['面積',u.area+'／'+u.tsubo],['賃料',u.rent],['管理費',u.fee],['坪単価',u.unitPrice]]])+'</dl><div class="unit-tags-block"><p class="tag-title">目的</p><div class="tags"><span>オフィス</span><span>店舗</span><span>アトリエ・ギャラリー</span></div><p class="tag-title">特徴</p><div class="tags">'+u.features.map(x=>'<span>'+x+'</span>').join('')+'</div></div><dl class="facts unit-facts unit-followup-facts">'+unitRows(u.sold?[]:[[['敷金','10ヶ月'],['礼金','2ヶ月'],['契約期間','普通建物賃貸借契約 2年'],['現況／内覧',u.status],['入居可能日',u.move]],[['最大天井高',u.ceiling],['専有部設備','個別空調／男女別トイレ／給湯'],['区画備考','原状回復条件／償却／解約予告／更新料等の区画固有情報を表示']]])+'</dl><dl class="facts unit-facts unit-meta-facts">'+unitRows([[['取引態様','媒介'],['仲介手数料','賃料の1ヶ月分＋消費税'],['情報更新日','2026年9月10日']]])+'</dl></div></div>').join('');
 
 /* Footer action sheet based on the "ワイヤー用情報（ビジュアル）4" I74:Q79 specification. */
 let unitActionMode='inquiry';
@@ -778,7 +1315,7 @@ function submitUnitAction(){
  }catch(e){feedback.textContent='このブラウザでは保存できませんでした。設定をご確認ください。'}
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('unitActionBackdrop').hidden)closeUnitAction()});
-const building=[['物件名','What? Office 表参道ビル'],['住所','東京都世田谷区玉川田園調布9-99-99'],['交通','「代官山」徒歩12分／「恵比寿」徒歩12分／「渋谷」徒歩12分'],['用途地域','商業地域'],['築年月','2008年9月'],['構造／規模','鉄骨鉄筋コンクリート造／地上9階・地下1階'],['共用部設備','エレベーター／駐車場（要空確認）／駐輪場（要空確認）／バイク置場（要空確認）／共用ラウンジ／共用会議室'],['建物備考','建物全体に共通する補足情報を表示']];document.getElementById('buildingFacts').innerHTML=rows(building);function toggleBuilding(){const x=document.getElementById('buildingInfo');x.hidden=!x.hidden;document.getElementById('buildingSign').textContent=x.hidden?'＋':'−';document.getElementById('buildingSign').dataset.open=String(!x.hidden)}
+const building=[['物件名','What? Office 表参道ビル'],['住所','東京都世田谷区玉川田園調布9-99-99'],['交通','「代官山」徒歩12分／「恵比寿」徒歩12分／「渋谷」徒歩12分'],['用途地域','商業地域'],['築年月','2008年9月'],['構造／規模','鉄骨鉄筋コンクリート造／地上9階・地下1階'],['共用部設備','エレベーター／駐車場（要空確認）／駐輪場（要空確認）／バイク置場（要空確認）／共用ラウンジ／共用会議室'],['建物備考','建物全体に共通する補足情報を表示']];document.getElementById('buildingFacts').innerHTML=[building.slice(0,3),building.slice(3,6),building.slice(6)].map(group=>'<div class="building-fact-group">'+rows(group)+'</div>').join('');function toggleBuilding(){const x=document.getElementById('buildingInfo');x.hidden=!x.hidden;x.closest('.building')?.classList.toggle('is-open',!x.hidden);document.getElementById('buildingSign').textContent=x.hidden?'＋':'−';document.getElementById('buildingSign').dataset.open=String(!x.hidden)}
 /* Each recommendation is one property, with one or more matching units.
    Area and rent recommendations can contain different units of the same property. */
 const relatedProperties=[
