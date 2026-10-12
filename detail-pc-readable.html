@@ -985,6 +985,38 @@ h1{font-size:21px;line-height:1.45;margin:15px 0 26px}
 .overlay .zoom-meta{bottom:max(22px,env(safe-area-inset-bottom))!important;grid-template-columns:minmax(0,1fr)!important;left:24px!important;right:24px!important}
 .overlay .zoom-meta #zoomCaption{grid-column:1!important;max-width:680px!important;font-size:14px!important}
 .overlay .zoom-plan{font-size:15px!important;padding:14px 20px!important;bottom:max(110px,calc(env(safe-area-inset-bottom) + 96px))!important}
+</style><style id="pc-detail-v24-zoom-balanced-layout">
+/* Treat image and caption as one vertically centered composition. */
+.overlay{padding:20px 24px!important;box-sizing:border-box!important}
+.overlay .zoom-content{
+ width:100%;max-width:1100px;max-height:calc(100dvh - 40px);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:16px;min-height:0;
+}
+.overlay .zoom-image-stage{
+ position:relative;width:100%;max-width:100%;max-height:calc(100dvh - 144px);
+ display:flex;align-items:center;justify-content:center;flex:0 1 auto;
+}
+.overlay .zoom-image-stage #zoomImage{
+ display:block;width:auto!important;height:auto!important;max-width:100%!important;
+ max-height:calc(100dvh - 144px)!important;object-fit:contain!important;transform:none!important;
+}
+.overlay .zoom-image-stage #zoomCount{
+ right:12px;bottom:12px;background:rgba(255,255,255,.75)!important;
+ color:#222!important;border-radius:20px!important;padding:4px 11px!important;
+ font-size:13px!important;font-weight:600!important;letter-spacing:.08em!important;
+ line-height:1.4!important;
+}
+.overlay .zoom-content .zoom-meta{
+ position:static!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;width:100%;min-height:44px;max-height:68px;
+ margin:0!important;padding:0 24px!important;box-sizing:border-box!important;
+ flex:0 0 auto;pointer-events:none;
+}
+.overlay .zoom-content .zoom-meta #zoomCaption{
+ width:auto!important;max-width:680px!important;line-height:1.55!important;
+ padding:0!important;font-size:14px!important;
+}
 </style></head><body><div class="page"><header class="head"><div class="logo">What? Office</div><div class="head-icons"><span>⌕</span><span>♧</span><span>☰</span></div></header><div class="hero"><img id="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" onclick="zoom()"><span class="hero-count" id="heroCount">01｜12</span><button class="hero-nav hero-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><button class="hero-nav hero-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button></div><div class="counter"><span class="num" id="counter" hidden>1 / 12</span><span id="caption">窓際のワークスペース</span></div><div class="gallery-bar"><div class="thumb-shell"><div id="galleryContinuation" class="gallery-continuation" aria-label="写真・間取り図サムネイル"></div><button class="thumb-control thumb-left" type="button" onclick="shift(-1)" aria-label="前の写真">‹</button><button class="thumb-control thumb-right" type="button" onclick="shift(1)" aria-label="次の写真">›</button></div><button class="plan-jump" type="button" onclick="jumpToPlan()">間取り図</button></div><div class="body alt-main"><div class="alt-intro"><h1 id="propertyTitle">代官山｜光と緑が見えるオフィス</h1><div class="description"><div class="fade" id="intro"><p>白金台駅から徒歩10分。駅から少し距離はありますが、周辺には高級料理店なども点在する、落ち着いたエリアです。今回募集されているのは、1FとB1Fを合わせた約56坪のスケルトン空間。</p><p>1Fは、道路側に大きく取られた窓が印象的です。窓の先には街路樹や植栽があり、室内からも緑がよく見えます。窓は一方向だけではなく、建物の形に沿って複数面に配置。柱や梁が現れたスケルトンの状態ながら、外からの光がしっかり入ります。</p><p>天井高は3.5m超。梁が交差し、壁もまっすぐな長方形ではないため、室内には少し変わった形が残っています。整った箱というより、この形そのものをどう使うかを考えたくなる空間です。</p><p>そして1Fから階段を下りるとB1Fへ。こちらにもドライエリアに面した大きな窓があり、地下ながら外からの光が入ります。一方で、道路に面した1Fとは視線の抜け方が異なり、囲われたような落ち着きがあります。</p><p>緑が見える1Fと、少しおこもり感のあるB1F。同じスケルトンでも、上下階でかなり雰囲気の違う2フロアです。</p></div><button class="more" onclick="const x=document.getElementById('intro');x.classList.toggle('expanded');this.innerHTML=x.classList.contains('expanded')?'閉じる <span>−</span>':'もっと見る <span>＋</span>'">もっと見る <span>＋</span></button></div></div><section class="alt-notices" aria-label="特記事項"><h2>特記事項</h2><ul class="alerts"><li>期間限定で居抜き相談可。原状回復前のため、現在の内装を活かして入居できる可能性があります。</li><li>契約条件の詳細はお問い合わせください。</li></ul></section><section class="alt-overview" aria-label="物件概要"><div class="alt-overview-header"><h2 class="alt-section-title">物件概要</h2><span class="alt-tax-note">※金額はすべて税抜</span></div><div class="alt-units" aria-label="募集区画"><div id="units"></div></div><section class="alt-building"><div class="building"><button class="building-btn" onclick="toggleBuilding()">建物情報 <span id="buildingSign">＋</span></button><div class="building-inner" id="buildingInfo" hidden><div class="facts building-facts" id="buildingFacts"></div></div></div></section><section class="alt-location"><div class="access"><div class="alt-address-row"><div class="address">♧ 世田谷区玉川田園調布9-99-99</div><a class="map-out" href="https://maps.google.com/?q=東京都世田谷区玉川田園調布" target="_blank" rel="noopener noreferrer">Googleマップへ ↗</a></div><p>都営大江戸線「若松河田」徒歩6分</p><p>東京メトロ副都心線「東新宿」徒歩8分</p><p>都営大江戸線「東新宿」徒歩8分</p></div><div class="map"><iframe title="周辺地図" loading="lazy" src="https://www.google.com/maps?q=東京都世田谷区玉川田園調布&output=embed"></iframe></div></section></section></div><div class="recommend"><h2>広さが近い物件</h2><div class="rail" id="nearArea"></div><h2>賃料が近い物件</h2><div class="rail" id="nearPrice"></div></div><footer class="foot"><strong>What? Office</strong><p>働く場所から、会社の未来を考える。</p></footer></div><div class="sticky"><button type="button" onclick="location.href='tel:0312345678'"><span>♧</span>電話</button><button type="button" onclick="openUnitAction('inquiry')"><span>⌕</span>お問い合わせ</button><button type="button" onclick="openUnitAction('bookmark')"><span>♧</span>ブックマーク</button></div>
 <div class="unit-action-backdrop" id="unitActionBackdrop" hidden onclick="if(event.target===this)closeUnitAction()">
  <section class="unit-action-panel" role="dialog" aria-modal="true" aria-labelledby="unitActionTitle">
@@ -994,7 +1026,7 @@ h1{font-size:21px;line-height:1.45;margin:15px 0 26px}
   <button type="button" class="unit-action-submit" id="unitActionSubmit" onclick="submitUnitAction()" disabled></button>
   <p class="unit-action-feedback" id="unitActionFeedback" aria-live="polite"></p>
  </section>
-</div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="写真の拡大表示" onclick="if(!event.target.closest('button') && !event.target.closest('#zoomImage'))closeZoom()"><button class="zoom-close" type="button" onclick="closeZoom()" aria-label="閉じる">×</button><button class="zoom-nav zoom-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><div class="zoom-image-stage"><img id="zoomImage" alt="拡大画像"><span id="zoomCount"></span></div><div class="zoom-meta"><span id="zoomCaption"></span></div><button class="zoom-nav zoom-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button><button class="zoom-plan" type="button" onclick="zoomToPlan()">間取り図</button></div><script>
+</div><div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="写真の拡大表示" onclick="if(!event.target.closest('button') && !event.target.closest('#zoomImage'))closeZoom()"><button class="zoom-close" type="button" onclick="closeZoom()" aria-label="閉じる">×</button><button class="zoom-nav zoom-nav-left" type="button" onclick="event.stopPropagation();shift(-1)" aria-label="前の画像">‹</button><div class="zoom-content"><div class="zoom-image-stage"><img id="zoomImage" alt="拡大画像"><span id="zoomCount"></span></div><div class="zoom-meta"><span id="zoomCaption"></span></div></div><button class="zoom-nav zoom-nav-right" type="button" onclick="event.stopPropagation();shift(1)" aria-label="次の画像">›</button><button class="zoom-plan" type="button" onclick="zoomToPlan()">間取り図</button></div><script>
 const images=['https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1100','https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1100','https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1100','https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=1100','https://images.unsplash.com/photo-1497366216548-37526070297c?w=1100','https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1100','https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1100','https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1100','https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1100','https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1100'];const plans=['https://placehold.co/900x680/f4f4f1/555?text=9F+Plan','https://placehold.co/900x680/f4f4f1/555?text=4F+Plan'];/* One continuous public gallery, while source photos and plans remain separate arrays. */
 const photoCaptions=[
 '窓際のワークスペース',
@@ -1074,7 +1106,7 @@ function refreshZoom(){const zoomImage=document.getElementById('zoomImage');if(z
 function zoom(){zoomOverflow=document.body.style.overflow;document.body.style.overflow='hidden';refreshZoom();document.getElementById('overlay').classList.add('show')}
 function closeZoom(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=zoomOverflow}
 function zoomToPlan(){idx=firstPlanIndex;updateHero();refreshZoom()}
-document.addEventListener('keydown',e=>{if(!document.getElementById('overlay').classList.contains('show'))return;if(e.key==='Escape'){e.preventDefault();closeZoom()}else if(e.key==='ArrowLeft'){e.preventDefault();shift(-1)}else if(e.key==='ArrowRight'){e.preventDefault();shift(1)}});
+document.addEventListener('keydown',e=>{const opened=document.getElementById('overlay').classList.contains('show');if(e.key==='Escape'&&opened){e.preventDefault();closeZoom();return}if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;if(!opened&&(e.target.closest('input,textarea,select,[contenteditable="true"]')||document.getElementById('unitActionBackdrop')?.hidden===false))return;e.preventDefault();shift(e.key==='ArrowLeft'?-1:1)});
 function renderContinuation(){
  const target=document.getElementById('galleryContinuation');
  target.innerHTML=gallery.map((item,i)=>'<button type="button" class="continued-photo'+(i===idx?' selected':'')+'" onclick="selectPhoto('+i+')" aria-pressed="'+(i===idx)+'" aria-label="'+(item.kind==='plan'?'間取り図':'写真')+' '+(item.kind==='plan'?(i-firstPlanIndex+1):(i+1))+'"><img loading="lazy" src="'+item.src+'" alt=""></button>').join('');
