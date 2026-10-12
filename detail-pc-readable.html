@@ -1074,7 +1074,7 @@ function refreshZoom(){const zoomImage=document.getElementById('zoomImage');if(z
 function zoom(){zoomOverflow=document.body.style.overflow;document.body.style.overflow='hidden';refreshZoom();document.getElementById('overlay').classList.add('show')}
 function closeZoom(){document.getElementById('overlay').classList.remove('show');document.body.style.overflow=zoomOverflow}
 function zoomToPlan(){idx=firstPlanIndex;updateHero();refreshZoom()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('overlay').classList.contains('show'))closeZoom()});
+document.addEventListener('keydown',e=>{if(!document.getElementById('overlay').classList.contains('show'))return;if(e.key==='Escape'){e.preventDefault();closeZoom()}else if(e.key==='ArrowLeft'){e.preventDefault();shift(-1)}else if(e.key==='ArrowRight'){e.preventDefault();shift(1)}});
 function renderContinuation(){
  const target=document.getElementById('galleryContinuation');
  target.innerHTML=gallery.map((item,i)=>'<button type="button" class="continued-photo'+(i===idx?' selected':'')+'" onclick="selectPhoto('+i+')" aria-pressed="'+(i===idx)+'" aria-label="'+(item.kind==='plan'?'間取り図':'写真')+' '+(item.kind==='plan'?(i-firstPlanIndex+1):(i+1))+'"><img loading="lazy" src="'+item.src+'" alt=""></button>').join('');
