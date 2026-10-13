@@ -1293,7 +1293,7 @@ function setup(){
  const menu=header.querySelector('.wo-pc-review-menu');
  if(!menu)return;
  const signedIn=new URLSearchParams(location.search).get('loggedin')==='1';
- const links=[['TOP','top-pc.html'],['物件を探す','listing-pc-d.html'],['物件一覧','listing-pc-d.html'],[signedIn?'マイページ':'会員登録／ログイン','#'],...(signedIn?[['ブックマーク','#'],['保存した検索条件','#']]:[]),['TOPICS','top-pc.html#topics'],['Instagram','#'],['お問い合わせ','#'],['アバウト（会社概要）','#'],['プライバシーポリシー','#'],['利用規約','#']];
+ const links=[['TOP','top-pc.html'],['物件を探す','listing-pc-d.html'],['物件一覧','listing-pc-d.html'],[signedIn?'マイページ':'会員登録／ログイン','#'],...(signedIn?[['ブックマーク','#'],['保存した検索条件','#']]:[]),['TOPICS','top-pc.html#topics'],['Instagram','#'],['お問い合わせ','#'],['アバウト（会社概要）','#'],];
  const arrow=label=>label==='Instagram'?'↗':'→';
  menu.innerHTML='<button class="wo-pc-menu-close" type="button" aria-label="メニューを閉じる">×</button><div class="wo-pc-menu-inner"><p class="wo-pc-menu-kicker">WHAT? OFFICE / MENU</p>'+links.map(([label,url])=>'<a href="'+url+'"><span>'+label+'</span><span class="wo-pc-menu-arrow">'+arrow(label)+'</span></a>').join('')+'</div>';
  const close=()=>{menu.classList.remove('open');document.body.style.overflow='';const b=header.querySelector('[aria-label="メニュー"]');if(b)b.setAttribute('aria-expanded','false')};
