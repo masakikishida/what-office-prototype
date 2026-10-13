@@ -613,6 +613,17 @@ html,body,#app{max-width:100%;overflow-x:hidden}
 .head-icons .wo-auth-nav-item{font-size:12px;white-space:nowrap}
 .wo-list-nav .wo-auth-nav-item{font-size:12px;min-width:32px}
 .nav .wo-auth-nav-item{font-size:inherit}
+</style><style id="wo-sp-fullscreen-menu-20261013">
+@media(max-width:899px){
+#woSpMenuOverlay{display:none;position:fixed;inset:0;z-index:999999;background:#202425;color:#f7f7f7;overflow-y:auto;overscroll-behavior:contain}
+#woSpMenuOverlay.open{display:flex;align-items:flex-start;justify-content:center}
+#woSpMenuOverlay .wo-sp-menu-inner{width:min(100% - 48px,460px);padding:90px 0 64px}
+#woSpMenuOverlay .wo-sp-menu-kicker{font-size:11px;letter-spacing:.16em;color:#c3c6c6;margin:0 0 20px}
+#woSpMenuOverlay .wo-sp-menu-inner a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 2px;border-bottom:1px solid #464a4b;color:#fff;font-size:17px;line-height:1.45;text-decoration:none}
+#woSpMenuOverlay .wo-sp-menu-inner a .wo-sp-menu-arrow{color:#bfc3c4;font-size:18px}
+#woSpMenuOverlay .wo-sp-menu-close{position:fixed;right:18px;top:20px;border:0;background:transparent;color:#fff;font-size:33px;font-weight:300;line-height:1;padding:6px 10px;cursor:pointer}
+header .menu.open,header .wo-list-menu.open{display:none!important}
+}
 </style></head><body><div id="app"><div id="map"><div id="mapArt"></div><div id="mapPins"></div><div class="mapcredit">地図は操作検証用の模式図（実際の道路・位置とは異なります）</div></div><div class="top" aria-label="現在の検索条件"><div class="condition-summary" id="summary">渋谷・表参道周辺 ／ 面積指定なし ／ 賃料上限なし</div></div><div id="cards" class="cards"></div><div id="empty" class="empty">該当する物件がありません。条件を変更してください。</div><nav class="bottom"><span class="muted">検索条件</span><button class="pill" onclick="saveSearch()">＋ 保存</button><button class="pill" onclick="openConditions()">変更</button><span class="divider"></span><button class="pill" onclick="openSheet('display')">表示</button><button class="pill" onclick="openSheet('sort')">並替</button></nav><div id="overlay" class="overlay" onclick="closeSheet()"></div><section id="sheet" class="sheet"><button class="close" onclick="closeSheet()">×</button><div id="sheetContent"></div></section></div><script>
 const properties=[{id:1,title:'代官山｜大きな窓から緑を眺める、天井高のある開放的なリノベーションオフィス',lat:35.6488,lng:139.7037,area:'123.45㎡',price:970840,station:'代官山駅 徒歩12分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'},{id:2,title:'中目黒｜緑を感じるリノベーションオフィス',lat:35.6435,lng:139.6987,area:'104.8㎡',price:680000,station:'中目黒駅 徒歩8分',image:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600'},{id:3,title:'恵比寿｜光が差し込むセットアップオフィス',lat:35.6480,lng:139.7102,area:'145.2㎡',price:1220000,station:'恵比寿駅 徒歩6分',image:'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=600'},{id:4,title:'表参道｜天高5mのスケルトン空間',lat:35.6655,lng:139.7127,area:'118.8㎡',price:940000,station:'表参道駅 徒歩7分',image:'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600'},{id:5,title:'渋谷｜明るい窓辺のワークスペース',lat:35.6590,lng:139.7008,area:'92.4㎡',price:620000,station:'渋谷駅 徒歩9分',image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600'}];
 let selected=1,order='default',visible=[...properties],markers={};let zoom=1;const positions={1:[39,59],2:[23,74],3:[72,65],4:[77,27],5:[45,42]};
@@ -814,5 +825,33 @@ setTitleGap(2);setView(new URLSearchParams(location.search).get('view')==='map'?
   const observer=new MutationObserver(()=>{if(!document.querySelector('header .wo-list-nav')||document.querySelector('header .wo-list-nav [data-wo-auth-role]'))return;syncHeader()});
   observer.observe(document.body,{childList:true,subtree:true});
  });
+})();
+</script><script id="wo-sp-fullscreen-menu-20261013">
+(function(){
+ function init(){
+  if(document.getElementById('woSpMenuOverlay'))return;
+  const signedIn=new URLSearchParams(location.search).get('loggedin')==='1';
+  const links=[['TOP','top.html'],['物件を探す','index.html?view=list'],['物件一覧','index.html?view=list'],
+   [signedIn?'マイページ':'会員登録／ログイン','#'],
+   ...(signedIn?[['ブックマーク','#'],['保存した検索条件','#']]:[]),
+   ['TOPICS','top.html#topics'],['Instagram','#'],['お問い合わせ','#'],['アバウト（会社概要）','#']];
+  const menu=document.createElement('div');menu.id='woSpMenuOverlay';menu.setAttribute('role','dialog');menu.setAttribute('aria-modal','true');menu.setAttribute('aria-label','メニュー');
+  menu.innerHTML='<button class="wo-sp-menu-close" type="button" aria-label="閉じる">×</button><div class="wo-sp-menu-inner"><p class="wo-sp-menu-kicker">WHAT? OFFICE / MENU</p>'+links.map(([label,href])=>'<a href="'+href+'"><span>'+label+'</span><span class="wo-sp-menu-arrow">'+(label==='Instagram'?'↗':'→')+'</span></a>').join('')+'</div>';
+  document.body.appendChild(menu);
+  const close=()=>{menu.classList.remove('open');document.body.style.overflow='';document.querySelectorAll('header .menu.open,header .wo-list-menu.open').forEach(el=>el.classList.remove('open'))};
+  const open=()=>{menu.classList.add('open');document.body.style.overflow='hidden'};
+  menu.querySelector('.wo-sp-menu-close').addEventListener('click',close);
+  menu.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();alert(a.querySelector('span').textContent+'は本制作で接続予定です')}));
+  menu.querySelectorAll('a:not([href="#"])').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('click',e=>{
+   if(window.innerWidth>=900)return;
+   const target=e.target.closest('header [aria-label="メニュー"],header .head-icons > span:last-child');
+   if(!target)return;
+   e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+   if(menu.classList.contains('open'))close();else open();
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script></body></html>
