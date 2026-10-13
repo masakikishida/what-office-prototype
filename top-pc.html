@@ -101,7 +101,7 @@
 .wo-auth-nav-item{display:inline-flex;align-items:center;justify-content:center;gap:5px;background:none;border:0;color:inherit;font:inherit;cursor:pointer;text-decoration:none}
 .head-icons .wo-auth-nav-item{font-size:12px;white-space:nowrap}
 .wo-list-nav .wo-auth-nav-item{font-size:12px;min-width:32px}
-.nav .wo-auth-nav-item{font-size:inherit}
+.nav .wo-auth-nav-item{font-size:inherit}.nav>a.desktop:first-child{display:inline-flex!important}
 </style></head><body>
 <section class="hero" id="hero"><header class="head"><a class="logo" href="top-pc.html">What?Office</a><nav class="nav"><a href="listing-pc-d.html" class="desktop">⌕ 検索</a><a href="listing-pc-d.html" aria-label="ブックマーク"><svg class="header-bookmark" viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg><span class="desktop">ブックマーク</span></a><a href="#member">♙ <span class="desktop">ログイン</span></a><button class="hamb" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="メニュー"><span class="two-lines"><i></i><i></i></span></button></nav><div class="menu" id="menu"><a href="top-pc.html">TOP</a><a href="listing-pc-d.html">物件を探す</a><a href="#office">LIST</a><a href="#topics">TOPICS</a><a href="#member">会員登録</a></div></header>
 <div class="hero-main"><div class="hero-copy"><h1>どんなところで、<br>何をする？</h1><p class="tagline">FIND YOUR OWN ANSWER.</p></div><div class="searchbox"><form class="searchrow" action="listing-pc-d.html"><input id="query" placeholder="物件のイメージを入力" aria-label="物件検索"><button>⌕ 検索</button></form><p class="examples">こんな探し方もできます</p><div class="question-switch"><button type="button" onclick="slide(-1)">←</button><span id="questionText">窓の外に緑が見える？</span><button type="button" onclick="slide(1)">→</button></div><a class="advanced" href="listing-pc-d.html"><svg class="advanced-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m15.7 15.7 5 5"></path></svg><span>条件から物件を探す</span></a></div></div></section>
@@ -173,7 +173,7 @@ switchTab('pick');
    const bookmark=nav.querySelector('[aria-label="ブックマーク"]');
    const login=nav.querySelector('[aria-label="ログイン"]');
    if(bookmark)bookmark.remove();
-   if(login)login.remove();
+   if(login)login.remove(); if(nav.classList.contains('nav'))nav.querySelectorAll('a[href="#member"]').forEach(a=>{if(a.textContent.includes('ログイン'))a.remove()});
    if(nav.classList.contains('head-icons')){
     nav.innerHTML='';
     const search=document.createElement('a');search.href="index.html";search.textContent='⌕ 検索';search.setAttribute('aria-label','検索');nav.appendChild(search);
