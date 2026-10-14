@@ -119,13 +119,7 @@ function topFloorplanSVG(p,n){
 }
 const topYen=n=>n.toLocaleString('ja-JP')+'円';
 const topArea=n=>n.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
-function toggleTopBookmark(button){
- button.classList.toggle('is-saved');
- const saved=button.classList.contains('is-saved');
- button.setAttribute('aria-pressed',String(saved));
- button.setAttribute('aria-label',saved?'ブックマークを解除':'ブックマークに追加');
-}
-function switchTab(t){
+function toggleTopBookmark(button,propertyId){const p=data.find(x=>x.id===Number(propertyId));if(p&&typeof woOpenUnitBookmark==='function')woOpenUnitBookmark(p.id,p.units);} function switchTab(t){
  document.getElementById('pickTab').classList.toggle('active',t==='pick');
  document.getElementById('newTab').classList.toggle('active',t==='new');
  const list=t==='new'?[...data].sort((a,b)=>(b.badge==='NEW')-(a.badge==='NEW')||b.id-a.id):data;
