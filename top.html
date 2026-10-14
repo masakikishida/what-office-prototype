@@ -127,7 +127,7 @@ function toggleTopBookmark(button,propertyId){const p=data.find(x=>x.id===Number
   const detailUrl='detail-gray.html?id='+d.id;
   const images=topGalleryImages.map((url,i)=>'<div class="gallery-item"><img loading="lazy" src="'+(i===0?d.image:url)+'" alt="'+d.title+' の写真 '+(i+1)+'"></div>').join('')+d.units.map((u,i)=>'<div class="gallery-item floorplan">'+topFloorplanSVG(d,i+1)+'</div>').join('');
   const rows=[...d.units].sort((a,b)=>a.price-b.price).map(u=>'<div class="unit-row"><span class="unit-id">'+u.unit+'</span><span class="unit-area"><span class="sqm">'+topArea(u.area)+'㎡</span><span class="slash">／</span><span class="tsubo">約'+topArea(u.area/3.305785)+'坪</span></span><span class="unit-rent">'+topYen(u.price)+'</span></div>').join('');
-  return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+images+'</div>'+(d.badge?'<span class="listing-new">'+d.badge+'</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="'+detailUrl+'" class="listing-title">'+d.title+'</a><button class="listing-bookmark" aria-label="ブックマークに追加" aria-pressed="false" onclick="toggleTopBookmark(this,'+d.id+')" type="button"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="'+detailUrl+'">'+rows+'</a></div></article>';
+  return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+images+'</div>'+(d.badge?'<span class="listing-new">'+d.badge+'</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="'+detailUrl+'" class="listing-title">'+d.title+'</a><button class="listing-bookmark" data-wo-property-id="'+d.id+'" aria-label="ブックマークに追加" aria-pressed="false" onclick="toggleTopBookmark(this,'+d.id+')" type="button"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="'+detailUrl+'">'+rows+'</a></div></article>';
  }).join('');
 }switchTab('pick');
 </script><script id="wo-auth-header-review-script">
@@ -205,11 +205,33 @@ window.woOpenUnitBookmark=function(propertyId,units){
  overlay.hidden=false;document.body.style.overflow='hidden';
  const list=overlay.querySelector('.wo-unit-bookmark-list'),submit=overlay.querySelector('.wo-unit-bookmark-submit'),feedback=overlay.querySelector('.wo-unit-bookmark-feedback');
  feedback.textContent='';
- list.innerHTML=units.map((u,i)=>'<label class="wo-unit-bookmark-choice"><input type="checkbox" value="'+i+'"><span>'+String(u.unit)+'</span><span>'+area(u.area)+'㎡／約'+area(u.area/3.305785)+'坪</span><span>'+yen(u.price)+'</span></label>').join('');
- const update=()=>{const n=list.querySelectorAll('input:checked').length;submit.disabled=n===0;submit.textContent='選択した'+n+'件をブックマーク'};
+ const existing=(()=>{try{const a=JSON.parse(localStorage.getItem('what-office-bookmarked-units')||'[]');return Array.isArray(a)?a:[]}catch(e){return []}})();
+ list.innerHTML=units.map((u,i)=>'<label class="wo-unit-bookmark-choice"><input type="checkbox" value="'+i+'" '+(existing.some(x=>Number(x.propertyId)===Number(propertyId)&&String(x.unit)===String(u.unit))?'checked':'')+'><span>'+String(u.unit)+'</span><span>'+area(u.area)+'㎡／約'+area(u.area/3.305785)+'坪</span><span>'+yen(u.price)+'</span></label>').join('');
+ const update=()=>{const n=list.querySelectorAll('input:checked').length;submit.disabled=false;submit.textContent='選択した'+n+'件を保存（変更）'};
  list.onchange=update;update();
- submit.onclick=()=>{const chosen=[...list.querySelectorAll('input:checked')].map(x=>units[Number(x.value)]);try{const key='what-office-bookmarked-units';const current=JSON.parse(localStorage.getItem(key)||'[]');const saved=Array.isArray(current)?current:[];for(const u of chosen){const entry={propertyId:Number(propertyId),unit:String(u.unit)};if(!saved.some(x=>x.propertyId===entry.propertyId&&x.unit===entry.unit))saved.push(entry)}localStorage.setItem(key,JSON.stringify(saved));feedback.textContent=chosen.length+'件をこのブラウザに保存しました。通知設定は未接続です。';}catch(e){feedback.textContent='保存できませんでした。ブラウザの設定をご確認ください。'}};
+ submit.onclick=()=>{const chosen=[...list.querySelectorAll('input:checked')].map(x=>units[Number(x.value)]);try{const key='what-office-bookmarked-units';const current=JSON.parse(localStorage.getItem(key)||'[]');const saved=Array.isArray(current)?current:[];const chosenIds=new Set(chosen.map(u=>String(u.unit)));const kept=saved.filter(x=>Number(x.propertyId)!==Number(propertyId)||!units.some(u=>String(u.unit)===String(x.unit))||chosenIds.has(String(x.unit)));for(const u of chosen){const entry={propertyId:Number(propertyId),unit:String(u.unit)};if(!kept.some(x=>Number(x.propertyId)===entry.propertyId&&String(x.unit)===entry.unit))kept.push(entry)}localStorage.setItem(key,JSON.stringify(kept));if(typeof window.woBookmarkSync==='function')window.woBookmarkSync();feedback.textContent='保存内容を更新しました（'+chosen.length+'件）。通知設定は未接続です。';}catch(e){feedback.textContent='保存できませんでした。ブラウザの設定をご確認ください。'}};
  overlay.querySelector('.wo-unit-bookmark-close').focus();
 };
+})();
+</script><script id="wo-bookmark-state-sync-20261014">
+(function(){
+ const key='what-office-bookmarked-units';
+ const read=()=>{try{const a=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(a)?a:[]}catch(e){return []}};
+ function sync(){
+  const ids=new Set(read().map(x=>String(x.propertyId)));
+  document.querySelectorAll('.listing-bookmark[data-wo-property-id]').forEach(b=>{
+   const on=ids.has(b.dataset.woPropertyId);
+   if(b.classList.contains('is-saved')!==on)b.classList.toggle('is-saved',on);
+   if(b.getAttribute('aria-pressed')!==String(on))b.setAttribute('aria-pressed',String(on));
+   const label=on?'保存済み区画を確認・変更':'ブックマークに追加';
+   if(b.getAttribute('aria-label')!==label)b.setAttribute('aria-label',label);
+  });
+ }
+ window.woBookmarkSync=sync;
+ const root=document.getElementById('properties')||document.getElementById('listPage');
+ if(root)new MutationObserver(records=>{if(records.some(r=>r.type==='childList'))sync()}).observe(root,{childList:true,subtree:false});
+ window.addEventListener('pageshow',sync);
+ window.addEventListener('storage',e=>{if(e.key===key)sync()});
+ sync();
 })();
 </script></body></html>
