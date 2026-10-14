@@ -1314,15 +1314,17 @@ function actionSelections(){return Array.from(document.querySelectorAll('#unitAc
 function updateUnitActionCount(){
  const count=actionSelections().length;
  const btn=document.getElementById('unitActionSubmit');
- btn.textContent='選択した'+count+'件を'+(unitActionMode==='inquiry'?'問い合わせ':'ブックマーク');
- btn.disabled=count===0;
+ btn.textContent=unitActionMode==='inquiry'?'選択した'+count+'件を問い合わせ':'選択した'+count+'件を保存（変更）';
+ btn.disabled=unitActionMode==='inquiry'&&count===0;
  document.getElementById('unitActionFeedback').textContent='';
 }
 function openUnitAction(mode){
  unitActionMode=mode;
  document.getElementById('unitActionTitle').textContent=mode==='inquiry'?'問い合わせる区画':'ブックマークに登録する区画';
  document.getElementById('unitActionSubtitle').textContent=mode==='inquiry'?'お急ぎの場合は電話でも受け付けております。':'条件変更・再募集時にお知らせします。\n※通知はマイページでONにできます。';
- document.getElementById('unitActionList').innerHTML=units.map((u,i)=>'<label class="unit-action-choice '+(u.sold?'sold':'')+'"><input type="checkbox" value="'+i+'" onchange="updateUnitActionCount()"><span class="unit-action-floor">'+u.id+'</span><span class="unit-action-area">'+u.area+'／'+u.tsubo+'</span><span class="unit-action-price">'+u.price+'</span></label>').join('');
+ const propertyId=Number(new URLSearchParams(location.search).get('id')||1);
+ const existing=(()=>{try{const a=JSON.parse(localStorage.getItem('what-office-bookmarked-units')||'[]');return Array.isArray(a)?a:[]}catch(e){return []}})();
+ document.getElementById('unitActionList').innerHTML=units.map((u,i)=>'<label class="unit-action-choice '+(u.sold?'sold':'')+'"><input type="checkbox" value="'+i+'" '+(mode==='bookmark'&&existing.some(x=>Number(x.propertyId)===propertyId&&String(x.unit)===String(u.id))?'checked':'')+' onchange="updateUnitActionCount()"><span class="unit-action-floor">'+u.id+'</span><span class="unit-action-area">'+u.area+'／'+u.tsubo+'</span><span class="unit-action-price">'+u.price+'</span></label>').join('');
  document.getElementById('unitActionBackdrop').hidden=false;
  document.body.style.overflow='hidden';
  updateUnitActionCount();
@@ -1334,7 +1336,7 @@ function closeUnitAction(){
 }
 function submitUnitAction(){
  const indexes=actionSelections();
- if(!indexes.length)return;
+ if(!indexes.length&&unitActionMode==='inquiry')return;
  const feedback=document.getElementById('unitActionFeedback');
  if(unitActionMode==='inquiry'){
   feedback.textContent='区画を選択しました。問い合わせフォームへの接続は、現在準備中です。';
@@ -1345,8 +1347,10 @@ function submitUnitAction(){
  try{
   const saved=JSON.parse(localStorage.getItem(key)||'[]');
   const list=Array.isArray(saved)?saved:[];
-  indexes.forEach(i=>{const entry={propertyId,unit:units[i].id};if(!list.some(x=>x.propertyId===entry.propertyId&&x.unit===entry.unit))list.push(entry)});
-  localStorage.setItem(key,JSON.stringify(list));
+  const chosen=new Set(indexes.map(i=>String(units[i].id)));
+  const kept=list.filter(x=>Number(x.propertyId)!==propertyId||!units.some(u=>String(u.id)===String(x.unit))||chosen.has(String(x.unit)));
+  indexes.forEach(i=>{const entry={propertyId,unit:units[i].id};if(!kept.some(x=>Number(x.propertyId)===entry.propertyId&&String(x.unit)===String(entry.unit)))kept.push(entry)});
+  localStorage.setItem(key,JSON.stringify(kept));
   feedback.textContent=indexes.length+'件をこのブラウザに保存しました。通知設定は未接続です。';
  }catch(e){feedback.textContent='このブラウザでは保存できませんでした。設定をご確認ください。'}
 }
