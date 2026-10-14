@@ -1180,7 +1180,7 @@ const relatedProperties=[
    current property's units using area or total monthly rent independently. */
 /* Layout stress test: A-204-equivalent maximum unit identifier, area and rent. */
 relatedProperties.find(p=>p.id===4).units[0]={unit:'A-204',area:1234.56,price:12345678};
-const areaMatches=[{id:4,units:['1F','2F']},{id:3,units:['3F','4F']}];
+const areaMatches=[{id:4,units:['A-204','2F']},{id:3,units:['3F','4F']}];
 const priceMatches=[{id:3,units:['3F','4F']},{id:2,units:['2F','3F']}];
 function relatedCards(matches){
  return matches.map(item=>{
