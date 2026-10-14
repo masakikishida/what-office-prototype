@@ -128,7 +128,23 @@ header .wo-pc-review-menu .wo-pc-menu-inner>a:hover{color:#d2d5d5!important}
 .property-grid .property.listing-card .listing-gallery .gallery-item:first-child{height:auto!important;aspect-ratio:3/2!important;flex:0 0 100%!important;width:100%!important;min-height:0!important}
 .property-grid .property.listing-card .listing-gallery .gallery-item img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
 }
-</style><style id="wo-pc-top-tsubo-color-20261013">@media(min-width:900px){.property-grid .property.listing-card .listing-units .unit-area .tsubo{color:#252525!important;opacity:1!important}}</style></head><body>
+</style><style id="wo-pc-top-tsubo-color-20261013">@media(min-width:900px){.property-grid .property.listing-card .listing-units .unit-area .tsubo{color:#252525!important;opacity:1!important}}</style><style id="wo-pc-unit-bookmark-sheet-20261014">
+@media(min-width:900px){
+.wo-unit-bookmark-backdrop[hidden]{display:none!important}
+.wo-unit-bookmark-backdrop{position:fixed;inset:0;z-index:999998;background:#0008;display:flex;align-items:center;justify-content:center}
+.wo-unit-bookmark-panel{width:100%;max-width:540px;max-height:85dvh;overflow-y:auto;background:#fff;padding:22px 20px max(28px,env(safe-area-inset-bottom));box-sizing:border-box;border-radius:12px;color:#252525}
+.wo-unit-bookmark-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.wo-unit-bookmark-heading h2{font-size:18px;line-height:1.5;margin:0}
+.wo-unit-bookmark-close{background:none;border:0;font-size:28px;padding:0 4px}
+.wo-unit-bookmark-subtitle{font-size:12px;line-height:1.6;color:#777;margin:0 0 16px}
+.wo-unit-bookmark-choice{display:grid;grid-template-columns:20px minmax(46px,.6fr) minmax(0,1.6fr) minmax(90px,1.4fr);align-items:center;gap:7px;padding:13px 0;border-bottom:1px solid #dedede;font-size:12px;line-height:1.5}
+.wo-unit-bookmark-choice input{accent-color:#717b4c;width:17px;height:17px}
+.wo-unit-bookmark-choice span:last-child{text-align:right;overflow-wrap:anywhere}
+.wo-unit-bookmark-submit{width:100%;background:#252a29;color:white;border:0;padding:14px 10px;margin-top:18px;font-size:14px}
+.wo-unit-bookmark-submit:disabled{opacity:.4}
+.wo-unit-bookmark-feedback{font-size:12px;line-height:1.6;color:#58613f}
+}
+</style></head><body>
 <section class="hero" id="hero"><header class="head"><a class="logo" href="top-pc.html">What?Office</a><nav class="nav"><a href="listing-pc-d.html" class="desktop">⌕ 検索</a><a href="listing-pc-d.html" aria-label="ブックマーク"><svg class="header-bookmark" viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg><span class="desktop">ブックマーク</span></a><a href="#member">♙ <span class="desktop">ログイン</span></a><button class="hamb" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="メニュー"><span class="two-lines"><i></i><i></i></span></button></nav><div class="menu" id="menu"><a href="top-pc.html">TOP</a><a href="listing-pc-d.html">物件を探す</a><a href="#office">LIST</a><a href="#topics">TOPICS</a><a href="#member">会員登録</a></div></header>
 <div class="hero-main"><div class="hero-copy"><h1>どんなところで、<br>何をする？</h1><p class="tagline">FIND YOUR OWN ANSWER.</p></div><div class="searchbox"><form class="searchrow" action="listing-pc-d.html"><input id="query" placeholder="物件のイメージを入力" aria-label="物件検索"><button>⌕ 検索</button></form><p class="examples">こんな探し方もできます</p><div class="question-switch"><button type="button" onclick="slide(-1)">←</button><span id="questionText">窓の外に緑が見える？</span><button type="button" onclick="slide(1)">→</button></div><a class="advanced" href="listing-pc-d.html"><svg class="advanced-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m15.7 15.7 5 5"></path></svg><span>条件から物件を探す</span></a></div></div></section>
 <section class="section wrap" id="office"><div class="section-head"><h2>LIST</h2><div class="tabs"><button class="active" id="pickTab" onclick="switchTab('pick')">PICK UP</button><button id="newTab" onclick="switchTab('new')">NEW</button></div></div><div class="property-grid" id="properties"></div><div class="center"><a href="listing-pc-d.html" class="outline">物件一覧を見る　→</a></div></section>
@@ -155,12 +171,7 @@ function topFloorplanSVG(p,n){
 }
 const topYen=n=>n.toLocaleString('ja-JP')+'円';
 const topArea=n=>n.toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2});
-function toggleTopBookmark(button){
- button.classList.toggle('is-saved');
- const saved=button.classList.contains('is-saved');
- button.setAttribute('aria-pressed',String(saved));
- button.setAttribute('aria-label',saved?'ブックマークを解除':'ブックマークに追加');
-}
+function toggleTopBookmark(button,propertyId){const p=data.find(x=>x.id===Number(propertyId));if(p&&typeof woOpenUnitBookmark==='function')woOpenUnitBookmark(p.id,p.units);}
 function switchTab(t){
  document.getElementById('pickTab').classList.toggle('active',t==='pick');
  document.getElementById('newTab').classList.toggle('active',t==='new');
@@ -169,7 +180,7 @@ function switchTab(t){
   const detailUrl='detail-pc.html?id='+d.id;
   const images=topGalleryImages.map((url,i)=>'<div class="gallery-item"><img loading="lazy" src="'+(i===0?d.image:url)+'" alt="'+d.title+' の写真 '+(i+1)+'"></div>').join('')+d.units.map((u,i)=>'<div class="gallery-item floorplan">'+topFloorplanSVG(d,i+1)+'</div>').join('');
   const rows=[...d.units].sort((a,b)=>a.price-b.price).map(u=>'<div class="unit-row"><span class="unit-id">'+u.unit+'</span><span class="unit-area"><span class="sqm">'+topArea(u.area)+'㎡</span><span class="slash">／</span><span class="tsubo">約'+topArea(u.area/3.305785)+'坪</span></span><span class="unit-rent">'+topYen(u.price)+'</span></div>').join('');
-  return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+images+'</div>'+(d.badge==='NEW'?'<span class="listing-new">NEW</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="'+detailUrl+'" class="listing-title">'+d.title+'</a><button class="listing-bookmark" aria-label="ブックマークに追加" aria-pressed="false" onclick="toggleTopBookmark(this)" type="button"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="'+detailUrl+'">'+rows+'</a></div></article>';
+  return '<article class="property listing-card"><div class="listing-gallery" aria-label="物件写真を横スクロール">'+images+'</div>'+(d.badge==='NEW'?'<span class="listing-new">NEW</span>':'')+'<div class="listing-body"><div class="listing-title-line"><a href="'+detailUrl+'" class="listing-title">'+d.title+'</a><button class="listing-bookmark" aria-label="ブックマークに追加" aria-pressed="false" onclick="toggleTopBookmark(this,'+d.id+')" type="button"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 2.5h14a1 1 0 0 1 1 1V25l-8-5.6L4 25V3.5a1 1 0 0 1 1-1z"/></svg></button></div><a class="listing-units" href="'+detailUrl+'">'+rows+'</a></div></article>';
  }).join('');
  requestAnimationFrame(alignPcCardTitles);
 }
@@ -270,5 +281,24 @@ function setup(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 }
 document.addEventListener('DOMContentLoaded',setup);
+})();
+</script><script id="wo-pc-unit-bookmark-script-20261014">
+(function(){
+function yen(n){return '¥'+Number(n).toLocaleString('ja-JP')}
+function area(n){return Number(n).toLocaleString('ja-JP',{minimumFractionDigits:2,maximumFractionDigits:2})}
+window.woOpenUnitBookmark=function(propertyId,units){
+ let overlay=document.getElementById('woUnitBookmarkBackdrop');
+ if(!overlay){overlay=document.createElement('div');overlay.id='woUnitBookmarkBackdrop';overlay.className='wo-unit-bookmark-backdrop';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.innerHTML='<div class="wo-unit-bookmark-panel"><div class="wo-unit-bookmark-heading"><h2>ブックマークに登録する区画</h2><button class="wo-unit-bookmark-close" aria-label="閉じる">×</button></div><p class="wo-unit-bookmark-subtitle">条件変更・再募集時にお知らせします。<br>※通知はマイページでONにできます。</p><div class="wo-unit-bookmark-list"></div><button class="wo-unit-bookmark-submit" disabled>選択した0件をブックマーク</button><p class="wo-unit-bookmark-feedback" aria-live="polite"></p></div>';document.body.appendChild(overlay);overlay.addEventListener('click',e=>{if(e.target===overlay)close()});overlay.querySelector('.wo-unit-bookmark-close').onclick=close;}
+ const oldOverflow=document.body.style.overflow;
+ function close(){overlay.hidden=true;document.body.style.overflow=oldOverflow}
+ overlay.hidden=false;document.body.style.overflow='hidden';
+ const list=overlay.querySelector('.wo-unit-bookmark-list'),submit=overlay.querySelector('.wo-unit-bookmark-submit'),feedback=overlay.querySelector('.wo-unit-bookmark-feedback');
+ feedback.textContent='';
+ list.innerHTML=units.map((u,i)=>'<label class="wo-unit-bookmark-choice"><input type="checkbox" value="'+i+'"><span>'+String(u.unit)+'</span><span>'+area(u.area)+'㎡／約'+area(u.area/3.305785)+'坪</span><span>'+yen(u.price)+'</span></label>').join('');
+ const update=()=>{const n=list.querySelectorAll('input:checked').length;submit.disabled=n===0;submit.textContent='選択した'+n+'件をブックマーク'};
+ list.onchange=update;update();
+ submit.onclick=()=>{const chosen=[...list.querySelectorAll('input:checked')].map(x=>units[Number(x.value)]);try{const key='what-office-bookmarked-units';const current=JSON.parse(localStorage.getItem(key)||'[]');const saved=Array.isArray(current)?current:[];for(const u of chosen){const entry={propertyId:Number(propertyId),unit:String(u.unit)};if(!saved.some(x=>x.propertyId===entry.propertyId&&x.unit===entry.unit))saved.push(entry)}localStorage.setItem(key,JSON.stringify(saved));feedback.textContent=chosen.length+'件をこのブラウザに保存しました。通知設定は未接続です。';}catch(e){feedback.textContent='保存できませんでした。ブラウザの設定をご確認ください。'}};
+ overlay.querySelector('.wo-unit-bookmark-close').focus();
+};
 })();
 </script></body></html>
