@@ -1542,8 +1542,13 @@ document.addEventListener('DOMContentLoaded',setup);
  if(intro){intro.innerHTML='<p>こちらは画面・ブックマーク動作確認用のデモ物件です。物件名・募集区画・面積・賃料は一覧と共通のデータを表示しています。所在地・設備・契約条件などの詳細情報は未登録です。</p>';}
  const facts=document.getElementById('buildingFacts');
  if(facts)facts.innerHTML='<div class="building-fact-group"><div><dt>物件名</dt><dd>'+p.title+'</dd></div><div><dt>住所</dt><dd>未登録（デモ）</dd></div><div><dt>交通</dt><dd>'+p.station+'</dd></div></div>';
- const hero=document.getElementById('heroImage');if(hero)hero.src=p.image;
- if(typeof gallery!=='undefined'&&gallery.length)gallery[0].src=p.image;
+ const hero=document.getElementById('heroImage');if(hero){hero.src=p.image;hero.alt=p.title+'（デモ画像）';}
+ if(typeof gallery!=='undefined'&&gallery.length){gallery[0].src=p.image;gallery[0].caption=p.title+'（デモ画像）';}
+ const caption=document.getElementById('caption');if(caption)caption.textContent=p.title+'（デモ画像）';
+ const address=document.querySelector('.alt-location .address');if(address)address.textContent='住所：未登録（デモ）';
+ const mapLink=document.querySelector('.alt-location .map-out');if(mapLink){mapLink.hidden=true;mapLink.style.display='none';}
+ const access=document.querySelector('.alt-location .access');if(access){const nodes=access.querySelectorAll('p,li');nodes.forEach(n=>{if(n.textContent.includes('徒歩')||n.textContent.includes('駅'))n.textContent=p.station+'（デモ）'});}
+
  document.title=p.title+'｜What? Office';
 })();
 </script></body></html>
